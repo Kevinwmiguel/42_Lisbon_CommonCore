@@ -17,6 +17,7 @@ void    *ft_memmove(void *destination,const void *source, size_t num)
             *p++ = *s++;
         }
     }
+
     
     return destination;
 }
