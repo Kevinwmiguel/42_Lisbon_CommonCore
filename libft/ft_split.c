@@ -1,39 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 10:00:23 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/11 10:36:49 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/11 10:59:58 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/11 11:17:47 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+int		ft_strlen(char *str)
 {
 	int	i;
-	int	ngt;
-	int	nmr;
 
-	nmr = 0;
-	ngt = 1;
 	i = 0;
-	while ((str[i] >= 7 && str[i] <= 14) || str[i] == ' ' || str[i] == 32)
-		i++;
-	if (str[i] == '-' || str[i])
-	{
-		ngt = -1;
-		i++;
-	}
-	else if (str[i] == '+')
+	while (str[i] != '\0')
 	{
 		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
+	}	
+	return (i);
+}
+char	**ft_split(char const *s, char c)
+{
+	int	count;
+	int	i;
+	int	j;
+	char **nova;
+
+	i = 0;
+	j = 0;
+	count = 0;
+	while (s[i] != '\0')
 	{
-		nmr = nmr * 10 + (str[i] - '0');
+		if(s[i] == c)
+			count++;
 		i++;
 	}
-	return (nmr * ngt);
+	nova = (char **)malloc((count + 1) * sizeof(char *));
+	if (!nova)
+	{
+		return (NULL);
+	}
+	i = 0;
+	while (j < count)
+	{
+		i = 0;
+		while (s[i] != c)
+		{
+			nova[j][i] = s[i];
+			i++;
+		}
+		j++;
+		nova[j][i] = '\0';
+	}
+	return (nova);
 }
