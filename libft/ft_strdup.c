@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t ft_strlen(const char *str)
+int ft_strlen(const char *str)
 {
-    size_t i;
+    int i;
 
     i = 0;
     while(str[i]!= '\0')
@@ -22,8 +22,8 @@ size_t ft_strlen(const char *str)
 
 char *strdup(const char *str)
 {
-    size_t i;
-    size_t len;
+    int i;
+    int len;
 
     len = ft_strlen(str);
     i = 0;
