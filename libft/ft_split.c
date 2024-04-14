@@ -6,53 +6,69 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:59:58 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/11 11:17:47 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/13 22:48:01 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strlen(char *str)
-{
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}	
-	return (i);
-}
-char	**ft_split(char const *s, char c)
+static int	count_substrings(const char *s, char c)
 {
 	int	count;
-	int	i;
-	int	j;
-	char **nova;
-
-	i = 0;
-	j = 0;
+	
 	count = 0;
-	while (s[i] != '\0')
+	while (*s)
 	{
-		if(s[i] == c)
-			count++;
+		count += (*s == c);
+		s++;
+	}
+	return (count);
+}
+
+static char	*copy_substring(const char *s, char c)
+{
+	const char *start;
+	int len;
+	char *sub;
+	
+	while (*s && *s == c)
+		s++;
+	start = s;
+	while (*s && *s != c)
+		s++;
+	len = s - start;
+	sub = malloc((len + 1) * sizeof(char));
+	if (!sub)
+		return (NULL);
+	ft_strlcpy(sub, start, len + 1);
+	return (sub);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	if (!s)
+		return (NULL);
+	int count = count_substrings(s, c);
+	char **result = malloc((count + 1) * sizeof(char *));
+	if (!result)
+		return (NULL);
+	int i = 0;
+	while (i < count)
+	{
+		result[i] = copy_substring(s, c);
+		if (!result[i])
+		{
+			while (i > 0)
+				free(result[--i]);
+			free(result);
+			return (NULL);
+		}
+		while (*s && *s == c)
+			s++;
+		while (*s && *s != c)
+			s++;
 		i++;
 	}
-	nova = (char **)malloc((count + 1) * sizeof(char *));
-	if (!nova)
-	{
-		return (NULL);
-	}
-	i = 0;
-	while (j < count)
-	{
-		i = 0;
-		while (s[i] != c)
-		{
-			nova[j][i] = s[i];
-			i++;
-		}
-		j++;
-		nova[j][i] = '\0';
-	}
-	return (nova);
+	result[count] = NULL;
+	return (result);
 }

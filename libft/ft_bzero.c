@@ -6,9 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:00:40 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/11 10:00:41 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/13 19:06:39 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void ft_bzero(void *s, size_t n)
 {

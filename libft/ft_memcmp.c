@@ -6,9 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:01:02 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/11 10:01:03 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/13 19:06:17 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int ft_memcmp(const void * ptr1, const void *ptr2, size_t num)
 {

@@ -6,11 +6,13 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 09:58:33 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/11 09:58:35 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/14 07:23:55 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int    ft_strlen(char *str)
+#include "libft.h"
+
+int   ft_strlen(char *str)
 {
     int     i;
 

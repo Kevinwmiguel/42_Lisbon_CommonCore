@@ -6,20 +6,12 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:01:45 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/11 10:01:58 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/13 19:05:49 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_strlen(char *str)
-{
-    int i;
+#include "libft.h"
 
-    i = 0;
-    while(str[i] != '\0')
-        i++;
-    
-    return i;
-}
 
 size_t  ft_strlcat(char *dst, const char *src, size_t dstsize)
 {

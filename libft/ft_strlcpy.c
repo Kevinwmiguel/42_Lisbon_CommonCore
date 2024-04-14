@@ -6,9 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:01:50 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/11 10:01:51 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/13 19:05:38 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

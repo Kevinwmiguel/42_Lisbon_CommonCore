@@ -6,12 +6,13 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:02:51 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/11 10:02:51 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/14 07:42:39 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-char    *tolower(char *str)
+char    *ft_tolower(char *str)
 {
     int i;
 
@@ -24,6 +25,5 @@ char    *tolower(char *str)
         }
         i++;
     }
-    
-    return str;
+    return (str);
 }

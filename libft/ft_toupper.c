@@ -6,9 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 09:58:40 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/11 09:58:42 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/14 07:52:28 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char    *ft_toupper(char *str)
 {
@@ -21,5 +23,5 @@ char    *ft_toupper(char *str)
         }
         i++;
     }
-    return str;
+    return (str);
 }
