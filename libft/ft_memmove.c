@@ -6,16 +6,16 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:01:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/13 19:06:11 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/14 08:35:07 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    *ft_memmove(void *destination,const void *source, size_t num)
+void			*ft_memmove(void *dst, const void *src, size_t num)
 {
-    unsigned char *p = destination;
-    unsigned char *s = source;
+    unsigned char *p = dst;
+    const unsigned char *s = src;
     
     if (p > s && p < s + num)
     {
@@ -26,12 +26,7 @@ void    *ft_memmove(void *destination,const void *source, size_t num)
             *p-- = *s--;
         }
     } else {
-        while (num--)
-        {
-            *p++ = *s++;
-        }
+        ft_memcpy(p, s, num);
     }
-
-    
-    return destination;
+    return (p);
 }
