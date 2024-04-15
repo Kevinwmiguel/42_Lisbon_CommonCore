@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 23:34:46 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/14 06:55:45 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:20:02 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ char    *ft_itoa(int n)
     return buffer;
 }
 
-int main()
-{
-    int test =  14569;
-    char *numero;
+// int main()
+// {
+//     int test =  14569;
+//     char *numero;
     
-    numero = ft_itoa(test);
-    printf("%s", numero);
-    free(numero); // Liberando a memória alocada
-    return (0);
-}
+//     numero = ft_itoa(test);
+//     printf("%s", numero);
+//     free(numero); // Liberando a memória alocada
+//     return (0);
+// }
