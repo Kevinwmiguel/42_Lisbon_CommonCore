@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:48:19 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/18 08:57:19 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 09:34:56 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char			*ft_strtrim(char const *s1, char const *set);
 
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 
-char			*ft_tolower(char *c);
+int				ft_tolower(int c);
 
 int				ft_toupper(int c);
 
@@ -113,5 +113,7 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void*));
 
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
+
+void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 #endif

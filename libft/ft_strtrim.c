@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:02:29 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/13 19:04:51 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 09:20:17 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,29 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
+	int		start;
+	int		end;
 	int		i;
-	int		j;
 	char	*nova;
-	int		size;
 
+	if (!s1)
+		return (NULL);
+	start = 0;
+	while (s1[start] && ft_strchr(set, s1[start]))
+		start++;
+	end = ft_strlen(s1) - 1;
+	while (end > start && ft_strchr(set, s1[end]))
+		end--;
+	nova = (char *)malloc(end - start + 2);
+	if (!nova)
+		return (NULL);
 	i = 0;
-	size = ft_strlen(s1);
-	nova = (char *)malloc(size + 1);
-	while (s1[i] != '\0')
+	while (start <= end)
 	{
-		j = 0;
-		while (set[j] != '\0')
-		{
-			if (s1[i] != set[j])
-			{
-				nova[i] = s1[i];
-			}
-			j++;
-		}
+		nova[i] = s1[start];
 		i++;
+		start++;
 	}
-	nova[i] != '\0';
+	nova[i] = '\0';
 	return (nova);
 }

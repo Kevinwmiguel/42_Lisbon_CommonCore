@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:00:56 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/18 00:45:25 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 09:19:11 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_memchr(const void *ptr, int c, size_t n)
 	{
 		if (p[i] == (unsigned char)c)
 		{
-			return (&p[i]);
+			return ((void *)&p[i]);
 		}
 		i++;
 	}
