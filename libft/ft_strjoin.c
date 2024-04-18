@@ -12,29 +12,30 @@
 
 #include "libft.h"
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-    unsigned int    i;
-    unsigned int    j;
-    int size;
+	char			*nova;
+	unsigned int	i;
+	unsigned int	j;
+	int				size;
 
-    i = 0;
-    size = ft_strlen(s1) + ft_strlen(s2);
-    char *nova = (char *)malloc(size + 1);
-    if (!nova)
-        return NULL;
-    while(s1[i] != '\0')
-    {
-        nova[i] = s1[i];
-        i++;
-    }
-    j = 0;
-    while(s2[j] != '\0')
-    {
-        nova[i] = s2[j];
-        j++;
-        i++;
-    }
-    nova[i] = '\0';
-    return nova;
+	i = 0;
+	size = ft_strlen(s1) + ft_strlen(s2);
+	nova = (char *)malloc(size + 1);
+	if (!nova)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		nova[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j] != '\0')
+	{
+		nova[i] = s2[j];
+		j++;
+		i++;
+	}
+	nova[i] = '\0';
+	return (nova);
 }

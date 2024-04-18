@@ -12,27 +12,25 @@
 
 #include "libft.h"
 
-char *ft_strstr(const char *src, const char *ocurrence)
+char	*ft_strstr(const char *src, const char *ocurrence)
 {
-    int i;
-    int size;
-    int find;
-    
-    size = ft_strlen(ocurrence);
-    while (*src != '\0')
-    {
-        i = 0;
-        find = 0;
-        while (src[i] == ocurrence[i] && ocurrence[i] != '\0')
-        {
-            i++;
-            find++;
-        }
-        if (find == size)
-        {
-            return (char *)src;
-        }
-        src++;
-    }
-    return NULL;
+	int	i;
+	int	size;
+	int	find;
+
+	size = ft_strlen(ocurrence);
+	while (*src != '\0')
+	{
+		i = 0;
+		find = 0;
+		while (src[i] == ocurrence[i] && ocurrence[i] != '\0')
+		{
+			i++;
+			find++;
+		}
+		if (find == size)
+			return ((char *)src);
+		src++;
+	}
+	return (NULL);
 }

@@ -6,31 +6,37 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:59:58 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/13 22:48:01 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 08:11:16 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 #include "libft.h"
 
 static int	count_substrings(const char *s, char c)
 {
 	int	count;
-	
+
 	count = 0;
 	while (*s)
 	{
-		count += (*s == c);
-		s++;
+		while (*s && *s == c)
+			s++;
+		if (*s)
+			count++;
+		while (*s && *s != c)
+			s++;
 	}
 	return (count);
 }
 
 static char	*copy_substring(const char *s, char c)
 {
-	const char *start;
-	int len;
-	char *sub;
-	
+	const char	*start;
+	int			len;
+	char		*sub;
+
 	while (*s && *s == c)
 		s++;
 	start = s;
@@ -44,31 +50,38 @@ static char	*copy_substring(const char *s, char c)
 	return (sub);
 }
 
+static void	free_result(char **result, int count)
+{
+	while (count--)
+		free(result[count]);
+	free(result);
+}
+
 char	**ft_split(char const *s, char c)
 {
-	if (!s)
+	int		count;
+	char	**result;
+	int		i;
+
+	if (!s || !c)
 		return (NULL);
-	int count = count_substrings(s, c);
-	char **result = malloc((count + 1) * sizeof(char *));
+	count = count_substrings(s, c);
+	result = malloc((count + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
-	int i = 0;
-	while (i < count)
+	i = 0;
+	while (*s && i < count)
 	{
 		result[i] = copy_substring(s, c);
 		if (!result[i])
 		{
-			while (i > 0)
-				free(result[--i]);
-			free(result);
+			free_result(result, i);
 			return (NULL);
 		}
-		while (*s && *s == c)
-			s++;
 		while (*s && *s != c)
 			s++;
 		i++;
 	}
-	result[count] = NULL;
+	result[i] = NULL;
 	return (result);
 }
