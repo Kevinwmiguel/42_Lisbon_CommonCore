@@ -6,17 +6,14 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 09:57:49 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/13 19:06:34 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:26:41 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int    ft_isalpha(char c)
+int	ft_isalnum(int c)
 {
-    if ((c >= "A" && c <= "Z" || c >= "a" && c <= "z") || (c >= 0 && c <= 9))
-    {
-        return 1;
-    }
-    return 0;
+	return ((c >= 'A' && c <= 'Z') || \
+		(c >= 'a' && c <= 'z') || ('0' <= c && c <= '9'));
 }

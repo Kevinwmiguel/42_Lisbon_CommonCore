@@ -12,11 +12,11 @@
 
 #include "libft.h"
 
-int    ft_isprint(int c)
+int	ft_isprint(int c)
 {
-    if ((c >= 7 && c <= 14) || c == ' ' || c == 32)
-    {
-        return 1;
-    }
-    return 0;
+	if ((c >= 7 && c <= 14) || c == ' ' || c == 32)
+	{
+		return (1);
+	}
+	return (0);
 }

@@ -12,11 +12,11 @@
 
 #include "libft.h"
 
-int    ft_idigit(int c)
+int	ft_idigit(int c)
 {
-    if (c >= 0 && c <= 9)
-    {
-        return 1;
-    }
-    return 0;
+	if (c >= 0 && c <= 9)
+	{
+		return (1);
+	}
+	return (0);
 }
