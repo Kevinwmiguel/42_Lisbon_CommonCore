@@ -6,50 +6,57 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 23:34:46 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/18 00:34:20 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:33:00 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include <stdio.h>
 #include "libft.h"
 
-static int	ft_contnum(int temp)
+static size_t	contnum(int n)
 {
-	int	count;
+	long	number;
+	int		temp;
 
-	count = 0;
-	while (temp != 0)
+	number = n;
+	temp = 0;
+	if (number <= 0)
 	{
-		temp /= 10;
-		count++;
+		temp++;
+		number = -number;
 	}
-	return (count);
+	while (number > 0)
+	{
+		number /= 10;
+		temp++;
+	}
+	return (temp);
 }
 
 char	*ft_itoa(int n)
 {
 	char	*buffer;
 	int		size;
-	int		temp;
-	int		count;
-	int		i;
+	long	temp;
 
-	count = ft_contnum(n);
-	size = count;
-	buffer = (char *)malloc((size + 1) * sizeof(char));
+	size = contnum(n);
+	buffer = ft_calloc(size + 1, 1);
 	if (!buffer)
-	{
 		return (NULL);
-	}
-	i = size -1;
 	temp = n;
-	while (i >= 0)
+	buffer[0] = '0';
+	if (n < 0)
 	{
-		buffer[i] = (temp % 10) + '0';
-		temp /= 10;
-		i--;
+		buffer[0] = '-';
+		temp = (-temp);
 	}
-	buffer[size] = '\0';
+	size--;
+	while (temp > 0)
+	{
+		buffer[size] = (temp % 10) + '0';
+		temp /= 10;
+		size--;
+	}
 	return (buffer);
 }
 

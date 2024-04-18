@@ -6,12 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:01:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/14 10:13:16 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:45:08 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdio.h>
 
 void	*ft_memmove(void *dst, const void *src, size_t num)
 {
@@ -19,28 +18,24 @@ void	*ft_memmove(void *dst, const void *src, size_t num)
 	unsigned char	*p;
 	unsigned char	*s;
 
+	if (!dst && !src)
+		return (NULL);
 	p = (unsigned char *)dst;
 	s = (unsigned char *)src;
-	if (p > s && p < s + num)
+	i = num - 1;
+	if (p > s)
 	{
-		p += num;
-		s += num;
-		while (num--)
+		while (i >= 0)
 		{
-			*p-- = *s--;
+			p[i] = s[i];
+			i--;
 		}
 	}
 	else
-	{
-		i = 0;
-		while (i < (int)num)
-		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i++;
-		}
-	}
+		ft_memcpy(p, s, num);
 	return (dst);
 }
+//#include <stdio.h>
 // int main()
 // {
 //     char j[16]; // Alocar memória suficiente para armazenar os caracteres

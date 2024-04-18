@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 07:08:00 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/15 17:46:48 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:31:56 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 	i = -1;
 	while (s[++i])
 		new[i] = f(i, s[i]);
+	new[i] = '\0';
 	return (new);
 }
 

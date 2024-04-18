@@ -6,24 +6,24 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:01:28 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/13 19:06:04 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:09:07 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int character)
+char	*ft_strchr(const char *s, int charactere)
 {
-	int	i;
+	char	*dst;
 
-	i = 0;
-	while (str[i] != '\0')
+	dst = (char *)s;
+	while (*dst)
 	{
-		if (str[i] == character)
-		{
-			return ((char *)&str[i]);
-		}
-		i++;
+		if ((unsigned char)*dst == (unsigned char)charactere)
+			return (dst);
+		dst++;
 	}
+	if ((unsigned char)*dst == (unsigned char)charactere)
+		return (dst);
 	return (NULL);
 }

@@ -6,23 +6,38 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 19:22:22 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/15 19:25:59 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:20:10 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	*number;
-	size_t	size;
-
-	number = ft_itoa(n);
-	size = ft_strlen(number);
-	write(fd, number, size);
+	if (n == 0)
+	{
+		write (fd, "0", 1);
+		return ;
+	}
+	if (n == -2147483648)
+	{
+		write (fd, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = (-n);
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+	}
+	ft_putchar_fd('0' + n % 10, fd);
 }
 // int main()
 // {
-// 	ft_putnbr_fd(4589563, 1);
+// 	ft_putnbr_fd(-3648, 1);
 // 	return (0);
 // }
