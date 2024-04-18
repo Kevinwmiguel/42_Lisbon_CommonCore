@@ -6,31 +6,31 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:42:24 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/15 17:42:25 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:13:21 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// #include <stdio.h>
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	i;
 
-	i = -1;
-	while (s[++i])
-		f(i, &s[i]);
+	i = 0;
+	while (s[i])
+	{
+		f(i, s + i);
+		i++;
+	}
 }
-
-// void print_index_and_char(unsigned int index, char *c)
+// #include <stdio.h>
+// static void print_index_and_char(unsigned int index, char *c)
 // {
 //     printf("Index, %u, Char, %c\n", index, *c);
 // }
-
 // int main()
 // {
 //     char str[] = "Testezao";
-
 //     ft_striteri(str, &print_index_and_char);
 //     return (0);
 // }

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 09:57:49 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/18 09:44:00 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:28:33 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,3 +19,11 @@ int	ft_isalnum(int c)
 		return (1);
 	return (0);
 }
+// #include <stdio.h>
+// int	main()
+// {
+// 	int r;
+// 	r = ft_isalnum('/');
+// 	printf("%d\n", r);
+// 	return 0;
+// }

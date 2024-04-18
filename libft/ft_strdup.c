@@ -6,13 +6,13 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:01:36 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/13 19:06:01 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:56:08 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strdup(const char *str)
+char	*ft_strdup(const char *str)
 {
 	int		i;
 	int		len;
@@ -31,3 +31,19 @@ char	*strdup(const char *str)
 	string[len] = '\0';
 	return ((char *)string);
 }
+// int main() {
+//     const char *original = "Hello, world!";
+//     char *copied = strdup(original);
+
+//     if (copied != NULL) {
+//         printf("String original: %s\n", original);
+//         printf("String copiada: %s\n", copied);
+
+//         // Não se esqueça de liberar a memória alocada
+//         free(copied);
+//     } else {
+//         printf("Falha ao copiar a string.\n");
+//     }
+
+//     return 0;
+// }
