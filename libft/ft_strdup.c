@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:01:36 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/18 10:56:08 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/19 20:18:46 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *str)
 	int		len;
 	char	*string;
 
+	if (!str)
+		return (NULL);
 	len = ft_strlen(str);
 	i = 0;
 	string = (char *)malloc(len + 1);

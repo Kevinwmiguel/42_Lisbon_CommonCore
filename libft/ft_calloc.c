@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:00:48 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/13 19:06:36 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/19 20:17:59 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,7 @@ void	*ft_calloc(size_t num_elements, size_t element_size)
 	i = 0;
 	memo = malloc(num_elements * element_size);
 	if (!memo)
-	{
 		return (NULL);
-	}
-	while (i < num_elements * element_size)
-	{
-		((char *)memo)[i] = 0;
-		i++;
-	}
+	ft_bzero(memo, num_elements * element_size);
 	return (memo);
 }

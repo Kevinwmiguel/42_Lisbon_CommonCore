@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:02:11 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/18 14:21:03 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:44:14 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strrchr(const char *str, int character)
 	int		i;
 	char	*dst;
 
+	if (!str)
+		return (NULL);
 	dst = (char *)str;
 	i = 0;
 	while (dst[i])
