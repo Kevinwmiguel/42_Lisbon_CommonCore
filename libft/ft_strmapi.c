@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 07:08:00 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/19 19:42:34 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/22 03:21:53 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 	size_t	size;
 	int		i;
 
-	if (!s)
+	if (!s || !f)
 		return (NULL);
 	size = ft_strlen(s);
 	new = malloc((size + 1) * sizeof(char));

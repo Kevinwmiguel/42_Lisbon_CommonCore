@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:03:06 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/15 18:47:27 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/22 03:24:26 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	size_t	i;
 
+	if (!s || !fd)
+		return ;
 	i = ft_strlen(s);
 	write(fd, s, i);
 }
