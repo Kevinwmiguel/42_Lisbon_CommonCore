@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:08:20 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/24 12:08:20 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:06:38 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,49 @@ void ft_lstfreeone(t_list *node)
     }
 }
 
+
+// Função de mapeamento para ft_lstmap
+static void *map_func_lst(void *content)
+{
+    // Exemplo de função de mapeamento simples
+    return ft_strdup((char *)content);
+}
+
+// Função de mapeamento para ft_strmapi
+static char map_func(unsigned int index, char c)
+{
+    return c + 1; // Exemplo de função de mapeamento simples
+}
+
+// Função de iteração para ft_striteri
+static void iter_func(unsigned int index, char *c)
+{
+    *c = *c + 1; // Exemplo de função de iteração simples
+}
+
+// Função de liberação de conteúdo para ft_lstdelone
+static void del_func(void *content)
+{
+    free(content); // Exemplo de função de liberação de conteúdo simples
+}
+
+// Função de impressão de conteúdo para ft_lstiter
+static void print_content(void *content)
+{
+    printf("%s\n", (char *)content); // Exemplo de função de impressão de conteúdo simples
+}
+
 int main(void)
 {
     // Test isalpha
     printf("Is 'A' alpha? %d\n", ft_isalpha('A'));
-    printf("Is 'A' alpha? %d\n", ft_isalpha('5'));
-    printf("Is 'A' alpha? %d\n", ft_isalpha(' '));
+    printf("Is '5' alpha? %d\n", ft_isalpha('5'));
+    printf("Is ' ' alpha? %d\n", ft_isalpha(' '));
 
     // Test isdigit
     printf("Is '5' a digit? %d\n", ft_isdigit('5'));
-    printf("Is '5' a digit? %d\n", ft_isdigit('A'));
-    printf("Is '5' a digit? %d\n", ft_isdigit(' '));
+    printf("Is 'A' a digit? %d\n", ft_isdigit('A'));
+    printf("Is ' ' a digit? %d\n", ft_isdigit(' '));
 
     // Test isalnum
     printf("Is 'A' alphanumeric? %d\n", ft_isalnum('X'));
@@ -200,8 +232,7 @@ int main(void)
 
     // Test ft_lstnew
     t_list *new_node = ft_lstnew("Hello");
-    printf("ft_lstnew result: %s");
-    return 0;
+    printf("ft_lstnew result: %s \n", (char *)new_node->content);
 
     // Test ft_lstadd_front
     t_list *list = ft_lstnew("World");
@@ -218,22 +249,6 @@ int main(void)
     ft_lstadd_back(&list, ft_lstnew("How"));
     printf("ft_lstadd_back result: %s\n", (char *)ft_lstlast(list)->content);
 
-    // Test ft_lstdelone
-    ft_lstdelone(list, &del_func); // Remember to free the memory allocated by ft_lstnew
-    printf("ft_lstdelone result: List node deleted\n");
-
-    ft_lstfreeone(list);
-
-    // Test ft_lstclear
-    t_list *list2 = ft_lstnew("Goodbye");
-    ft_lstadd_front(&list2, ft_lstnew("Hello"));
-    ft_lstadd_back(&list2, ft_lstnew("World"));
-    printf("List before clearing:\n");
-    ft_lstiter(list2, &print_content);
-    ft_lstclear(&list2, &del_func);
-    printf("List after clearing:\n");
-    ft_lstiter(list2, &print_content);
-
     // Test ft_lstiter
     t_list *list3 = ft_lstnew("Hello");
     ft_lstadd_back(&list3, ft_lstnew("World"));
@@ -241,7 +256,13 @@ int main(void)
     ft_lstiter(list3, &print_content);
 
     // Test ft_lstmap
-    t_list *new_list = ft_lstmap(list3, &map_func_lst);
-    printf("List contents after mapping:\n");
-    ft_lstiter(new_list, &print_content);
+    t_list *list4 = ft_lstnew("Goodbye");
+    ft_lstadd_front(&list4, ft_lstnew("Hellow"));
+    ft_lstadd_back(&list4, ft_lstnew("World1"));
+
+    
+    printf("until here\n");
+
+    //Falta ft_lstnew e ft_lstdelone
+    return 0;
 }

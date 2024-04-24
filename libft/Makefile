@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 19:38:58 by kwillian          #+#    #+#              #
-#    Updated: 2024/04/18 12:14:14 by kwillian         ###   ########.fr        #
+#    Updated: 2024/04/22 03:47:09 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,5 +49,6 @@ re:				fclean all
 
 bonus:			$(OBJS) $(BONUS_OBJS)
 				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+				touch bonus
 
-.PHONY:			all bonus clean fclean re
+.PHONY:			all clean fclean re
