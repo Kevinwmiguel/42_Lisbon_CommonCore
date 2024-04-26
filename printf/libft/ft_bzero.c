@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 09:58:33 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/26 13:28:14 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/11 10:00:40 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/18 12:03:25 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+void	ft_bzero(void *s, size_t n)
 {
-	size_t	i;
+	unsigned char	*ptr;
 
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
+	ptr = (unsigned char *)s;
+	while (n > 0)
+	{
+		*(ptr++) = 0;
+		n--;
+	}
 }
+// #include <stdio.h>
+// int main() {
+//     char str[11] = "Hellox";
+//     printf("Antes do bzero: %s\n", str);
+//     ft_bzero(str, 5);
+//     printf("Depois do bzero: %s\n", str);
+//     return 0;
+// }

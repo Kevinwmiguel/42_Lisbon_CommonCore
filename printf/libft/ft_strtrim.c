@@ -1,23 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 09:58:33 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/26 13:28:14 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/11 10:02:29 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/18 09:20:17 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	i;
+	int		start;
+	int		end;
+	int		i;
+	char	*nova;
 
+	if (!s1)
+		return (NULL);
+	start = 0;
+	while (s1[start] && ft_strchr(set, s1[start]))
+		start++;
+	end = ft_strlen(s1) - 1;
+	while (end > start && ft_strchr(set, s1[end]))
+		end--;
+	nova = (char *)malloc(end - start + 2);
+	if (!nova)
+		return (NULL);
 	i = 0;
-	while (str[i] != '\0')
+	while (start <= end)
+	{
+		nova[i] = s1[start];
 		i++;
-	return (i);
+		start++;
+	}
+	nova[i] = '\0';
+	return (nova);
 }

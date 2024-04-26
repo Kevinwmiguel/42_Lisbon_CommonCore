@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 09:58:33 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/26 13:28:14 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/15 17:42:24 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/22 03:23:04 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	size_t	i;
+	unsigned int	i;
 
+	if (!s || !f)
+		return ;
 	i = 0;
-	while (str[i] != '\0')
+	while (s[i])
+	{
+		f(i, s + i);
 		i++;
-	return (i);
+	}
 }
+// #include <stdio.h>
+// static void print_index_and_char(unsigned int index, char *c)
+// {
+//     printf("Index, %u, Char, %c\n", index, *c);
+// }
+// int main()
+// {
+//     char str[] = "Testezao";
+//     ft_striteri(str, &print_index_and_char);
+//     return (0);
+// }
