@@ -3,6 +3,7 @@
         "stdio.h": "c",
         "*.tcc": "c",
         "libft.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "stdint.h": "c"
     }
 }
