@@ -4,6 +4,7 @@
         "*.tcc": "c",
         "libft.h": "c",
         "unistd.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "stdarg.h": "c"
     }
 }

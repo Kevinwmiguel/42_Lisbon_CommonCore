@@ -1,126 +1,138 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 20:08:03 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/29 20:24:05 by kwillian         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include <stdarg.h>
 #include <unistd.h>
+#include <stdio.h>
 
-
-static void ft_putchar(char c)
+static void	ft_putchar(char c)
 {
-    write(1, &c, 1);
+	write(1, &c, 1);
 }
 
-static void ft_putstr(char *str)
+static void	ft_putstr(char *str)
 {
-    while (*str)
-    {
-        ft_putchar(*str);
-        str++;
-    }
+	while (*str)
+	{
+		ft_putchar(*str);
+		str++;
+	}
 }
 
-static void ft_putnbr(unsigned int n)
+static void	ft_putnbr(unsigned int n)
 {
-    if (n >= 10)
-    {
-        ft_putnbr(n / 10);
-        ft_putchar(n % 10 + '0');
-    }
-    else
-        ft_putchar(n + '0');
-}
-static void ft_puthex(unsigned int n, char format)
-{
-    char *hex_digits = (format == 'X') ? "0123456789ABCDEF" : "0123456789abcdef";
-    if (n >= 16)
-    {
-        ft_puthex(n / 16, format);
-        ft_putchar(hex_digits[n % 16]);
-    }
-    else
-        ft_putchar(hex_digits[n]);
-}
-static void ft_putnbr_hex_fd(unsigned long long nbr, int fd)
-{
-    char *hex_digits = "0123456789abcdef";
-    if (nbr >= 16)
-    {
-        ft_putnbr_hex_fd(nbr / 16, fd);
-        ft_putnbr_hex_fd(nbr % 16, fd);
-    }
-    else
-        ft_putchar_fd(hex_digits[nbr], fd);
+	if (n >= 10)
+	{
+		ft_putnbr(n / 10);
+		ft_putchar(n % 10 + '0');
+	}
+	else
+		ft_putchar(n + '0');
 }
 
-static int ft_printf_internal(const char *format, va_list args)
+static void	ft_puthex(unsigned int n, char format)
 {
-    int count = 0;
-    while (*format)
-    {
-        if (*format == '%')
-        {
-            format++;
-            if (*format == 'u')
-            {
-                unsigned int num = va_arg(args, unsigned int);
-                ft_putnbr(num);
-            }
-            else if (*format == 'd' || *format == 'i')
-            {
-                int num = va_arg(args, int);
-                if (num < 0)
-                {
-                    ft_putchar('-');
-                    num = -num;
-                }
-                ft_putnbr(num);
-            }
-            else if (*format == 'x' || *format == 'X')
-            {
-                unsigned int num = va_arg(args, unsigned int);
-                ft_puthex(num, *format);
-            }
-            else if (*format == 'c')
-            {
-                char c = (char)va_arg(args, int);
-                ft_putchar(c);
-            }
-            else if (*format == 's')
-            {
-                char *str = va_arg(args, char *);
-                ft_putstr(str);
-            }
-            else if (*format == 'p')
-            {
-                unsigned long long ptr_val = (unsigned long long)va_arg(args, void *);
-                ft_putstr_fd("0x", 1); // Prefixo "0x" para indicar formato hexadecimal
-                ft_putnbr_hex_fd(ptr_val, 1); // Imprime o valor do ponteiro em hexadecimal
-            }
-            else if (*format == '%')
-            {
-                ft_putchar('%');
-            }
-            else
-            {
-                ft_putchar('%');
-                ft_putchar(*format);
-            }
-        }
-        else
-        {
-            ft_putchar(*format);
-        }
-        format++;
-        count++;
-    }
-    return count;
+	char	*hex_digits;
+
+	hex_digits = (format == 'X') ? "0123456789ABCDEF" : "0123456789abcdef";
+	if (n >= 16)
+	{
+		ft_puthex(n / 16, format);
+		ft_putchar(hex_digits[n % 16]);
+	}
+	else
+		ft_putchar(hex_digits[n]);
 }
 
-int ft_printf(const char *format, ...)
+static void	ft_putnbr_ptr_fd(unsigned long long nbr)
 {
-    va_list args;
-    va_start(args, format);
-    int count = ft_printf_internal(format, args);
-    va_end(args);
-    return count;
+	char	*ptr_digits;
+
+	ptr_digits = "0123456789abcdef";
+	if (nbr >= 16)
+	{
+		ft_putnbr_ptr_fd(nbr / 16);
+		ft_putnbr_ptr_fd(nbr % 16);
+	}
+	else
+		ft_putchar(ptr_digits[nbr]);
+}
+
+static void	ft_isnumber(int num, const char format)
+{
+	if (num < 0)
+	{
+		ft_putchar('-');
+		num = -num;
+	}
+	ft_putnbr(num);
+}
+
+static int	process_format(const char **format, va_list args)
+{
+	*format += 1;
+	if (**format == 'u')
+		ft_putnbr(va_arg(args, unsigned int));
+	else if (**format == 'd' || **format == 'i')
+		ft_putnbr_fd(va_arg(args, int), 1);
+	else if (**format == 'x' || **format == 'X')
+		ft_puthex(va_arg(args, unsigned int), **format);
+	else if (**format == 'c')
+		ft_putchar((char)va_arg(args, int));
+	else if (**format == 's')
+		ft_putstr(va_arg(args, char *));
+	else if (**format == 'p')
+	{
+		ft_putstr("0x");
+		ft_putnbr_ptr_fd(va_arg(args, unsigned long long));
+	}
+	else if (**format == '%')
+		ft_putchar('%');
+	return (1);
+}
+
+static int	ft_printf_internal(const char *format, va_list args)
+{
+	int	count; 
+
+	count = 0;
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			count += process_format(&format, args);
+			format++;
+		}
+		else
+		{
+			ft_putchar(*format);
+			format++;
+			count++;
+		}
+	}
+	return (count);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list args;
+
+	va_start(args, format);
+	int count;
+
+	count = ft_printf_internal(format, args);
+	va_end(args);
+	return (count);
 }
 // int main()
 // {
