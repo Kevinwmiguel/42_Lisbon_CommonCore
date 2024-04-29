@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 10:00:48 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/18 16:26:29 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/29 20:53:10 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/29 21:04:17 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-void	*ft_calloc(size_t num_elements, size_t element_size)
+void	ft_puthex(unsigned int n, char format)
 {
-	void	*memo;
+	char	*hex_digits;
 
-	memo = malloc(num_elements * element_size);
-	if (!memo)
-		return (NULL);
-	ft_bzero(memo, num_elements * element_size);
-	return (memo);
+	if (format == 'X')
+		hex_digits = "0123456789ABCDEF";
+	else if (format == 'x')
+		hex_digits = "0123456789abcdef";
+	if (n >= 16)
+	{
+		ft_puthex(n / 16, format);
+		ft_putchar_fd((hex_digits[n % 16]), 1);
+	}
+	else
+		ft_putchar_fd((hex_digits[n]), 1);
 }

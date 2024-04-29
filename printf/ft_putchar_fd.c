@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 10:02:11 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/19 19:44:14 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/15 17:50:44 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/29 21:04:21 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-char	*ft_strrchr(const char *str, int character)
+void	ft_putchar_fd(char c, int fd)
 {
-	int		i;
-	char	*dst;
-
-	if (!str)
-		return (NULL);
-	dst = (char *)str;
-	i = 0;
-	while (dst[i])
-		i++;
-	while (i >= 0)
-	{
-		if (dst[i] == (char)character)
-			return ((char *)dst + i);
-		i--;
-	}
-	return (NULL);
+	if (!c || !fd)
+		return ;
+	write(fd, &c, 1);
 }
