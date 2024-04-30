@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 17:50:44 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/22 03:23:49 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/11 10:00:48 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/30 16:31:10 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	*ft_calloc(size_t num_elements, size_t element_size)
 {
-	if (!c || !fd)
-		return ;
-	write(fd, &c, 1);
+	void	*memo;
+
+	memo = malloc(num_elements * element_size);
+	if (!memo)
+		return (NULL);
+	ft_bzero(memo, num_elements * element_size);
+	return (memo);
 }

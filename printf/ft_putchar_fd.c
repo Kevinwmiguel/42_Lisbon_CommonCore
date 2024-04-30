@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 18:41:29 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/22 03:25:11 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/15 17:50:44 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/30 16:04:41 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putendl_fd(char *s, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
-	size_t	x;
-
-	if (!s || !fd)
-		return ;
-	x = ft_strlen(s);
-	write(fd, s, x);
-	write(fd, "\n", 1);
+	if (!c || !fd)
+		return 0;
+	write(fd, &c, 1);
+	return (1);
 }
-
-// int main()
-// {
-//     ft_putendl_fd("Ola familiaaaax", 1);
-//     return (0);
-// }

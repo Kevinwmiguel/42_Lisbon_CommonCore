@@ -6,22 +6,21 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 19:38:58 by kwillian          #+#    #+#              #
-#    Updated: 2024/04/29 20:23:33 by kwillian         ###   ########.fr        #
+#    Updated: 2024/04/30 18:20:37 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-SOURCES = *.c
+SOURCES = ft_printf.c ft_putchar_fd.c ft_putstr_fd.c ft_strlen.c \
+ft_putnbr_ptr_fd.c ft_putnbr_fd.c ft_itoa.c ft_calloc.c ft_bzero.c
 OBJECTS = $(SOURCES:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	@$(MAKE) -C ./libft
-	cp ./libft/libft.a ./$(NAME)
 	$(AR) -r $@ $?
 
 %.o: %.c

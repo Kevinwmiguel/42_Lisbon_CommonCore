@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 10:00:48 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/18 16:26:29 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/15 19:22:22 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/30 16:06:24 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_calloc(size_t num_elements, size_t element_size)
+int	ft_putnbr_fd(int n, int fd)
 {
-	void	*memo;
+	int	count;
 
-	memo = malloc(num_elements * element_size);
-	if (!memo)
-		return (NULL);
-	ft_bzero(memo, num_elements * element_size);
-	return (memo);
+	count = 0;
+	if (n == -2147483648)
+	{
+		write (fd, "-2147483648", 11);
+		return (11);
+	}
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = (-n);
+	}
+	if (n >= 10)
+		count += ft_putnbr_fd(n / 10, fd);
+	ft_putchar_fd('0' + n % 10, fd);
+	count++;
+	return (count);
 }
+// int main()
+// {
+// 	ft_putnbr_fd(-3648, 1);
+// 	return (0);
+// }

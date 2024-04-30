@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 18:03:06 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/22 03:24:26 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/11 10:00:40 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/30 16:30:20 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_bzero(void *s, size_t n)
 {
-	size_t	i;
+	unsigned char	*ptr;
 
-	if (!s || !fd)
-		return ;
-	i = ft_strlen(s);
-	write(fd, s, i);
+	ptr = (unsigned char *)s;
+	while (n > 0)
+	{
+		*(ptr++) = 0;
+		n--;
+	}
 }
-
-// int main()
-// {
-//     ft_putstr_fd("Oi Gente boa!", 1);
-//     return (0);
+// #include <stdio.h>
+// int main() {
+//     char str[11] = "Hellox";
+//     printf("Antes do bzero: %s\n", str);
+//     ft_bzero(str, 5);
+//     printf("Depois do bzero: %s\n", str);
+//     return 0;
 // }

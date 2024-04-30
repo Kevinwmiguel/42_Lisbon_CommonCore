@@ -1,43 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 19:22:22 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/22 03:32:30 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/15 18:03:06 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/30 17:26:22 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <unistd.h>
+#include "ft_printf.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
-	if (n == 0)
+	size_t	i;
+
+	i = 0;
+	if (!s)
 	{
-		write (fd, "0", 1);
-		return ;
+		write(1, "(null)", 6);
+		return (6);
 	}
-	if (n == -2147483648)
-	{
-		write (fd, "-2147483648", 11);
-		return ;
-	}
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		n = (-n);
-	}
-	if (n >= 10)
-	{
-		ft_putnbr_fd(n / 10, fd);
-	}
-	ft_putchar_fd('0' + n % 10, fd);
+	if (s[0] == '%' && s[i+1] == '%' && s[i+2] == '%')
+		return (0);
+	if (!s || !fd)
+		return (0);
+	i = ft_strlen(s);
+	write(fd, s, i);
+	return (i);
 }
+
 // int main()
 // {
-// 	ft_putnbr_fd(-3648, 1);
-// 	return (0);
+//     ft_putstr_fd("Oi Gente boa!", 1);
+//     return (0);
 // }

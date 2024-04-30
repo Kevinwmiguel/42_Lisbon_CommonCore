@@ -6,12 +6,12 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 23:34:46 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/22 03:22:19 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:27:46 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include <stdio.h>
-#include "libft.h"
+#include "ft_printf.h"
 
 static size_t	contnum(int n)
 {
