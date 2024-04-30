@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:48:19 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/26 13:27:44 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/30 06:51:57 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }				t_list;
-
 
 int				ft_atoi(const char *str);
 

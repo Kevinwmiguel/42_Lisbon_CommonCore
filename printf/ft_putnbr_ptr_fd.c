@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_ptr_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 06:48:06 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/30 06:50:22 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/30 06:49:31 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/30 06:51:40 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
+#include "ft_printf.h"
+#include <stdarg.h>
+#include <unistd.h>
+#include <stdio.h>
 
-# include <stdlib.h>
-# include <unistd.h>
+void	ft_putnbr_ptr_fd(unsigned long long nbr)
+{
+	char	*ptr_digits;
 
-void	ft_putnbr_ptr_fd(unsigned long long nbr);
-
-#endif
+	ptr_digits = "0123456789abcdef";
+	if (nbr >= 16)
+	{
+		ft_putnbr_ptr_fd(nbr / 16);
+		ft_putnbr_ptr_fd(nbr % 16);
+	}
+	else
+		ft_putchar_fd((ptr_digits[nbr]), 1);
+}

@@ -6,38 +6,25 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 20:08:03 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/30 06:30:54 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/04/30 06:51:18 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_printf.h"
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
-
-static void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-static void	ft_putstr(char *str)
-{
-	while (*str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
-}
 
 static void	ft_putnbr(unsigned int n)
 {
 	if (n >= 10)
 	{
 		ft_putnbr(n / 10);
-		ft_putchar(n % 10 + '0');
+		ft_putchar_fd((n % 10 + '0'), 1);
 	}
 	else
-		ft_putchar(n + '0');
+		ft_putchar_fd((n + '0'), 1);
 }
 
 static void	ft_puthex(unsigned int n, char format)
@@ -51,24 +38,10 @@ static void	ft_puthex(unsigned int n, char format)
 	if (n >= 16)
 	{
 		ft_puthex(n / 16, format);
-		ft_putchar(hex_digits[n % 16]);
+		ft_putchar_fd((hex_digits[n % 16]), 1);
 	}
 	else
-		ft_putchar(hex_digits[n]);
-}
-
-static void	ft_putnbr_ptr_fd(unsigned long long nbr)
-{
-	char	*ptr_digits;
-
-	ptr_digits = "0123456789abcdef";
-	if (nbr >= 16)
-	{
-		ft_putnbr_ptr_fd(nbr / 16);
-		ft_putnbr_ptr_fd(nbr % 16);
-	}
-	else
-		ft_putchar(ptr_digits[nbr]);
+		ft_putchar_fd((hex_digits[n]), 1);
 }
 
 static int	process_format(const char **format, va_list args)
@@ -81,16 +54,16 @@ static int	process_format(const char **format, va_list args)
 	else if (**format == 'x' || **format == 'X')
 		ft_puthex(va_arg(args, unsigned int), **format);
 	else if (**format == 'c')
-		ft_putchar((char)va_arg(args, int));
+		ft_putchar_fd(((char)va_arg(args, int)), 1);
 	else if (**format == 's')
-		ft_putstr(va_arg(args, char *));
+		ft_putstr_fd((va_arg(args, char *)), 1);
 	else if (**format == 'p')
 	{
-		ft_putstr("0x");
+		ft_putstr_fd(("0x"), 1);
 		ft_putnbr_ptr_fd(va_arg(args, unsigned long long));
 	}
 	else if (**format == '%')
-		ft_putchar('%');
+		ft_putchar_fd(('%'), 1);
 	return (1);
 }
 
@@ -108,7 +81,7 @@ static int	ft_printf_internal(const char *format, va_list args)
 		}
 		else
 		{
-			ft_putchar(*format);
+			ft_putchar_fd((*format), 1);
 			format++;
 			count++;
 		}
