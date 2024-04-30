@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 18:03:06 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/29 21:04:14 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/29 20:21:54 by kwillian          #+#    #+#             */
+/*   Updated: 2024/04/29 20:22:39 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "libftprintf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	size_t	i;
+# include <stdlib.h>
+# include <unistd.h>
 
-	if (!s || !fd)
-		return ;
-	i = ft_strlen(s);
-	write(fd, s, i);
-}
+int ft_printf(const char *, ...);
 
-// int main()
-// {
-//     ft_putstr_fd("Oi Gente boa!", 1);
-//     return (0);
-// }
+void			ft_putnbr_fd(int n, int fd);
+
+#endif
