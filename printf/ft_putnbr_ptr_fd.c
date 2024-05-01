@@ -15,17 +15,17 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int	putThePointer(unsigned long long nbr)
+int	putthepointer(unsigned long long nbr)
 {
 	char	*ptr_digits;
-	int	count;
+	int		count;
 
 	count = 0;
 	ptr_digits = "0123456789abcdef";
 	if (nbr >= 16)
 	{
-		count += putThePointer(nbr / 16);
-		count += putThePointer(nbr % 16);
+		count += putthepointer(nbr / 16);
+		count += putthepointer(nbr % 16);
 	}
 	else
 	{
@@ -46,7 +46,6 @@ int	ft_putnbr_ptr_fd(unsigned long long nbr)
 		return (5);
 	}
 	ft_putstr_fd("0x", 1);
-	count += putThePointer(nbr);
-	//printf("Contagem total de pointer %d ", count);
+	count += putthepointer(nbr);
 	return (count);
 }

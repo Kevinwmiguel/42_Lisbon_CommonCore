@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 19:22:22 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/30 16:06:24 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:08:58 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_putnbr_fd(int n, int fd)
 	{
 		ft_putchar_fd('-', fd);
 		n = (-n);
+		count++;
 	}
 	if (n >= 10)
 		count += ft_putnbr_fd(n / 10, fd);

@@ -23,7 +23,7 @@ int	ft_putstr_fd(char *s, int fd)
 		write(1, "(null)", 6);
 		return (6);
 	}
-	if (s[0] == '%' && s[i+1] == '%' && s[i+2] == '%')
+	if (s[0] == '%' && s[i + 1] == '%' && s[i + 2] == '%')
 		return (0);
 	if (!s || !fd)
 		return (0);

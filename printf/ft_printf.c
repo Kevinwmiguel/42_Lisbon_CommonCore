@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 20:08:03 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/30 18:25:13 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:09:19 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static int	ft_putnbr(unsigned int n)
 	return (count);
 }
 
-static int ft_puthex(unsigned int n, char format)
+static int	ft_puthex(unsigned int n, char format)
 {
 	char	*hex_digits;
-	int	count;
+	int		count;
 
 	count = 0;
 	if (format == 'X')
@@ -71,7 +71,7 @@ static int	process_format(const char **format, va_list args)
 		return (ft_putstr_fd((va_arg(args, char *)), 1));
 	else if (**format == 'p')
 	{
-		return (ft_putnbr_ptr_fd(va_arg(args, unsigned long long)));	
+		return (ft_putnbr_ptr_fd(va_arg(args, unsigned long long)));
 	}
 	else if (**format == '%')
 		return (ft_putchar_fd(('%'), 1));
@@ -106,44 +106,6 @@ int	ft_printf(const char *format, ...)
 
 	va_start(args, format);
 	count = ft_printf_internal(format, args);
-	printf("\nCONTAGEM TOTAL DE BYTES DE CADA VARIAVEL %d", count);
 	va_end(args);
 	return (count);
 }
-// int main()
-// {
-//     char i = 'C';
-//     char *str = "palavra";
-//     unsigned int x = -958;
-//     int j = -2147483648;
-
-//     ft_printf("FUNCAO FT_PRINTF\n");
-//     ft_printf("This is a letter %c \n", i);
-//     ft_printf("This is a string %s \n", str);
-//     ft_printf("This is a pointer %p tentativa \n", &x);
-//     ft_printf("This is a int nmb %d D \n", x);
-//     ft_printf("This is a int nmb %i ssss \n", j);
-//     ft_printf("This is a int nmb %x ssss \n", x);
-//     ft_printf("This is a int nmb %X ssss \n", x);
-//     ft_printf("This is a uns dec nbm %u ssss \n", x);
-//     ft_printf("This is a porcent %% ssss \n");
-// 	ft_printf("%p \n", NULL);
-// 	ft_printf("%s \n", (char *)NULL);
-	
-
-//     printf("\nFUNCAO PRINT\n");
-//     printf("This is a letter %c \n", i);
-//     printf("This is a string %s \n", str);
-//     printf("This is a pointer %p tentativa \n", &x);
-//     printf("This is a int nmb %d D \n", x);
-//     printf("This is a int nmb %i ssss \n", j);
-//     printf("This is a int nmb %x ssss \n", x);
-//     printf("This is a int nmb %X ssss \n", x);
-//     printf("This is a uns dec nbm %u ssss \n", x);
-//     printf("This is a porcent %% ssss \n");
-// 	printf("%p \n", NULL);
-// 	printf("%s\n", (char *)NULL);
-// 	printf("% %s %s", str);
-// 	printf("% %s %p", str);
-//     return 0;
-// }
