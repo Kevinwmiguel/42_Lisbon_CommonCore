@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 15:12:58 by kwillian          #+#    #+#             */
-/*   Updated: 2024/05/01 16:11:01 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:31:56 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ int main()
     printf("PONTUACAO PRINTF uns dec: %d\n", test);
     test = printf("This is a porcent %% ssss \n");
     printf("PONTUACAO PRINTF porcent: %d\n", test);
-	printf("%p \n", NULL);
+	test = printf("%p", NULL);
+    printf("\n");
+    printf("PONTUACAO PRINTF porcent: %d\n", test);
 	//printf("%s\n", (char *)NULL);
     // return 0;
 }

@@ -1,9 +1,9 @@
 <h1 align="center">
-	📖 libft
+	📖 ft_printf
 </h1>
 
 <p align="center">
-	<b><i>Do you have a library?</i></b><br>
+	<b><i>Can you print this?</i></b><br>
 </p>
 
 ![image](https://github.com/Kevinwmiguel/42_Lisbon_CommonCore/assets/59360014/546d47c3-0f82-4340-b61c-efb3756594a4)
@@ -26,9 +26,9 @@
 
 ## 💡 About the project
 
-> _The aim of this project is to make you code your own librery._
+> _The aim of this project is to reproduce the behavior of original printf._
 
-	You will code the most usable funcations in C.
+	The most famous function to debugging now in your hand!
 
 ## 🛠️ Usage
 

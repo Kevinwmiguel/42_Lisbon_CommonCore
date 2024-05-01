@@ -3,6 +3,7 @@
         "unistd.h": "c",
         "stdarg.h": "c",
         "ft_printf.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "stdio.h": "c"
     }
 }
