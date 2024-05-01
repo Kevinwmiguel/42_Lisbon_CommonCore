@@ -7,7 +7,8 @@
 </p>
 
 <p align="center">
-	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/jdecorte-be/42-Get-next-line?color=lightblue" />
+	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Kevinwmiguel/42_Lisbon_CommonCore
+/libft?color=lightblue" />
 	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Kevinwmiguel/libft?color=green" />
 </p>
 
