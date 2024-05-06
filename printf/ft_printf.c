@@ -6,14 +6,14 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 20:08:03 by kwillian          #+#    #+#             */
-/*   Updated: 2024/05/01 15:09:19 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/05/03 10:05:21 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 
 static int	ft_putnbr(unsigned int n)
 {
@@ -104,6 +104,8 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		count;
 
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	count = ft_printf_internal(format, args);
 	va_end(args);

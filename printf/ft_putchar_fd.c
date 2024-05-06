@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:50:44 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/30 16:04:41 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:20:37 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	ft_putchar_fd(char c, int fd)
 {
-	if (!c || !fd)
-		return (0);
 	write(fd, &c, 1);
 	return (1);
 }
