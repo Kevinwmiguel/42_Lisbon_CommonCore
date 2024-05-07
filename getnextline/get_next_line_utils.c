@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:01:00 by kwillian          #+#    #+#             */
-/*   Updated: 2024/05/05 20:17:30 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:58:07 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,54 +69,4 @@ char	*ft_strdup(const char *str)
 	}
 	string[len] = '\0';
 	return ((char *)string);
-}
-
-char *ft_strncpy(char *dest, const char *src, size_t n) {
-    char *dest_start = dest;
-    while (n > 0 && *src != '\0') {
-        *dest = *src;
-        dest++;
-        src++;
-        n--;
-    }
-    while (n > 0) {
-        *dest = '\0';
-        dest++;
-        n--;
-    }
-
-    return dest_start;
-}
-
-char	*ft_strchr(const char *s, int charactere)
-{
-	char	*dst;
-
-	dst = (char *)s;
-	while (*dst)
-	{
-		if ((unsigned char)*dst == (unsigned char)charactere)
-			return (dst);
-		dst++;
-	}
-	if ((unsigned char)*dst == (unsigned char)charactere)
-		return (dst);
-	return (NULL);
-}
-
-char *ft_strndup(const char *s, size_t n) {
-    if (!s)
-        return NULL;
-    size_t len = ft_strlen(s);
-
-    size_t copy_len = (len < n) ? len : n;
-    char *dup = (char *)malloc(copy_len + 1);
-    if (!dup)
-        return NULL;
-    for (size_t i = 0; i < copy_len; i++) {
-        dup[i] = s[i];
-    }
-    dup[copy_len] = '\0';
-
-    return dup;
 }
