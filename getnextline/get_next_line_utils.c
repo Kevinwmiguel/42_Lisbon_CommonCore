@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:01:00 by kwillian          #+#    #+#             */
-/*   Updated: 2024/05/07 17:58:07 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/05/08 20:16:22 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t  ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-    size_t  i;
+	size_t	i;
 
-    i = 0;
-    while(s[i] != '\0')
-        i++;
-    return (i);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -69,4 +69,22 @@ char	*ft_strdup(const char *str)
 	}
 	string[len] = '\0';
 	return ((char *)string);
+}
+
+char	*ft_strchr(const char *s, int charactere)
+{
+	char	*dst;
+
+	if (!s)
+		return (NULL);
+	dst = (char *)s;
+	while (*dst)
+	{
+		if ((unsigned char)*dst == (unsigned char)charactere)
+			return (dst);
+		dst++;
+	}
+	if ((unsigned char)*dst == (unsigned char)charactere)
+		return (dst);
+	return (NULL);
 }
