@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:01:00 by kwillian          #+#    #+#             */
-/*   Updated: 2024/05/10 02:39:40 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/05/10 06:37:25 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	ft_strlen(const char *s)
 	{
 		if (s[i] == '\n')
 			return (i + 1);
-		i++;	
+		i++;
 	}
 	return (i);
 }
@@ -41,7 +41,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 	while (s1 && s1[i] != '\0')
 	{
 		nova[i] = s1[i];
-		i++;	
+		i++;
 	}
 	j = 0;
 	free(s1);
@@ -49,7 +49,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 	{
 		nova[i++] = s2[j++];
 		if (s2[j - 1] == '\n')
-			break;
+			break ;
 	}
 	nova[i] = '\0';
 	return (nova);

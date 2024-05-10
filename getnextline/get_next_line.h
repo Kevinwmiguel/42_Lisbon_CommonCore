@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 18:55:56 by kwillian          #+#    #+#             */
-/*   Updated: 2024/05/10 02:38:22 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/05/10 06:30:42 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2148473649
+#  define BUFFER_SIZE 0
 # endif
 
 char	*get_next_line(int fd);
