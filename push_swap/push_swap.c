@@ -6,43 +6,33 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:00:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/06/07 20:52:26 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:29:38 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
-#include "printf/ft_printf.h"
-#include "libft/libft.h"
+#include "push_swap.h" // Inclui a definição de t_node
 #include <stdio.h>
+
+#include "libft/libft.h" 
+# include "printf/ft_printf.h"
 
 int main(int argc, char **argv)
 {
-    if (argc > 1)
+    t_node *a = NULL;
+    t_node *new_node;
+    t_node *b = NULL;
+
+    int i = 1;
+    int *data;
+    while (i < argc)
     {
-        //criacao das pilhas
-        t_list **a;
-        t_list b;
-
-        //variaveis
-        int comandos = argc;
-        int i = 1;
-        int j = argc;
-
-        //criar o haed
-        t_list *a = (t_list **)malloc(comandos * sizeof(t_list));
-        
-        //inserir na lista
-        while (comandos > 1)
-        {
-            data = ft_atoi(argv[i]);
-            t_list *temp = ft_lstnew(data);
-            ft_lstadd_back(a,temp);
-            i++;
-            comandos--;
-        }
-
-        ft_lstiter(a, printf);
-        
+        data = (int *)malloc(sizeof(int));
+        *data = ft_atoi(argv[i]);
+        new_node = ft_lstnew(data);
+        ft_lstadd_front(&a, new_node);
+        i++;
     }
+    // CHAMA ORGANIZADOR
+    
     return (0);
 }

@@ -1,20 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pushswap.h                                         :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 07:03:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/06/06 07:04:58 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/15 18:03:06 by kwillian          #+#    #+#             */
+/*   Updated: 2024/06/10 18:22:23 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include <unistd.h>
 #include "ft_printf.h"
 
-struct lst;
-	int data;
-	t_list *next;
-typedef t_list;
+int	ft_putstr_fd2(char *s, int fd)
+{
+	size_t	i;
 
+	i = 0;
+	if (!s)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	if (s[0] == '%' && s[i + 1] == '%' && s[i + 2] == '%')
+		return (0);
+	if (!s || !fd)
+		return (0);
+	i = ft_strlen2(s);
+	write(fd, s, i);
+	return (i);
+}
+
+// int main()
+// {
+//     ft_putstr_fd("Oi Gente boa!", 1);
+//     return (0);
+// }

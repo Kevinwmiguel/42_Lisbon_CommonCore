@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   pushswap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 09:58:33 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/30 14:27:22 by kwillian         ###   ########.fr       */
+/*   Created: 2024/06/06 07:03:15 by kwillian          #+#    #+#             */
+/*   Updated: 2024/06/17 17:04:58 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef PUSHSWAP_H
+# define PUSHSWAP_H
 
-size_t	ft_strlen(const char *str)
+typedef struct node
 {
-	size_t	i;
+    int number;
+    struct node *next;
+    struct node *prev;
+} t_node;
 
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
+#include "libft/libft.h" // Inclui a definição de t_list
+# include "printf/ft_printf.h"
+
+#endif

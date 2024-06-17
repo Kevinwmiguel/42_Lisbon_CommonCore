@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 17:50:44 by kwillian          #+#    #+#             */
-/*   Updated: 2024/05/03 11:20:37 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/11 09:58:33 by kwillian          #+#    #+#             */
+/*   Updated: 2024/06/10 17:49:46 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putchar_fd(char c, int fd)
+size_t	ft_strlen2(const char *str)
 {
-	write(fd, &c, 1);
-	return (1);
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }

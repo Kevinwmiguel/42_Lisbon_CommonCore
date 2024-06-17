@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 06:49:31 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/30 18:11:21 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:22:19 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	putthepointer(unsigned long long nbr)
 	}
 	else
 	{
-		count += ft_putchar_fd(ptr_digits[nbr], 1);
+		count += ft_putchar_fd2(ptr_digits[nbr], 1);
 	}
 	return (count);
 }
@@ -45,7 +45,7 @@ int	ft_putnbr_ptr_fd(unsigned long long nbr)
 		count = 5;
 		return (5);
 	}
-	ft_putstr_fd("0x", 1);
+	ft_putstr_fd2("0x", 1);
 	count += putthepointer(nbr);
 	return (count);
 }
