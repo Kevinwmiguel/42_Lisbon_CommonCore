@@ -79,7 +79,6 @@ void pb(t_node **a, t_node **b)
     if (*b != NULL)
         (*b)->prev = hold;
     *b = hold;
-    return ;
 }
 
 void ra(t_node **a)
@@ -88,40 +87,81 @@ void ra(t_node **a)
         return;
     t_node *temp = a;
     t_node *current = a;
-
-    *a = (*a)->next;
-    (*a)->prev = NULL;
     while(current->next != NULL)
     {
         current = current->next;
     }
-    
+    *a = (*a)->next;
+    (*a)->prev = NULL;
     current->next = temp;
     temp->prev = current;
     temp->next = NULL;
 }
 
-void rb()
+void rb(t_node **b)
 {
-    
+    if (*b == NULL || (*b)->next == NULL)
+        return;
+
+    t_node *temp = *b; // Guardar o topo de b
+    *b = (*b)->next; // Atualizar o topo de b
+    (*b)->prev = NULL;
+
+    t_node *current = *b;
+    while(current->next != NULL) // Encontrar o último elemento
+    {
+        current = current->next;
+    }
+
+    current->next = temp; // Mover temp para o final
+    temp->prev = current;
+    temp->next = NULL;
 }
 
-void rr()
+void rr(t_node **a, t_node **b)
 {
-    
+    ra(a);
+    rb(b);
 }
 
-void rra()
+void rra(t_node **a)
 {
-    
+    if (*a == NULL || (*a)->next == NULL)
+        return;
+
+    t_node *current = *a;
+    while(current->next != NULL) // Encontrar o último elemento
+    {
+        current = current->next;
+    }
+
+    current->prev->next = NULL; // Desconectar o último elemento
+    current->prev = NULL;
+    current->next = *a;
+    (*a)->prev = current;
+    *a = current; // Atualizar o topo de a
 }
 
-void rrb()
+void rrb(t_node **b)
 {
-    
+    if (*b == NULL || (*b)->next == NULL)
+        return;
+
+    t_node *current = *b;
+    while(current->next != NULL) // Encontrar o último elemento
+    {
+        current = current->next;
+    }
+
+    current->prev->next = NULL; // Desconectar o último elemento
+    current->prev = NULL;
+    current->next = *b;
+    (*b)->prev = current;
+    *b = current; // Atualizar o topo de b
 }
 
-void rrr()
+void rrr(t_node **a, t_node **b)
 {
-    
+    rra(a);
+    rrb(b);
 }

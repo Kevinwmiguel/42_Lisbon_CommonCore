@@ -20,6 +20,8 @@ typedef struct node
     struct node *prev;
 } t_node;
 
+t_node *ft_lstnew2(int number);
+
 #include "libft/libft.h" // Inclui a definição de t_list
 # include "printf/ft_printf.h"
 
