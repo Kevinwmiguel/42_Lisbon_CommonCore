@@ -21,7 +21,6 @@ typedef struct node
 } t_node;
 
 t_node *ft_lstnew2(int number);
-
 void sa(t_node *original);
 void sb(t_node *original);
 void ss(t_node *a, t_node *b);
