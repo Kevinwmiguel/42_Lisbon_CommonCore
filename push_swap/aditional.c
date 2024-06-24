@@ -1,5 +1,5 @@
 
-#include "push_swap.h" 
+#include "push_swap.h"
 
 typedef struct node
 {
@@ -19,4 +19,18 @@ t_node *ft_lstnew2(int number)
     new_node->prev = NULL;
 
     return new_node;
+}
+
+void	ft_lstadd_front2(t_node **lst, t_node *new)
+{
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	if (lst && new)
+	{
+		new->next = *lst;
+		*lst = new;
+	}
 }

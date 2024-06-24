@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:00:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/06/17 19:29:38 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:20:16 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,28 +65,22 @@ void free_list(t_node *head)
 int main(int argc, char **argv)
 {
     t_node *a = NULL;
-    t_node *new_node;
+    t_node *new_node = NULL;
     t_node *b = NULL;
     int i;
 
     i = 1;
     while (i < argc)
     {
-        int *data = (int *)malloc(sizeof(int));
-        if (data == NULL)
-        {
-            ft_printf("Erro de alocação de memória\n");
-            return (1);
-        }
-        *data = ft_atoi(argv[i]);
-        new_node = ft_lstnew(data);
+        int data;
+        data = ft_atoi(argv[i]);
+        new_node = ft_lstnew2(data);
         if (new_node == NULL)
         {
             ft_printf("Erro de criação de novo nó\n");
-            free(data);
             return (1);
         }
-        ft_lstadd_front(&a, new_node);
+        ft_lstadd_front2(&a, new_node);
         i++;
     }
     // Chama o organizador

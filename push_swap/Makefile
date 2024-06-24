@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 06:53:20 by kwillian          #+#    #+#              #
-#    Updated: 2024/06/10 18:54:09 by kwillian         ###   ########.fr        #
+#    Updated: 2024/06/23 20:31:37 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,12 @@ NAME := push_swap
 # Aqui eu pego as bibliotecas 
 LIBFT_DIR := libft
 PRINT_F_DIR := printf
+# Diretório atual onde está push_swap.h
+INCLUDE_DIR := .
 
 # Compilar com as flags da 42
 CC := cc
-CFLAGS := -Wall -Werror -Wextra -I$(LIBFT_DIR) -I$(PRINT_F_DIR)
+CFLAGS := -Wall -Werror -Wextra -I$(LIBFT_DIR) -I$(PRINT_F_DIR) -I$(INCLUDE_DIR)
 
 SRC := push_swap.c operations.c
 OBJ := $(SRC:.c=.o)
