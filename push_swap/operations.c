@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:36:37 by kwillian          #+#    #+#             */
-/*   Updated: 2024/06/23 20:30:45 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/06/27 05:13:02 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void sa(t_node *original)
 {
+
     if (original == NULL || original->next == NULL)
         return;
     int temp;
@@ -51,7 +52,7 @@ void pa(t_node **a, t_node **b)
     if (*b != NULL) // Se b não está vazio depois da atualização
         (*b)->prev = NULL;
 
-    ft_lstadd_front(a, temp); // Adicionar temp no topo de a
+    ft_lstadd_front2(a, temp); // Adicionar temp no topo de a
 
     temp->next = *a; // Atualizar os ponteiros de temp
     temp->prev = NULL;
@@ -61,32 +62,28 @@ void pa(t_node **a, t_node **b)
     return;
 }
 
-void pb(t_node **a, t_node **b)
-{
-    if (*a == NULL)
-        return;
-    
-    t_node *hold = a; // guarda o topo de a
+void pb(t_node **a, t_node **b) {
+    if (*a == NULL) return;
+
+    t_node *hold = *a;
     *a = (*a)->next;
 
-    if (*a != NULL)
+    if (*a != NULL) {
         (*a)->prev = NULL;
-    ft_lstadd_front(b, hold);
-    
-    
-    hold->next = *b;
+    }
+
+    hold->next = NULL;
     hold->prev = NULL;
-    if (*b != NULL)
-        (*b)->prev = hold;
-    *b = hold;
+
+    ft_lstadd_front2(b, hold);
 }
 
 void ra(t_node **a)
 {
     if (*a == NULL || (*a)->next == NULL)
         return;
-    t_node *temp = a;
-    t_node *current = a;
+    t_node *temp = *a;
+    t_node *current = *a;
     while(current->next != NULL)
     {
         current = current->next;

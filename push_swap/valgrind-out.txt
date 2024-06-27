@@ -1,0 +1,26 @@
+==119108== Memcheck, a memory error detector
+==119108== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==119108== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==119108== Command: ./a.out 12456 4 5 6 98 74 2 4 0
+==119108== Parent PID: 103242
+==119108== 
+==119108== 
+==119108== HEAP SUMMARY:
+==119108==     in use at exit: 216 bytes in 9 blocks
+==119108==   total heap usage: 10 allocs, 1 frees, 1,240 bytes allocated
+==119108== 
+==119108== 216 (48 direct, 168 indirect) bytes in 2 blocks are definitely lost in loss record 2 of 2
+==119108==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==119108==    by 0x109939: ft_lstnew2 (in /home/kwillian/Documents/42_Lisbon_CommonCore/push_swap/a.out)
+==119108==    by 0x1092B7: insert (in /home/kwillian/Documents/42_Lisbon_CommonCore/push_swap/a.out)
+==119108==    by 0x109352: main (in /home/kwillian/Documents/42_Lisbon_CommonCore/push_swap/a.out)
+==119108== 
+==119108== LEAK SUMMARY:
+==119108==    definitely lost: 48 bytes in 2 blocks
+==119108==    indirectly lost: 168 bytes in 7 blocks
+==119108==      possibly lost: 0 bytes in 0 blocks
+==119108==    still reachable: 0 bytes in 0 blocks
+==119108==         suppressed: 0 bytes in 0 blocks
+==119108== 
+==119108== For lists of detected and suppressed errors, rerun with: -s
+==119108== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
