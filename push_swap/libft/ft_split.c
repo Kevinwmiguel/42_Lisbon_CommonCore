@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:59:58 by kwillian          #+#    #+#             */
-/*   Updated: 2024/04/22 03:20:27 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/01 00:32:26 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,22 +93,3 @@ char	**ft_split(char const *s, char c)
 	buffer = ft_split_words(buffer, s, c);
 	return (buffer);
 }
-
-// #include <stdio.h>
-
-// int	main()
-// {
-// 	const char	*palavra = "ola senhoras, e senhores, e bichos";
-// 	char **new = ft_split(palavra, ',');
-// 	int	i = 0;	
-// 	printf("antiga:  %s \n", palavra);
-// 	if (new)
-// 	{
-// 		while(new[i])
-// 		{
-// 			printf("nova: %s \n ", new[i]);
-// 			i++;
-// 		}
-// 	}
-// 	return 0;
-// }

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:00:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/06/27 05:32:14 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/05 18:52:34 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,158 +16,118 @@
 #include "libft/libft.h" 
 # include "printf/ft_printf.h"
 
-int mymax(t_node *lst)
+t_node *mymin(t_node *b)
+{
+    long int temp;
+    t_node *min_t_node;
+
+    if(!b)
+        return (NULL);
+    temp = LONG_MAX;
+    while (b)
+    {
+        if (b->number < temp)
+        {
+            temp = b->number;
+            min_t_node = b;
+        }
+        b = b->next;
+    }
+    return (min_t_node);
+}
+
+int mymax(t_node *b)
 {
     int temp;
-
-    temp = lst->number;
-    while(lst != NULL)
+    
+    temp = b->number;
+    while (b != NULL)
     {
-        if (lst->number > lst->next->number)
-            temp = lst->number;
-        lst = lst->next;
+        if (b->number < b->next->number)
+            sb(b);
     }
-    if (lst->number < lst->prev->number)
-        temp = lst->number;
-
     return temp;
 }
 
-int mymin(t_node *lst)
+int is_sorted(t_node *lst)
 {
-    int temp;
-
-    temp = lst->number;
-    while(lst != NULL)
+    while (lst != NULL && lst->next != NULL)
     {
         if (lst->number > lst->next->number)
-            temp = lst->number;
+            return (0);
         lst = lst->next;
     }
-    if (lst->number < lst->prev->number)
-        temp = lst->number;
-    
-    return temp;
+    return (1);
 }
-
-// void push2onb(t_node **a, t_node **b)
-// {
-//     int smaller;
-//     int bigger;
-//     t_node *new_node = NULL;
+void pushT3ona(t_node **a, t_node **b)
+{
+    int elements = 0;
+    t_node *temp;
     
-//     // pegar o maior valor e colocar em b
-//     bigger = mymax(a);
-//     // pegar o menor valor e colocar em b
-//     smaller = mymin(a);
-
-
-    
-
-//     new_node = ft_lstnew2(bigger);
-//     ft_lstadd_front2(&b, new_node);
-//     new_node = ft_lstnew2(smaller);
-//     ft_lstadd_front2(&b, new_node);
-// }
-
-// int is_sorted(t_node *a)
-// {
-//     while (a != NULL && a->next != NULL)
-//     {
-//         if (a->number > a->next->number)
-//             return 0;
-//         a = a->next;
-//     }
-//     return 1;
-// }
-
-// void simple_sort(t_node **a, t_node **b)
-// {
-//     while (!is_sorted(*a))
-//     {
-//         if ((*a)->number > (*a)->next->number)
-//         {
-//             sa(*a);
-//             ft_printf("sa\n");
-//         }
-//         else
-//         {
-//             pb(a, b);
-//             ft_printf("pb\n");
-//         }
-//     }
-//     while (*b != NULL)
-//     {
-//         pa(a, b);
-//         ft_printf("pa\n");
-//     }
-// }
-
-// void free_list(t_node *head)
-// {
-//     t_node *current = head;
-//     t_node *next;
-//     while (current != NULL)
-//     {
-//         next = current->next;
-//         free(current);
-//         current = next;
-//     }
-// }
-
-void insert(t_node **a, int data) {
-    t_node *new_node = ft_lstnew2(data);
-    if (new_node == NULL) {
-        printf("Erro de criação de novo nó\n");
-        return;
+    // Contar os elementos na pilha a
+    pb(a, b);
+    pb(a, b);
+    temp = *a;
+    while(temp != NULL)
+    {
+        elements++;
+        temp = temp->next;
     }
-    ft_lstadd_front2(a, new_node);
+    //VERIFICAR ORGANIZAÇAO EM B
+    //maxmin_max();
+    // Mover elementos de a para b até que a tenha apenas 3 elementos
+    while(elements > 3)
+    {
+        pb(a, b);  // Supondo que pb(&a, &b) move o topo de a para b   
+        elements--;
+    }
 }
-int main(int argc, char **argv) {
+
+void simple_sort(t_node **a, t_node **b)
+{
+    while (!is_sorted(*a))
+    {
+        if ((*a)->number > (*a)->next->number)
+        {
+            sa(*a);
+            ft_printf("sa\n");
+        }
+        else
+        {
+            pb(a, b);
+            ft_printf("pb\n");
+        }
+    }
+    while (*b != NULL)
+    {
+        pa(a, b);
+        ft_printf("pa\n");
+    }
+}
+
+void free_list(t_node *head)
+{
+    t_node *current = head;
+    t_node *next;
+    while (current != NULL)
+    {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+}
+
+int main(int argc, char **argv)
+{
+    if (argc == 1 || (argc == 2 && !argv[1][0]))
+        return 0;
     t_node *a = NULL;
     t_node *b = NULL;
-    int i = 1;
+    //REcebe valores, coloca eles dentro e passa 2 valores para B
+    process_args(argc, argv , &a, &b);
+    // Aqui devemos chamar identificadores de maior e menor e passar todos o elementos para B ate 3 sobrar 3 em A
 
-    // Recebe os valores na pilha A
-    while (i < argc) {
-        insert(&a, atoi(argv[i]));
-        i++;
-    }
-
-    //MAx MIN
-    //CHamar funcao aqui de max e mim
-    // Move o topo da pilha A para a pilha B
-    pb(&a, &b);
-    pb(&a, &b);
-    pb(&a, &b);
-    
-    // Mostra a pilha A
-    printf("Pilha A:\n");
-    t_node *temp = a;
-    while (temp != NULL) {
-        printf("%d\n", temp->number);
-        temp = temp->next;
-    }
-
-    // Mostra a pilha B
-    printf("Pilha B:\n");
-    temp = b;
-    while (temp != NULL) {
-        printf("%d\n", temp->number);
-        temp = temp->next;
-    }
-
-    // Liberação de memória (para evitar vazamentos)
-   
-     while (a != NULL) {
-        temp = a;
-        a = a->next;
-        free(temp);
-    }
-    while (b != NULL) {
-        temp = b;
-        b = b->next;
-        free(temp);
-    }
+    free_list(a);
+    free_list(b);
     return 0;
 }

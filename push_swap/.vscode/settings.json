@@ -4,6 +4,13 @@
         "stdio.h": "c",
         "ft_printf.h": "c",
         "pushswap.h": "c",
-        "random": "c"
+        "random": "c",
+        "push_swap.h": "c",
+        "*.tcc": "c",
+        "deque": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "limits.h": "c"
     }
 }
