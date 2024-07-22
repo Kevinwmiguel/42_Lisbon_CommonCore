@@ -11,6 +11,7 @@
         "string": "c",
         "unordered_map": "c",
         "vector": "c",
-        "limits.h": "c"
+        "limits.h": "c",
+        "stdbool.h": "c"
     }
 }

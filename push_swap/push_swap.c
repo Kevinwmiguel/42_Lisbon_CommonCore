@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:00:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/05 18:52:34 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:03:19 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,7 @@
 #include "libft/libft.h" 
 # include "printf/ft_printf.h"
 
-t_node *mymin(t_node *b)
-{
-    long int temp;
-    t_node *min_t_node;
-
-    if(!b)
-        return (NULL);
-    temp = LONG_MAX;
-    while (b)
-    {
-        if (b->number < temp)
-        {
-            temp = b->number;
-            min_t_node = b;
-        }
-        b = b->next;
-    }
-    return (min_t_node);
-}
-
-int mymax(t_node *b)
-{
-    int temp;
-    
-    temp = b->number;
-    while (b != NULL)
-    {
-        if (b->number < b->next->number)
-            sb(b);
-    }
-    return temp;
-}
-
-int is_sorted(t_node *lst)
+bool is_sorted(t_node *lst)
 {
     while (lst != NULL && lst->next != NULL)
     {
@@ -59,27 +26,39 @@ int is_sorted(t_node *lst)
     }
     return (1);
 }
-void pushT3ona(t_node **a, t_node **b)
+
+bool is_sorted_b(t_node *lst)
 {
-    int elements = 0;
-    t_node *temp;
-    
-    // Contar os elementos na pilha a
-    pb(a, b);
-    pb(a, b);
-    temp = *a;
-    while(temp != NULL)
+    while (lst != NULL && lst->next != NULL)
     {
-        elements++;
-        temp = temp->next;
+        if (lst->number < lst->next->number)
+            return (0);
+        lst = lst->next;
     }
-    //VERIFICAR ORGANIZAÇAO EM B
-    //maxmin_max();
-    // Mover elementos de a para b até que a tenha apenas 3 elementos
-    while(elements > 3)
-    {
-        pb(a, b);  // Supondo que pb(&a, &b) move o topo de a para b   
-        elements--;
+    return (1);
+}
+
+void move_cheapest(t_node **a, t_node **b) {
+    cost_checker(*a, *b);
+    cheaperONE(*a);
+    cheaperONE(*b);
+
+    t_node *current = *a;
+    while (current != NULL) {
+        if (current->cheapest) {
+            pa(a, b);
+            return;
+        }
+        current = current->next;
+    }
+
+    current = *b;
+    while (current != NULL) {
+        if (current->cheapest) {
+            pb(a, b);
+            return;
+        }
+        current = current->next;
     }
 }
 
@@ -105,6 +84,75 @@ void simple_sort(t_node **a, t_node **b)
     }
 }
 
+void sort_stack_b(t_node **b) {
+    if (*b == NULL || (*b)->next == NULL) return;
+
+    t_node *current;
+    int swapped;
+
+    do {
+        swapped = 0;
+        current = *b;
+
+        while (current->next != NULL) {
+            if (current->number < current->next->number) {
+                int temp = current->number;
+                current->number = current->next->number;
+                current->next->number = temp;
+                swapped = 1;
+            }
+            current = current->next;
+        }
+    } while (swapped);
+}
+
+int is_sorted_desc(t_node *stack) {
+    if (!stack) return 1;
+
+    while (stack->next) {
+        if (stack->number < stack->next->number)
+            return 0;
+        stack = stack->next;
+    }
+    return 1;
+}
+
+void pushT3ona(t_node **a, t_node **b) {
+    // Mover todos os elementos de a para b
+    while (*a != NULL) {
+        pb(a, b);
+    }
+
+    // Ordenar b em ordem decrescente
+    sort_stack_b(b);
+
+    // Mover elementos de volta para a em ordem crescente
+    while (*b != NULL) {
+        pa(a, b);
+    }
+
+    // Ordenar a em ordem crescente usando bubble sort
+    t_node *current;
+    int swapped;
+
+    do {
+        swapped = 0;
+        current = *a;
+
+        while (current->next != NULL)
+        {
+            if (current->number > current->next->number)
+            {
+                int temp = current->number;
+                current->number = current->next->number;
+                current->next->number = temp;
+                swapped = 1;
+            }
+            current = current->next;
+        }
+    } while (swapped);
+}
+
 void free_list(t_node *head)
 {
     t_node *current = head;
@@ -117,17 +165,24 @@ void free_list(t_node *head)
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-    if (argc == 1 || (argc == 2 && !argv[1][0]))
-        return 0;
     t_node *a = NULL;
     t_node *b = NULL;
-    //REcebe valores, coloca eles dentro e passa 2 valores para B
-    process_args(argc, argv , &a, &b);
-    // Aqui devemos chamar identificadores de maior e menor e passar todos o elementos para B ate 3 sobrar 3 em A
 
+    if (argc < 2)
+    {
+        ft_putstr_fd("Error\n", 2);
+        return (1);
+    }
+    if (!checkErrors(argc, argv))
+    {
+        ft_putstr_fd("Error\n", 2);
+        return (1);
+    }
+    process_args(argc, argv, &a, &b);
+    // stack_sort_ultimate(&a, &b);
     free_list(a);
     free_list(b);
-    return 0;
+    return (0);
 }

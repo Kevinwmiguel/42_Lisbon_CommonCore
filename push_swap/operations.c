@@ -6,24 +6,21 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:36:37 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/02 04:00:28 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:54:36 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void sa(t_node *original)
-{
-
-    if (original == NULL || original->next == NULL)
-        return;
-    int temp;
-    
-    temp = original->number;
+void sa(t_node *original) {
+    if (original == NULL || original->next == NULL) return;
+    int temp = original->number;
     original->number = original->next->number;
     original->next->number = temp;
     ft_printf("sa\n");
 }
+
+
 
 void sb(t_node *original)
 {
@@ -76,14 +73,11 @@ void pb(t_node **a, t_node **b) {
     ft_printf("pb\n");
 }
 
-void ra(t_node **a)
-{
-    if (*a == NULL || (*a)->next == NULL)
-        return;
+void ra(t_node **a) {
+    if (*a == NULL || (*a)->next == NULL) return;
     t_node *temp = *a;
     t_node *current = *a;
-    while(current->next != NULL)
-    {
+    while (current->next != NULL) {
         current = current->next;
     }
     *a = (*a)->next;
