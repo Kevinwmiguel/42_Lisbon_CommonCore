@@ -1,57 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   r_operations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 20:36:37 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/24 16:02:06 by kwillian         ###   ########.fr       */
+/*   Created: 2024/07/23 17:11:11 by kwillian          #+#    #+#             */
+/*   Updated: 2024/07/24 16:49:09 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_node **a)
+void	ra(t_node **a)
 {
+	t_node	*temp;
 	t_node	*current;
 
 	if (*a == NULL || (*a)->next == NULL)
 		return ;
 	current = *a;
+	temp = *a;
 	while (current->next != NULL)
 		current = current->next;
-	if (current->prev != NULL)
-		current->prev->next = NULL;
-	current->prev = NULL;
-	current->next = *a;
-	(*a)->prev = current;
-	*a = current;
-	ft_printf("rra\n");
+	*a = (*a)->next;
+	(*a)->prev = NULL;
+	current->next = temp;
+	temp->prev = current;
+	temp->next = NULL;
+	ft_printf("ra\n");
 }
 
-void	rrb(t_node **b)
+void	rb(t_node **b)
 {
 	t_node	*current;
+	t_node	*temp;
 
 	if (*b == NULL || (*b)->next == NULL)
 		return ;
+	temp = *b;
+	*b = (*b)->next;
+	(*b)->prev = NULL;
 	current = *b;
 	while (current->next != NULL)
-	{
 		current = current->next;
-	}
-	current->prev->next = NULL;
-	current->prev = NULL;
-	current->next = *b;
-	(*b)->prev = current;
-	*b = current;
-	ft_printf("rrb\n");
+	current->next = temp;
+	temp->prev = current;
+	temp->next = NULL;
+	ft_printf("rb\n");
 }
 
-void	rrr(t_node **a, t_node **b)
+void	rr(t_node **a, t_node **b)
 {
-	rra(a);
-	rrb(b);
-	ft_printf("rrr\n");
+	ra(a);
+	rb(b);
+	ft_printf("rr\n");
 }

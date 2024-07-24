@@ -6,12 +6,12 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 06:53:20 by kwillian          #+#    #+#              #
-#    Updated: 2024/07/06 18:50:17 by kwillian         ###   ########.fr        #
+#    Updated: 2024/07/24 18:29:44 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Nome do meu programa
-NAME := a.out
+NAME := push_swap
 
 # Aqui eu pego as bibliotecas 
 LIBFT_DIR := libft
@@ -23,7 +23,8 @@ INCLUDE_DIR := .
 CC := cc
 CFLAGS := -Wall -Werror -Wextra -I$(LIBFT_DIR) -I$(PRINT_F_DIR) -I$(INCLUDE_DIR)
 
-SRC := push_swap.c operations.c aditional.c insert_process.c tudoextra.c
+SRC := push_swap.c operations.c aditional.c aditional2.c insert_process.c \
+	r_operations.c tudoextra.c s_operation.c p_operations.c errors.c
 OBJ := $(SRC:.c=.o)
 
 # Inclui os diretórios de bibliotecas para o linker

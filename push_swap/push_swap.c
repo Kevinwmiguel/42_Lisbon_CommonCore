@@ -6,46 +6,23 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:00:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/22 23:07:27 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:56:22 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h" // Inclui a definição de t_node
 #include <stdio.h>
-
 #include "libft/libft.h" 
 #include "printf/ft_printf.h"
 
-bool	is_sorted(t_node *lst)
-{
-	while (lst != NULL && lst->next != NULL)
-	{
-		if (lst->number > lst->next->number)
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
-}
-
-bool	is_sorted_b(t_node *lst)
-{
-	while (lst != NULL && lst->next != NULL)
-	{
-		if (lst->number < lst->next->number)
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
-}
-
 void	move_cheapest(t_node **a, t_node **b)
 {
-	t_node		*current;
+	t_node	*current;
 
-	current = *a;
 	cost_checker(*a, *b);
-	cheaperONE(*a);
-	cheaperONE(*b);
+	cheaper_one(*a);
+	cheaper_one(*b);
+	current = *a;
 	while (current != NULL)
 	{
 		if (current->cheapest)
@@ -67,89 +44,31 @@ void	move_cheapest(t_node **a, t_node **b)
 	}
 }
 
-void	simple_sort(t_node **a, t_node **b)
+void	push_all_to_b(t_node **a, t_node **b)
 {
-	while (!is_sorted(*a))
-	{
-		if ((*a)->number > (*a)->next->number)
-		{
-			sa(*a);
-			ft_printf("sa\n");
-		}
-		else
-		{
-			pb(a, b);
-			ft_printf("pb\n");
-		}
-	}
-	while (*b != NULL)
-	{
-		pa(a, b);
-		ft_printf("pa\n");
-	}
-}
-
-void	sort_stack_b(t_node **b)
-{
-	int	swapped;
-
-	swapped = 1;
-	if (*b == NULL || (*b)->next == NULL)
-		return ;
-	while (swapped)
-	{
-		swapped = 0;
-		t_node	*current;
-
-		current = *b;
-		while (current->next != NULL)
-		{
-			if (current->number < current->next->number)
-			{
-				int	temp = current->number;
-				current->number = current->next->number;
-				current->next->number = temp;
-				swapped = 1;
-			}
-			current = current->next;
-		}
-	}
-}
-
-int	is_sorted_desc(t_node *stack)
-{
-	if (!stack)
-		return (1);
-	while (stack->next)
-	{
-		if (stack->number < stack->next->number)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
-void	pushT3ona(t_node **a, t_node **b)
-{
-	int	swapped;
-
-	swapped = 1;
 	while (*a != NULL)
 		pb(a, b);
 	sort_stack_b(b);
 	while (*b != NULL)
 		pa(a, b);
+}
+
+void	bubble_sort_stack(t_node **a)
+{
+	t_node	*current;
+	int		swapped;
+	int		temp;
+
+	swapped = 1;
 	while (swapped)
 	{
 		swapped = 0;
-		t_node *current;
-
 		current = *a;
 		while (current->next != NULL)
 		{
 			if (current->number > current->next->number)
 			{
-				int	temp = current->number;
+				temp = current->number;
 				current->number = current->next->number;
 				current->next->number = temp;
 				swapped = 1;
@@ -159,17 +78,22 @@ void	pushT3ona(t_node **a, t_node **b)
 	}
 }
 
-void	free_list(t_node *head)
+void	push_3_on_a(t_node **a, t_node **b)
 {
-	t_node		*current;
-	t_node		*next;
+	int	len;
 
-	current = head;
-	while (current != NULL)
+	len = stack_len(*a);
+	if (len == 3)
+		simple_sort_three(a);
+	else if (len == 5)
+		simple_sort_five(a, b);
+	else
 	{
-		next = current->next;
-		free(current);
-		current = next;
+		while (stack_len(*a) > 3)
+			pb(a, b);
+		simple_sort_three(a);
+		while (*b != NULL)
+			move_cheapest(a, b);
 	}
 }
 
@@ -185,12 +109,13 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
-	if (!checkErrors(argc, argv))
+	if (!check_errors(argc, argv))
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
 	process_args(argc, argv, &a, &b);
+	printa(a);
 	free_list(a);
 	free_list(b);
 	return (0);
