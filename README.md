@@ -11,24 +11,16 @@ Welcome to my repository of projects completed during my time at [42 Lisboa](htt
 ### Libft
 The **Libft** project involves creating a library of C functions that replicate various standard C library functions, as well as some additional functions that are commonly useful. This project was a great exercise in familiarizing myself with C and its functionalities.
 
-- **Repository**: [libft](https://github.com/your-username/libft)
-
 ### Printf
 In the **Printf** project, I developed my own version of the C `printf` function. This project was an excellent way to gain a deeper understanding of string formatting at a low level and how to manage variable arguments.
 
-- **Repository**: [ft_printf](https://github.com/your-username/ft_printf)
-
 ### Get Next Line
 The **Get Next Line** project involves creating a function that reads a line from a file descriptor one at a time. It is an essential project for understanding file handling and buffer management in C.
-
-- **Repository**: [get_next_line](https://github.com/your-username/get_next_line)
 
 ## Current Progress
 
 ### Push Swap
 I am currently working on the **Push Swap** project. This project involves creating a program that sorts numbers using a limited set of operations on two stacks. It is a significant challenge in algorithm optimization and efficiency.
-
-- **Repository**: [push_swap](https://github.com/your-username/push_swap) (in progress)
 
 ## Completed Exams
 
