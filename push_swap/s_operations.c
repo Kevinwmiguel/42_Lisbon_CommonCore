@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_operation.c                                      :+:      :+:    :+:   */
+/*   s_operations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:11:11 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/24 18:04:31 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/25 19:16:39 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,17 @@ void	sb(t_node *original)
 
 void	ss(t_node *a, t_node *b)
 {
-	sa(a);
-	sb(b);
+	int	temp;
+
+	if (a == NULL || a->next == NULL)
+		return ;
+	if (b == NULL || b->next == NULL)
+		return ;
+	temp = a->number;
+	a->number = a->next->number;
+	a->next->number = temp;
+	temp = b->number;
+	b->number = b->next->number;
+	b->next->number = temp;
 	ft_printf("ss\n");
-}
-
-void	simple_sort_five(t_node **a, t_node **b)
-{
-	pb(a, b);
-	pb(a, b);
-	simple_sort_three(a);
-	pa(a, b);
-	pa(a, b);
-}
-
-void	simple_sort_three(t_node **a)
-{
-	if ((*a)->number > (*a)->next->number)
-		sa(*a);
-	if ((*a)->next->number > (*a)->next->next->number)
-		rra(a);
-	if ((*a)->number > (*a)->next->number)
-		sa(*a);
 }

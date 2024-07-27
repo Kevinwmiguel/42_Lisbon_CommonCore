@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 06:53:20 by kwillian          #+#    #+#              #
-#    Updated: 2024/07/24 18:29:44 by kwillian         ###   ########.fr        #
+#    Updated: 2024/07/26 21:23:39 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,11 @@ INCLUDE_DIR := .
 
 # Compilar com as flags da 42
 CC := cc
-CFLAGS := -Wall -Werror -Wextra -I$(LIBFT_DIR) -I$(PRINT_F_DIR) -I$(INCLUDE_DIR)
+CFLAGS := -Wall -Werror -Wextra -I$(LIBFT_DIR) -I$(PRINT_F_DIR) -I$(INCLUDE_DIR) -g
 
-SRC := push_swap.c operations.c aditional.c aditional2.c insert_process.c \
-	r_operations.c tudoextra.c s_operation.c p_operations.c errors.c
+SRC := main.c push_swap.c operations.c aditional.c aditional2.c \
+	r_operations.c tudoextra.c s_operations.c \
+	 p_operations.c errors.c insert_process.c sortfive.c
 OBJ := $(SRC:.c=.o)
 
 # Inclui os diretórios de bibliotecas para o linker
@@ -44,6 +45,7 @@ $(PRINT_F_DIR)/libftprintf.a:
 # Compila o projeto principal
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+	clear
 
 # Regras de compilação para os arquivos objeto
 %.o: %.c

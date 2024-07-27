@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:12:02 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/24 18:54:58 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/27 00:05:56 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,23 @@ void	insert(t_node **a, long int data, int idx)
 void	printa(t_node *a)
 {
 	t_node		*current;
-	int			i;
 
-	i = 1;
 	current = a;
 	while (current != NULL)
 	{
-		ft_printf("A posiçao %d: %d \n", i, current->number);
+		ft_printf("A posiçao %d: %d \n", current->index, current->number);
 		current = current->next;
-		i++;
+	};
+}
+void	printb(t_node *b)
+{
+	t_node		*current;
+
+	current = b;
+	while (current != NULL)
+	{
+		ft_printf("                     B posiçao %d: %d \n", current->index, current->number);
+		current = current->next;
 	};
 }
 
@@ -72,6 +80,9 @@ void	process_args(int argc, char *argv[], t_node **a, t_node **b)
 		}
 		free_split_args(tokens);
 	}
-	if (stack_len(*a) >= 2)
+	if (stack_len(*a) > 2)
 		push_3_on_a(a, b);
+	else
+		if ((*a)->number > (*a)->next->number)
+			sa(*a);
 }

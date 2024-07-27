@@ -6,13 +6,13 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:11:11 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/24 16:49:09 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:48:13 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_node **a)
+void	ra(t_node **a, char c)
 {
 	t_node	*temp;
 	t_node	*current;
@@ -28,10 +28,11 @@ void	ra(t_node **a)
 	current->next = temp;
 	temp->prev = current;
 	temp->next = NULL;
-	ft_printf("ra\n");
+	if (c == 'a')
+		ft_printf("ra\n");
 }
 
-void	rb(t_node **b)
+void	rb(t_node **b, char c)
 {
 	t_node	*current;
 	t_node	*temp;
@@ -47,12 +48,14 @@ void	rb(t_node **b)
 	current->next = temp;
 	temp->prev = current;
 	temp->next = NULL;
-	ft_printf("rb\n");
+	if (c == 'b')
+		ft_printf("rb\n");
 }
 
-void	rr(t_node **a, t_node **b)
+void	rr(t_node **a, t_node **b, char c)
 {
-	ra(a);
-	rb(b);
-	ft_printf("rr\n");
+	ra(a, 'c');
+	rb(b, 'c');
+	if (c == 'c')
+		ft_printf("rr\n");
 }

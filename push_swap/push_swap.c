@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:00:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/24 18:56:22 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/27 01:19:16 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include "libft/libft.h" 
 #include "printf/ft_printf.h"
+
 
 void	move_cheapest(t_node **a, t_node **b)
 {
@@ -44,79 +45,38 @@ void	move_cheapest(t_node **a, t_node **b)
 	}
 }
 
-void	push_all_to_b(t_node **a, t_node **b)
+void	create_index(t_node *a)
 {
-	while (*a != NULL)
-		pb(a, b);
-	sort_stack_b(b);
-	while (*b != NULL)
-		pa(a, b);
-}
+	t_node *current = a;
 
-void	bubble_sort_stack(t_node **a)
-{
-	t_node	*current;
-	int		swapped;
-	int		temp;
-
-	swapped = 1;
-	while (swapped)
+	int	i;
+	
+	printf("VALOR TOTAL DA STACK %d\n", stack_len(a));
+	i = 0;
+	while ((a))
 	{
-		swapped = 0;
-		current = *a;
-		while (current->next != NULL)
-		{
-			if (current->number > current->next->number)
-			{
-				temp = current->number;
-				current->number = current->next->number;
-				current->next->number = temp;
-				swapped = 1;
-			}
-			current = current->next;
-		}
+		(a)->index = i;
+		if (i <= (stack_len(a) / 2))
+			(a)->upmedium = true;
+		else
+			(a)->upmedium = false;
+		i++;
+		(a) = (a)->next;
 	}
+	a = current;
 }
 
 void	push_3_on_a(t_node **a, t_node **b)
 {
 	int	len;
-
+	
+	create_index(*a);
+	printa(*a);
 	len = stack_len(*a);
 	if (len == 3)
 		simple_sort_three(a);
-	else if (len == 5)
-		simple_sort_five(a, b);
 	else
 	{
-		while (stack_len(*a) > 3)
-			pb(a, b);
-		simple_sort_three(a);
-		while (*b != NULL)
-			move_cheapest(a, b);
+		simple_sort(a, b);
 	}
-}
-
-int	main(int argc, char *argv[])
-{
-	t_node		*a;
-	t_node		*b;
-
-	a = NULL;
-	b = NULL;
-	if (argc < 2)
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
-	if (!check_errors(argc, argv))
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
-	process_args(argc, argv, &a, &b);
-	printa(a);
-	free_list(a);
-	free_list(b);
-	return (0);
 }

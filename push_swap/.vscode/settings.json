@@ -12,6 +12,14 @@
         "unordered_map": "c",
         "vector": "c",
         "limits.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "array": "c",
+        "concepts": "c",
+        "memory": "c",
+        "string_view": "c",
+        "ostream": "c",
+        "streambuf": "c",
+        "functional": "c",
+        "tuple": "c"
     }
 }

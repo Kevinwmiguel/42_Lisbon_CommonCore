@@ -6,75 +6,43 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 21:34:18 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/23 21:35:00 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:55:52 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	is_sorted(t_node *lst)
-{
-	while (lst != NULL && lst->next != NULL)
-	{
-		if (lst->number > lst->next->number)
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
+bool is_sorted(t_node *lst) {
+    while (lst != NULL && lst->next != NULL) {
+        if (lst->number > lst->next->number)
+            return false;
+        lst = lst->next;
+    }
+    return true;
 }
 
-bool	is_sorted_b(t_node *lst)
+bool is_sorted_b(t_node *lst)
 {
-	while (lst != NULL && lst->next != NULL)
-	{
-		if (lst->number < lst->next->number)
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
-}
-
-void	simple_sort(t_node **a, t_node **b)
-{
-	while (!is_sorted(*a))
-	{
-		if ((*a)->number > (*a)->next->number)
-			sa(*a);
-		else
-			pb(a, b);
-	}
-	while (*b != NULL)
-	{
-		pa(a, b);
-	}
+    while (lst != NULL && lst->next != NULL)
+    {
+        if (lst->number > lst->next->number)
+            return false;
+        lst = lst->next;
+    }
+    return true;
 }
 
 void	sort_stack_b(t_node **b)
 {
-	int		swapped;
-	int		temp;
-	t_node	*current;
-
-	swapped = 1;
-	if (*b == NULL || (*b)->next == NULL)
-		return ;
-	while (swapped)
+	while (!is_sorted_b(*b))
 	{
-		swapped = 0;
-		current = *b;
-		while (current->next != NULL)
+		if ((*b)->number > (*b)->next->number)
 		{
-			if (current->number < current->next->number)
-			{
-				temp = current->number;
-				current->number = current->next->number;
-				current->next->number = temp;
-				swapped = 1;
-			}
-			current = current->next;
+			sb(*b); // Trocar os dois primeiros elementos se necessári
 		}
 	}
 }
+
 
 int	is_sorted_desc(t_node *stack)
 {
@@ -82,7 +50,7 @@ int	is_sorted_desc(t_node *stack)
 		return (1);
 	while (stack->next)
 	{
-		if (stack->number < stack->next->number)
+		if (stack->number > stack->next->number)
 			return (0);
 		stack = stack->next;
 	}
