@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:03:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/27 00:24:23 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/27 16:45:56 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	is_sorted_desc(t_node *stack);
 void	push_all_to_b(t_node **a, t_node **b);
 void	move_a_to_b(t_node **a, t_node **b);
 void	sort_stks(t_node **a, t_node **b);
-void	min_on_top(t_node **a ,t_node **b);
+void	min_on_top(t_node **stack);
 t_node	*find_max(t_node *a,t_node *b);
 t_node	*find_min(t_node *a,t_node *b);
 void	current_index(t_node *stack);
