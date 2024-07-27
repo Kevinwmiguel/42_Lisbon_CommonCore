@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 19:16:46 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/27 01:29:22 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/27 02:52:53 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void set_targetb(t_node *a, t_node *b)
     while (b != NULL)
     {
         b->target = find_max(a, b);
+
 		b = b->next;
     }
 }
@@ -96,6 +97,14 @@ void prep_pushr(t_node **a, t_node **b, t_node *cheap)
 	while ((cheap->upmedium == false && cheap->target->upmedium == false) && (cheap != *a || cheap->target != *b))
 			rrr(a, b);
 	while ((cheap->upmedium == true && cheap->target->upmedium == true) && (cheap != *a || cheap->target != *b))
+		rr(a, b, 'c');
+}
+
+void prep_pushrb(t_node **a, t_node **b, t_node *cheap)
+{
+	while ((cheap->upmedium == false && cheap->target->upmedium == false) && (cheap != *b || cheap->target != *a))
+			rrr(a, b);
+	while ((cheap->upmedium == true && cheap->target->upmedium == true) && (cheap != *b || cheap->target != *a))
 			rr(a, b, 'c');
 }
 
@@ -103,7 +112,6 @@ void simple_sort(t_node **a, t_node **b)
 {
     pb(a, b);
     pb(a, b);
-	printb(*b);
 	t_node *cheap;
 	
     while (stack_len(*a) > 3)
@@ -120,16 +128,21 @@ void simple_sort(t_node **a, t_node **b)
 		create_index(*a);
     }
 	simple_sort_three(a);
-	printf("=================================\n");
-	printa(*a);
-	printb(*b);
-	printf("=================================\n");
+	// printf("=================================\n");
+	// printa(*a);
+	// printb(*b);
+	// printf("=================================\n");
 	while((*b))
 	{
 		set_targetb(*a, *b);
 		cost_checker(*a, *b);
+		cheap = get_cheapest((*b));
+		prep_pushrb(a, b, cheap);
+		prep_push(b, cheap, 'b');
+		prep_push(a, cheap->target, 'a');
 		pa(a, b);
 	}
+	
 }
 
 

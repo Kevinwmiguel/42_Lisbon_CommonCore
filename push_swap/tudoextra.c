@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:11:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/27 01:02:51 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/27 02:21:03 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,12 +161,11 @@ t_node	*find_max(t_node *a, t_node *b)
     check = INT_MAX;
 	while (a)
 	{
-		if (a->number < b->number && a->number > max)
+		if (a->number > b->number && a->number < max)
 		{
 			max = a->number;
 			max_node = a;
 		}
-		a = a->next;
         if (a->number < check)
             {
                 check = a->number;
@@ -176,7 +175,6 @@ t_node	*find_max(t_node *a, t_node *b)
 	}
     if (max == INT_MAX)
     {
-        printf("valor de check: %d\n", check);
         max_node = fail;
     }
 	return (max_node);
