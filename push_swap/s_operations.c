@@ -6,13 +6,13 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:11:11 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/25 19:16:39 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/30 03:49:32 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_node *original)
+void	sa(t_node *original, char c)
 {
 	int	temp;
 
@@ -21,10 +21,11 @@ void	sa(t_node *original)
 	temp = original->number;
 	original->number = original->next->number;
 	original->next->number = temp;
-	ft_printf("sa\n");
+	if (c == 'a')
+		ft_printf("sa\n");
 }
 
-void	sb(t_node *original)
+void	sb(t_node *original, char c)
 {
 	int	temp;
 
@@ -33,22 +34,14 @@ void	sb(t_node *original)
 	temp = original->number;
 	original->number = original->next->number;
 	original->next->number = temp;
-	ft_printf("sb\n");
+	if (c == 'b')
+		ft_printf("sb\n");
 }
 
-void	ss(t_node *a, t_node *b)
+void	ss(t_node *a, t_node *b, char c)
 {
-	int	temp;
-
-	if (a == NULL || a->next == NULL)
-		return ;
-	if (b == NULL || b->next == NULL)
-		return ;
-	temp = a->number;
-	a->number = a->next->number;
-	a->next->number = temp;
-	temp = b->number;
-	b->number = b->next->number;
-	b->next->number = temp;
-	ft_printf("ss\n");
+	sa(a, 'c');
+	sb(b, 'c');
+	if (c == 'c')
+		ft_printf("ss\n");
 }

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 21:34:18 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/26 18:55:52 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/29 06:27:06 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	sort_stack_b(t_node **b)
 	{
 		if ((*b)->number > (*b)->next->number)
 		{
-			sb(*b); // Trocar os dois primeiros elementos se necessári
+			sb(*b, 'b'); // Trocar os dois primeiros elementos se necessári
 		}
 	}
 }

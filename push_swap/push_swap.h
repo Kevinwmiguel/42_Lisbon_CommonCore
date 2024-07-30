@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:03:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/27 16:45:56 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/30 06:26:28 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,19 @@ typedef struct node
 t_node	*ft_lstnew2(int number, int idx);
 void	simple_sort(t_node **a, t_node **b);
 void	simple_sort_three(t_node **a);
-void	sa(t_node *original);
-void	sb(t_node *original);
-void	ss(t_node *a, t_node *b);
+void	sa(t_node *original, char c);
+void	sb(t_node *original, char c);
+void	ss(t_node *a, t_node *b, char c);
 void	pa(t_node **a, t_node **b);
 void	pb(t_node **a, t_node **b);
 void	ra(t_node **a, char c);
 void	rb(t_node **b, char c);
 void	rr(t_node **a, t_node **b, char c);
 void	free_list(t_node *head);
-void	rra(t_node **a);
+void	rra(t_node **a, char c);
 t_node*	get_cheapest(t_node *stack);
-void	rrb(t_node **b);
-void	rrr(t_node **a, t_node **b);
+void	rrb(t_node **b, char c);
+void	rrr(t_node **a, t_node **b, char c);
 void	ft_lstadd_front2(t_node **lst, t_node *new);
 void	insert(t_node **a, long int data, int idx);
 void	process_args(int argc, char *argv[], t_node **a, t_node **b);

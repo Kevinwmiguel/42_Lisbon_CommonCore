@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:32:14 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/27 00:02:23 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/30 05:12:26 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	process_args(argc, argv, &a, &b);
-	
 	free_list(a);
 	free_list(b);
 	return (0);

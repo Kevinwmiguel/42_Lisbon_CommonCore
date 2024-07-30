@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:00:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/27 02:29:07 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/30 02:29:56 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,24 @@ void	move_cheapest(t_node **a, t_node **b)
 	}
 }
 
-void	create_index(t_node *a)
+void	create_index(t_node *stack)
 {
-	t_node *current = a;
+	t_node *current = stack;
 
 	int	i;
 
 	i = 0;
-	while ((a))
+	while ((stack))
 	{
-		(a)->index = i;
-		if (i <= (stack_len(a) / 2))
-			(a)->upmedium = true;
+		(stack)->index = i;
+		if (i <= (stack_len(stack) / 2))
+			(stack)->upmedium = true;
 		else
-			(a)->upmedium = false;
+			(stack)->upmedium = false;
 		i++;
-		(a) = (a)->next;
+		(stack) = (stack)->next;
 	}
-	a = current;
+	stack = current;
 }
 
 void	push_3_on_a(t_node **a, t_node **b)

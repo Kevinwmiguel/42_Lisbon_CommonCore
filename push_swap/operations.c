@@ -6,13 +6,13 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:36:37 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/24 16:02:06 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/30 06:22:23 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_node **a)
+void	rra(t_node **a, char c)
 {
 	t_node	*current;
 
@@ -27,10 +27,11 @@ void	rra(t_node **a)
 	current->next = *a;
 	(*a)->prev = current;
 	*a = current;
-	ft_printf("rra\n");
+	if (c == 'a')
+		ft_printf("rra\n");
 }
 
-void	rrb(t_node **b)
+void	rrb(t_node **b, char c)
 {
 	t_node	*current;
 
@@ -46,12 +47,14 @@ void	rrb(t_node **b)
 	current->next = *b;
 	(*b)->prev = current;
 	*b = current;
-	ft_printf("rrb\n");
+	if (c == 'b')
+		ft_printf("rrb\n");
 }
 
-void	rrr(t_node **a, t_node **b)
+void	rrr(t_node **a, t_node **b, char c)
 {
-	rra(a);
-	rrb(b);
-	ft_printf("rrr\n");
+	rra(a,'c');
+	rrb(b,'c');
+	if (c == 'c')
+		ft_printf("rra\n");
 }

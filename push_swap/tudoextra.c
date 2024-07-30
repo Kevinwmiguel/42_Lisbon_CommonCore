@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:11:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/27 16:45:18 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/30 03:49:59 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,11 +222,10 @@ t_node *find_min_to_a(t_node *stack)
 
 void min_on_top(t_node **stack)
 {
-    t_node *min_node = find_min_to_a(*stack); // Encontrar o menor elemento na stack passada como parâmetro
+    t_node *min_node = find_min_to_a(*stack);
     int len = stack_len(*stack);
     int min_index = min_node->index;
 
-    // Determinar se o menor elemento está na metade superior ou inferior da pilha
     while ((*stack)->number != min_node->number)
     {
         if (min_index <= len / 2)
@@ -235,7 +234,7 @@ void min_on_top(t_node **stack)
         }
         else
         {
-            rra(stack);
+            rra(stack, 'a');
         }
     }
 }

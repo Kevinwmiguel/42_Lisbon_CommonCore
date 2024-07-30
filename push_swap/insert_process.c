@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:12:02 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/27 00:05:56 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/30 04:38:57 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	printa(t_node *a)
 	current = a;
 	while (current != NULL)
 	{
-		ft_printf("A posiçao %d: %d \n", current->index, current->number);
+
+		ft_printf("A posiçao %d: %d\n", current->index, current->number);
 		current = current->next;
 	};
 }
@@ -43,7 +44,11 @@ void	printb(t_node *b)
 	current = b;
 	while (current != NULL)
 	{
-		ft_printf("                     B posiçao %d: %d \n", current->index, current->number);
+		printf("=================================\n");
+		ft_printf("           B posiçao %d: %d atual target = %d\n", current->index, current->number, current->target->number);
+		printf("Custo %d | Upmedium? %s\n", current->cost_to_push, current->upmedium ? "true" : "false");
+		printf("cheapest? %s\n", current->cheapest ? "true" : "false");
+		
 		current = current->next;
 	};
 }
@@ -84,5 +89,5 @@ void	process_args(int argc, char *argv[], t_node **a, t_node **b)
 		push_3_on_a(a, b);
 	else
 		if ((*a)->number > (*a)->next->number)
-			sa(*a);
+			sa(*a, 'a');
 }
