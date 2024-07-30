@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 19:16:46 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/30 06:13:39 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/30 07:53:44 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,12 @@ void set_targetb(t_node *a, t_node *b)
 //     }
 // }
 
-void prep_push(t_node **stack, t_node *cheap, char c)
+void prep_push(t_node **stack, t_node *cheap, char c, t_node **other)
 {
 	while(*stack != cheap)
 	{
+		create_index(*other);
+		create_index(*stack);
 		if (c == 'a')
 		{
 			if (cheap->upmedium == false)
@@ -133,8 +135,8 @@ void simple_sort(t_node **a, t_node **b)
 		cheap = get_cheapest((*a));
 		set_target(*a, *b);
 		prep_pushr(a, b, cheap);
-		prep_push(a, cheap, 'a');
-		prep_push(b, cheap->target, 'b');
+		prep_push(a, cheap, 'a', b);
+		prep_push(b, cheap->target, 'b', a);
 		//printa(*a);
 		pb(a ,b);
 		
@@ -151,10 +153,8 @@ void simple_sort(t_node **a, t_node **b)
 		cost_checker(*a, *b);
 		cheap = get_cheapest((*b));
 		prep_pushrb(a, b, cheap);
-		prep_push(b, cheap, 'b');
-		prep_push(a, cheap->target, 'a');
-		
-		
+		prep_push(b, cheap, 'b', a);
+		prep_push(a, cheap->target, 'a', b);
 		create_index(*b);
 		create_index(*a);
 		// printa(*a);
@@ -163,9 +163,4 @@ void simple_sort(t_node **a, t_node **b)
 		simple_sort_three(a);
 	}
 	min_on_top(a);
-	//printa(*a);
 }
-
-
-
-

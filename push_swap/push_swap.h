@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:03:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/30 06:26:28 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/30 07:50:27 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	current_index(t_node *stack);
 void	move_b_to_a(t_node **a, t_node **b);
 t_node* find_best_target(t_node *a, t_node *b);
 void	create_index(t_node *a);
-void prep_push(t_node **stack, t_node *cheap, char c);
+void prep_push(t_node **stack, t_node *cheap, char c, t_node **other);
 
 #endif
