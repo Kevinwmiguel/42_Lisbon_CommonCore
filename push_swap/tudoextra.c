@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:11:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/31 04:08:13 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/31 04:57:59 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ t_node* get_cheapest(t_node *stack)
     cheap->cheapest = true;
     return (cheap);
 }
-
-void    find_last(t_node **last)
-{
-    while ((*last)->next != NULL)
-         *last = (*last)->next;
-}
-
 
 int	stack_len(t_node *stack)
 {
@@ -180,8 +173,6 @@ t_node	*find_max(t_node *a, t_node *b)
 	return (max_node);
 }
 
-
-
 void	current_index(t_node *stack)
 {
 	int	i;
@@ -224,23 +215,16 @@ void min_on_top(t_node **stack)
 {
     if (stack == NULL || *stack == NULL)
         return;
-
     t_node *min_node = find_min_to_a(*stack);
     if (min_node == NULL)
         return;
-
     int len = stack_len(*stack);
     int min_index = min_node->index;
-
     while ((*stack)->number != min_node->number)
     {
         if (min_index <= len / 2)
-        {
             ra(stack, 'a');
-        }
         else
-        {
             rra(stack, 'a');
-        }
     }
 }
