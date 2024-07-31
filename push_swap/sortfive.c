@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 19:16:46 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/30 07:53:44 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/31 04:24:08 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,42 +84,80 @@ void set_targetb(t_node *a, t_node *b)
 
 void prep_push(t_node **stack, t_node *cheap, char c, t_node **other)
 {
-	while(*stack != cheap)
-	{
-		create_index(*other);
+    create_index(*stack);
+    create_index(*other);
+    
+    while(*stack != cheap)
+    {
+        if (c == 'a')
+        {
+            if (cheap->upmedium == false)
+                rra(stack, 'a');
+            else
+                ra(stack, 'a');
+        }
+        else
+        {
+            if (cheap->upmedium == false)
+                rrb(stack, 'b');
+            else
+                rb(stack, 'b');
+        }
 		create_index(*stack);
-		if (c == 'a')
-		{
-			if (cheap->upmedium == false)
-				rra(stack, 'a');
-			else
-				ra(stack, 'a');
-		}
-		else
-		{
-			if (cheap->upmedium == false)
-				rrb(stack, 'b');
-			else
-				rb(stack, 'b');
-		}
-	}
+        create_index(*other);
+    }
 }
 
 void prep_pushr(t_node **a, t_node **b, t_node *cheap)
 {
-	while ((cheap->upmedium == false && cheap->target->upmedium == false) && (cheap != *a))
-		rrr(a, b, 'c');
-	while ((cheap->upmedium == true && cheap->target->upmedium == true) && (cheap != *a))
-		rr(a, b, 'c');
+    create_index(*a);
+    create_index(*b);
+
+    while (cheap != *a)
+    {
+        if (cheap->upmedium == false && cheap->target->upmedium == false)
+        {
+            rrr(a, b, 'c');
+        }
+        else if (cheap->upmedium == true && cheap->target->upmedium == true)
+        {
+            rr(a, b, 'c');
+        }
+        else
+        {
+            break;
+        }
+
+        create_index(*a);
+        create_index(*b);
+    }
 }
 
 void prep_pushrb(t_node **a, t_node **b, t_node *cheap)
 {
-	while ((cheap->upmedium == false && cheap->target->upmedium == false) && (cheap != *b))
-			rrr(a, b, 'c');
-	while ((cheap->upmedium == true && cheap->target->upmedium == true) && (cheap != *b))
-			rr(a, b, 'c');
+    create_index(*a);
+    create_index(*b);
+
+    while (cheap != *b)
+    {
+        if (cheap->upmedium == false && cheap->target->upmedium == false)
+        {
+            rrr(a, b, 'c');
+        }
+        else if (cheap->upmedium == true && cheap->target->upmedium == true)
+        {
+            rr(a, b, 'c');
+        }
+        else
+        {
+            break;
+        }
+
+        create_index(*a);
+        create_index(*b);
+    }
 }
+
 
 void simple_sort(t_node **a, t_node **b)
 {
@@ -137,18 +175,14 @@ void simple_sort(t_node **a, t_node **b)
 		prep_pushr(a, b, cheap);
 		prep_push(a, cheap, 'a', b);
 		prep_push(b, cheap->target, 'b', a);
-		//printa(*a);
 		pb(a ,b);
-		
     }
 	simple_sort_three(a);
 	while((*b))
 	{
 		simple_sort_three(a);
-		
 		create_index(*b);
 		create_index(*a);
-		//printb(*b);
 		set_targetb(*a, *b);
 		cost_checker(*a, *b);
 		cheap = get_cheapest((*b));
@@ -157,10 +191,8 @@ void simple_sort(t_node **a, t_node **b)
 		prep_push(a, cheap->target, 'a', b);
 		create_index(*b);
 		create_index(*a);
-		// printa(*a);
-		// printb(*b);
 		pa(a, b);
-		simple_sort_three(a);
 	}
 	min_on_top(a);
+	//printa(*a);
 }

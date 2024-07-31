@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:11:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/30 03:49:59 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/07/31 04:08:13 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,13 @@ t_node *find_min_to_a(t_node *stack)
 
 void min_on_top(t_node **stack)
 {
+    if (stack == NULL || *stack == NULL)
+        return;
+
     t_node *min_node = find_min_to_a(*stack);
+    if (min_node == NULL)
+        return;
+
     int len = stack_len(*stack);
     int min_index = min_node->index;
 
