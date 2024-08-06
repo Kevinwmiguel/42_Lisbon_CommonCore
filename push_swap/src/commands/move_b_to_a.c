@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   move_b_to_a.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 10:32:14 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/30 05:12:26 by kwillian         ###   ########.fr       */
+/*   Created: 2024/04/22 16:02:12 by mmata-al          #+#    #+#             */
+/*   Updated: 2024/08/04 21:04:29 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h" 
+#include "../push_swap.h"
 
-int	main(int argc, char *argv[])
+void	move_b_to_a(t_node **a, t_node **b)
 {
-	t_node		*a;
-	t_node		*b;
-
-	a = NULL;
-	b = NULL;
-	if (argc < 2)
-	{
-		ft_printf("Error\n");
-		return (1);
-	}
-	if (!check_errors(argc, argv))
-	{
-		ft_printf("Error\n");
-		return (1);
-	}
-	process_args(argc, argv, &a, &b);
-	free_list(a);
-	free_list(b);
-	return (0);
+	push_prep(a, (*b)->target, 'a');
+	pa(a, b, false); 
 }
