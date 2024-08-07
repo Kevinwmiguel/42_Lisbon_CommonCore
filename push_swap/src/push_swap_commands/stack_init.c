@@ -6,32 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 12:18:20 by mmata-al          #+#    #+#             */
-/*   Updated: 2024/08/04 21:04:16 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:33:46 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-static long	ft_atol(const char *s)
-{
-	long	res;
-	int		sign;
-
-	res = 0;
-	sign = 1;
-	while (*s == ' ' || *s == '\t' || *s == '\n' || \
-			*s == '\r' || *s == '\f' || *s == '\v')
-		s++;
-	if (*s == '-' || *s == '+')
-	{
-		if (*s == '-')
-			sign = -1;
-		s++;
-	}
-	while (ft_isdigit(*s))
-		res = res * 10 + (*s++ - '0');
-	return (res * sign);
-}
 
 static void	append_node(t_node **stack, int n)
 {
@@ -57,6 +36,27 @@ static void	append_node(t_node **stack, int n)
 		node->prev = last_node;
 	}
 	node->cheapest = false;
+}
+
+static long	ft_atol(const char *s)
+{
+	long	res;
+	int		sign;
+
+	res = 0;
+	sign = 1;
+	while (*s == ' ' || *s == '\t' || *s == '\n' || \
+			*s == '\r' || *s == '\f' || *s == '\v')
+		s++;
+	if (*s == '-' || *s == '+')
+	{
+		if (*s == '-')
+			sign = -1;
+		s++;
+	}
+	while (ft_isdigit(*s))
+		res = res * 10 + (*s++ - '0');
+	return (res * sign);
 }
 
 void	init_stack_a(t_node **a, char **argv)

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:02:12 by mmata-al          #+#    #+#             */
-/*   Updated: 2024/08/04 21:04:29 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:36:17 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	move_b_to_a(t_node **a, t_node **b)
 {
 	push_prep(a, (*b)->target, 'a');
-	pa(a, b, false); 
+	pa(a, b, false);
 }

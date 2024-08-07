@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_all_numbers.c                                        :+:      :+:    :+:   */
+/*   sort_all_numbers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/10 12:17:32 by mmata-al          #+#    #+#             */
-/*   Updated: 2024/08/04 20:26:55 by kwillian         ###   ########.fr       */
+/*   Created: 2024/08/07 19:36:34 by kwillian          #+#    #+#             */
+/*   Updated: 2024/08/07 19:37:06 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,17 @@ static void	move_a_to_b(t_node **a, t_node **b)
 {
 	t_node	*cheapest_node;
 
-	cheapest_node = get_cheapest(*a); 
-	if (cheapest_node->upmedian 
+	cheapest_node = get_cheapest(*a);
+	if (cheapest_node->upmedian
 		&& cheapest_node->target->upmedian)
 		rotate_both(a, b, cheapest_node);
-	else if (!(cheapest_node->upmedian) 
+	else if (!(cheapest_node->upmedian)
 		&& !(cheapest_node->target->upmedian))
 		rev_rotate_both(a, b, cheapest_node);
 	push_prep(a, cheapest_node, 'a');
 	push_prep(b, cheapest_node->target, 'b');
 	pb(b, a, false);
 }
-
-
 
 static void	min_on_top(t_node **a)
 {

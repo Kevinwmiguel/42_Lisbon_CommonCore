@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 12:18:23 by mmata-al          #+#    #+#             */
-/*   Updated: 2024/08/04 21:03:26 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:40:24 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	stack_len(t_node *stack)
 {
 	int	count;
 
-	if (!stack) 
+	if (!stack)
 		return (0);
 	count = 0;
 	while (stack)
@@ -51,8 +51,8 @@ bool	stack_sorted(t_node *stack)
 
 t_node	*find_min(t_node *stack)
 {
-	long			min;
 	t_node	*min_node;
+	long	min;
 
 	if (!stack)
 		return (NULL);
@@ -66,13 +66,13 @@ t_node	*find_min(t_node *stack)
 		}
 		stack = stack->next;
 	}
-	return (min_node); 
+	return (min_node);
 }
 
 t_node	*find_max(t_node *stack)
 {
-	long			max;
 	t_node	*max_node;
+	long	max;
 
 	if (!stack)
 		return (NULL);

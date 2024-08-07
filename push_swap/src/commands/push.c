@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 12:17:02 by mmata-al          #+#    #+#             */
-/*   Updated: 2024/08/04 20:55:20 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:37:32 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	push(t_node **dst, t_node **src)
 
 void	pa(t_node **a, t_node **b, bool print)
 {
-	push(a, b); 
-	if (!print) 
+	push(a, b);
+	if (!print)
 		ft_printf("pa\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 12:17:44 by mmata-al          #+#    #+#             */
-/*   Updated: 2024/08/04 21:04:29 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:43:11 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	set_target_a(t_node *a, t_node *b)
 {
 	t_node	*current_b;
 	t_node	*target;
-	long			best_match_index;
+	long	best_match_index;
 
 	while (a)
 	{
@@ -45,7 +45,7 @@ static void	set_target_a(t_node *a, t_node *b)
 		current_b = b;
 		while (current_b)
 		{
-			if (current_b->number < a->number 
+			if (current_b->number < a->number
 				&& current_b->number > best_match_index)
 			{
 				best_match_index = current_b->number;
@@ -83,8 +83,8 @@ static void	cost_analysis_a(t_node *a, t_node *b)
 
 void	set_cheapest(t_node *stack)
 {
-	long			cheapest_value;
 	t_node	*cheapest_node;
+	long	cheapest_value;
 
 	if (!stack)
 		return ;

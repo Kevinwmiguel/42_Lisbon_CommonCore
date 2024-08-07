@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 12:17:20 by mmata-al          #+#    #+#             */
-/*   Updated: 2024/08/04 20:55:20 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:36:00 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	rotate(t_node **stack)
 
 	if (!*stack || !(*stack)->next)
 		return ;
-	last_node = find_last(*stack); 
+	last_node = find_last(*stack);
 	last_node->next = *stack;
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
