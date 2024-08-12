@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_3.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/07 19:37:17 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/07 19:37:20 by kwillian         ###   ########.fr       */
+/*   Created: 2024/07/25 10:32:14 by kwillian          #+#    #+#             */
+/*   Updated: 2024/07/30 05:12:26 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h" 
 
-void	simple_sort(t_node **a)
+int	main(int argc, char *argv[])
 {
-	t_node	*biggest_node;
+	t_node		*a;
+	t_node		*b;
 
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if ((*a)->next == biggest_node)
-		rra(a, false);
-	if ((*a)->number > (*a)->next->number)
-		sa(a, false);
+	a = NULL;
+	b = NULL;
+	if (argc < 2)
+	{
+		ft_printf("Error\n");
+		return (1);
+	}
+	if (!check_errors(argc, argv))
+	{
+		ft_printf("Error\n");
+		return (1);
+	}
+	process_args(argc, argv, &a, &b);
+	free_list(a);
+	free_list(b);
+	return (0);
 }

@@ -5,69 +5,62 @@
 #                                                     +:+ +:+         +:+      #
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/10 12:18:35 by mmata-al          #+#    #+#              #
-#    Updated: 2024/08/06 20:31:52 by kwillian         ###   ########.fr        #
+#    Created: 2024/06/06 06:53:20 by kwillian          #+#    #+#              #
+#    Updated: 2024/07/26 21:23:39 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Nome do programa
-NAME = push_swap
+# Nome do meu programa
+NAME := push_swap
 
-# Diretórios das bibliotecas e includes
-SRC_DIR = src/
-LIBFT_DIR = $(SRC_DIR)/libft/
-PRINTF_DIR = $(SRC_DIR)/printf/
-LDFLAGS = -L$(LIBFT_DIR) -L$(PRINTF_DIR) -lft -lftprintf
+# Aqui eu pego as bibliotecas 
+LIBFT_DIR := libft
+PRINT_F_DIR := printf
+# Diretório atual onde está push_swap.h
+INCLUDE_DIR := .
 
-# Arquivos fonte do projeto
-PUSHSWAP = $(SRC_DIR)push_swap_commands/error_handler.c \
-           $(SRC_DIR)push_swap_commands/a_to_b.c \
-           $(SRC_DIR)push_swap_commands/push_swap.c \
-           $(SRC_DIR)push_swap_commands/b_to_a.c \
-           $(SRC_DIR)push_swap_commands/stack_init.c \
-           $(SRC_DIR)push_swap_commands/split.c \
-           $(SRC_DIR)push_swap_commands/stack_utils.c
+# Compilar com as flags da 42
+CC := cc
+CFLAGS := -Wall -Werror -Wextra -I$(LIBFT_DIR) -I$(PRINT_F_DIR) -I$(INCLUDE_DIR) -g
 
-COMMANDS = $(SRC_DIR)commands/push.c \
-           $(SRC_DIR)commands/rev_rotate.c \
-           $(SRC_DIR)commands/sort_all_numbers.c \
-           $(SRC_DIR)commands/swap.c \
-           $(SRC_DIR)commands/rotate.c \
-           $(SRC_DIR)commands/sort_3.c \
-           $(SRC_DIR)commands/move_b_to_a.c
+SRC := main.c push_swap.c operations.c aditional.c aditional2.c \
+	r_operations.c tudoextra.c s_operations.c \
+	 p_operations.c errors.c insert_process.c sortfive.c
+OBJ := $(SRC:.c=.o)
 
-SRCS = $(PUSHSWAP) $(COMMANDS)
-OBJS = $(SRCS:.c=.o)
+# Inclui os diretórios de bibliotecas para o linker
+LDFLAGS := -L$(LIBFT_DIR) -L$(PRINT_F_DIR)
+LDLIBS := -lft -lftprintf
 
-# Compilador e flags
-CC = cc
-CFLAGS = -Wall -Werror -Wextra -I$(SRC_DIR) -I$(LIBFT_DIR)include -I$(PRINTF_DIR)include -g
+# Alvo padrão
+all: $(LIBFT_DIR)/libft.a $(PRINT_F_DIR)/libftprintf.a $(NAME)
 
-# Regras de compilação
-all: $(LIBFT_DIR)libft.a $(PRINTF_DIR)libftprintf.a $(NAME)
+# Chama os Makefiles das subpastas
+$(LIBFT_DIR)/libft.a:
+	$(MAKE) -C $(LIBFT_DIR)
 
-$(LIBFT_DIR)libft.a:
-	@make -C $(LIBFT_DIR)
+$(PRINT_F_DIR)/libftprintf.a:
+	$(MAKE) -C $(PRINT_F_DIR)
 
-$(PRINTF_DIR)libftprintf.a:
-	@make -C $(PRINTF_DIR)
+# Compila o projeto principal
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+	clear
 
-$(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
-
+# Regras de compilação para os arquivos objeto
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Limpeza de arquivos
+# Regras de limpeza
 clean:
-	@$(RM) $(OBJS)
-	@make clean -C $(LIBFT_DIR)
-	@make clean -C $(PRINTF_DIR)
+	$(MAKE) clean -C $(LIBFT_DIR)
+	$(MAKE) clean -C $(PRINT_F_DIR)
+	rm -f $(OBJ)
 
 fclean: clean
-	@$(RM) $(NAME)
-	@make fclean -C $(LIBFT_DIR)
-	@make fclean -C $(PRINTF_DIR)
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	$(MAKE) fclean -C $(PRINT_F_DIR)
+	rm -f $(NAME)
 
 re: fclean all
 
