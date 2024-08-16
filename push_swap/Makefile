@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 06:53:20 by kwillian          #+#    #+#              #
-#    Updated: 2024/07/26 21:23:39 by kwillian         ###   ########.fr        #
+#    Updated: 2024/08/14 19:48:00 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ INCLUDE_DIR := .
 CC := cc
 CFLAGS := -Wall -Werror -Wextra -I$(LIBFT_DIR) -I$(PRINT_F_DIR) -I$(INCLUDE_DIR) -g
 
-SRC := main.c push_swap.c operations.c aditional.c aditional2.c \
-	r_operations.c tudoextra.c s_operations.c \
-	 p_operations.c errors.c insert_process.c sortfive.c
+SRC := src/main.c src/push_swap.c src/operations.c src/aditional.c src/aditional2.c \
+	src/r_operations.c src/tudoextra.c src/s_operations.c \
+	 src/p_operations.c src/errors.c src/insert_process.c src/sortfive.c
 OBJ := $(SRC:.c=.o)
 
 # Inclui os diretórios de bibliotecas para o linker
@@ -44,22 +44,22 @@ $(PRINT_F_DIR)/libftprintf.a:
 
 # Compila o projeto principal
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	clear
 
 # Regras de compilação para os arquivos objeto
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Regras de limpeza
 clean:
-	$(MAKE) clean -C $(LIBFT_DIR)
-	$(MAKE) clean -C $(PRINT_F_DIR)
+	@$(MAKE) clean -C $(LIBFT_DIR)
+	@$(MAKE) clean -C $(PRINT_F_DIR)
 	rm -f $(OBJ)
 
 fclean: clean
-	$(MAKE) fclean -C $(LIBFT_DIR)
-	$(MAKE) fclean -C $(PRINT_F_DIR)
+	@$(MAKE) fclean -C $(LIBFT_DIR)
+	@$(MAKE) fclean -C $(PRINT_F_DIR)
 	rm -f $(NAME)
 
 re: fclean all

@@ -6,11 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 21:33:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/24 15:32:17 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/14 19:46:50 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 t_node	*ft_lstnew2(int number, int idx)
 {

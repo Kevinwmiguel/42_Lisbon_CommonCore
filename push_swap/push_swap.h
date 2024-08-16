@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:03:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/12 19:17:27 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/16 03:45:02 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	rb(t_node **b, char c);
 void	rr(t_node **a, t_node **b, char c);
 void	free_list(t_node *head);
 void	rra(t_node **a, char c);
-t_node*	get_cheapest(t_node *stack);
+t_node	*get_cheapest(t_node *stack);
 void	rrb(t_node **b, char c);
 void	rrr(t_node **a, t_node **b, char c);
 void	ft_lstadd_front2(t_node **lst, t_node *new);
@@ -64,7 +64,7 @@ void	sort_stack_b(t_node **b);
 void	printa(t_node *a);
 void	printb(t_node *b);
 bool	is_sorted_b(t_node *lst);
-int	is_sorted_desc(t_node *stack);
+int		is_sorted_desc(t_node *stack);
 void	push_all_to_b(t_node **a, t_node **b);
 void	move_a_to_b(t_node **a, t_node **b);
 void	sort_stks(t_node **a, t_node **b);
@@ -73,8 +73,10 @@ t_node	*find_max(t_node *stack);
 t_node	*find_min(t_node *stack);
 void	current_index(t_node *stack);
 void	move_b_to_a(t_node **a, t_node **b);
-t_node* find_best_target(t_node *a, t_node *b);
+t_node	*find_best_target(t_node *a, t_node *b);
 void	create_index(t_node *a);
-void prep_push(t_node **stack, t_node *cheap, char c, t_node **other);
-void prep_push_combined(t_node **a, t_node **b, t_node *cheap, char c, bool is_double_rotation);
+void	prep_push(t_node **stack, t_node *cheap, char c, t_node **other);
+void	prep_push_combined(t_node **a, t_node **b, t_node *cheap, char c, bool is_double_rotation);
+long	ft_atol(const char *str);
+void	simple_sort_three2(t_node **a);
 #endif

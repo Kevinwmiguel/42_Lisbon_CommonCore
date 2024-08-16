@@ -6,11 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:00:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/12 18:10:46 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/15 04:28:47 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h" // Inclui a definição de t_node
+#include "../push_swap.h" // Inclui a definição de t_node
 #include <stdio.h>
 #include "libft/libft.h" 
 #include "printf/ft_printf.h"
@@ -69,7 +69,7 @@ void	create_index(t_node *stack)
 void	push_3_on_a(t_node **a, t_node **b)
 {
 	int	len;
-	
+
 	create_index(*a);
 	len = stack_len(*a);
 	if (len == 3)

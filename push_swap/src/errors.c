@@ -6,11 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 21:35:37 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/27 02:40:45 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:30:52 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	free_split_args(char **args)
 {
@@ -58,8 +58,8 @@ bool	is_duplicate(char **args, int number, int size)
 
 bool	check_tokens(char **tokens)
 {
-	int	n;
-	int	i;
+	int		i;
+	long	n;
 
 	i = 0;
 	while (tokens[i] != NULL)
@@ -69,8 +69,8 @@ bool	check_tokens(char **tokens)
 			free_split_args(tokens);
 			return (false);
 		}
-		n = ft_atoi(tokens[i]);
-		if (n > INT_MAX || n < INT_MIN || is_duplicate(tokens, n, i))
+		n = ft_atol(tokens[i]);
+		if (n > 2147483647 || n < -2147483648 || is_duplicate(tokens, n, i))
 		{
 			free_split_args(tokens);
 			return (false);
@@ -81,11 +81,48 @@ bool	check_tokens(char **tokens)
 	return (true);
 }
 
+bool	signals2(char **c, int i, int j)
+{
+	if (c[i][j] == '+' || c[i][j] == '-')
+	{
+		if (j != 0)
+			return (false);
+		if (c[i][j + 1])
+		{
+			if (c[i][j + 1] == '-' || c[i][j + 1] == '+')
+				return (false);
+		}
+		if (c[i][j - 1])
+		{
+			if (c[i][j - 1] == '-' || c[i][j - 1] == '+')
+				return (false);
+		}
+	}
+	return (true);
+}
+
+bool	signals(char **argv, int i, int j)
+{
+	long	n;
+
+	while (argv[i][++j])
+	{
+		if (!signals2(argv, i, j))
+			return (false);
+		if (ft_isdigit(argv[i][j]) == 0 && argv[i][j] != '+' && argv[i][j] != '-')
+			return (false);
+	}
+	n = ft_atol(argv[i]);
+	if (n > 2147483647 || n < -2147483648 || is_duplicate(argv + 1, n, i - 1))
+		return (false);
+	return (true);
+}
+
 bool	check_errors(int argc, char *argv[])
 {
 	char	**tokens;
-	int		n;
 	int		i;
+	int		j;
 
 	i = 1;
 	if (argc == 2)
@@ -99,10 +136,8 @@ bool	check_errors(int argc, char *argv[])
 	{
 		while (i < argc)
 		{
-			if (!is_number(argv[i]))
-				return (false);
-			n = ft_atoi(argv[i]);
-			if (n > INT_MAX || n < INT_MIN || is_duplicate(argv + 1, n, i - 1))
+			j = -1;
+			if (!signals(argv, i, j))
 				return (false);
 			i++;
 		}

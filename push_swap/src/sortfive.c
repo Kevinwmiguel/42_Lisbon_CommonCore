@@ -6,25 +6,25 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 19:16:46 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/12 19:45:13 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/16 03:46:40 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	simple_sort_three(t_node **a)
 {
-    if ((*a)->number > (*a)->next->number)
-        sa(*a, 'a');
-    if ((*a)->next->number > (*a)->next->next->number)
-    {
-        rra(a, 'a');
-        if ((*a)->number > (*a)->next->number)
-            sa(*a, 'a');
-    }
-    if ((*a)->number > (*a)->next->number)
-        sa(*a, 'a');
+	t_node	*biggest_node;
+
+	biggest_node = find_max(*a);
+	if (biggest_node == *a)
+		ra(a, 'a');
+	else if ((*a)->next == biggest_node)
+		rra(a, 'a');
+	if ((*a)->number > (*a)->next->number)
+		sa(*a, 'a');
 }
+
 
 
 void	set_target(t_node *a, t_node *b)
@@ -118,44 +118,45 @@ void prep_push_combined(t_node **a, t_node **b, t_node *cheap, char stack_id, bo
     }
 }
 
+
 void	simple_sort(t_node **a, t_node **b)
 {
-	t_node *cheap;
+	t_node  *cheap;
 
-    while (!is_sorted(*a))
+    if (stack_len(*a) == 4)
+         pb(a, b);
+    else
     {
         pb(a, b);
         pb(a, b);
-        while (stack_len(*a) > 3)
-        {
-            create_index(*b);
-            create_index(*a);
-            //simple_sort_three(a);
-            cost_checker(*a, *b);
-            cheap = get_cheapest((*a));
-            set_target(*a, *b);
-            prep_push_combined(a, b, cheap, 'a', true); // substitui prep_pushr
-            prep_push_combined(a, b, cheap, 'a', false); // substitui prep_push
-            prep_push_combined(a, b, cheap->target, 'b', false); // substitui prep_push
-            pb(a, b);
-        }
-        simple_sort_three(a);
-        while((*b))
-        {
-            //simple_sort_three(a);
-            create_index(*b);
-            create_index(*a);
-            set_targetb(*a, *b);
-            cost_checker(*a, *b);
-            cheap = get_cheapest((*b));
-            prep_push_combined(a, b, cheap, 'b', true); // substitui prep_pushrb
-            prep_push_combined(a, b, cheap, 'b', false); // substitui prep_push
-            prep_push_combined(a, b, cheap->target, 'a', false); // substitui prep_push
-            //printb(*b);
-            pa(a, b);
-        }
-        min_on_top(a);
     }
-    create_index(*a);
-    //printa(*a);
+    while (stack_len(*a) > 3)
+    {
+        create_index(*b);
+        create_index(*a);
+        set_target(*a, *b);
+        cost_checker(*a, *b);
+        cheap = get_cheapest((*a));
+        //printa(*a);
+        prep_push_combined(a, b, cheap, 'a', true);
+        prep_push_combined(a, b, cheap, 'a', false);
+        prep_push_combined(a, b, cheap->target, 'b', false);
+        pb(a, b);
+    }
+    simple_sort_three(a);
+    while((*b))
+    {
+        create_index(*b);
+        create_index(*a);
+        set_targetb(*a, *b);
+        cost_checker(*a, *b);
+        cheap = get_cheapest((*b));
+        prep_push_combined(a, b, cheap, 'b', true);
+        prep_push_combined(a, b, cheap, 'b', false);
+        prep_push_combined(a, b, cheap->target, 'a', false);
+        pa(a, b);
+    }
+    min_on_top(a);
 }
+
+

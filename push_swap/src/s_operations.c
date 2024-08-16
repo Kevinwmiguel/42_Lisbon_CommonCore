@@ -6,11 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:11:11 by kwillian          #+#    #+#             */
-/*   Updated: 2024/07/30 03:49:32 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/14 19:46:50 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	sa(t_node *original, char c)
 {
