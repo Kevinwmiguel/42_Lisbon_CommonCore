@@ -22,18 +22,18 @@ The **Get Next Line** project involves creating a function that reads a line fro
 ### Push Swap
 I am currently working on the **Push Swap** project. This project involves creating a program that sorts numbers using a limited set of operations on two stacks. It is a significant challenge in algorithm optimization and efficiency.
 
-Norminette: CURRENT:
-possible erros: OK
-Moves: 
-  0 ok 
-  1 ok 
-  3 ok 
-  5 ok 
-  10 ok 
-  100 not ok 
-  500 not ok
-Tester: Not OK
-Evaluation: NOT OK
+Norminette: CURRENT:<br>
+possible erros: OK<br>
+Moves: <br>
+  0 ok<br>
+  1 ok<br>
+  3 ok<br>
+  5 ok<br>
+  10 ok<br>
+  100 not ok<br> 
+  500 not ok<br>
+Tester: Not OK<br>
+Evaluation: NOT OK<br>
 
 References: https://medium.com/@ayogun/push-swap-c1f5d2d41e97
 ## Completed Exams
