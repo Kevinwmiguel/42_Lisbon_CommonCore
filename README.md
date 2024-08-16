@@ -23,10 +23,19 @@ The **Get Next Line** project involves creating a function that reads a line fro
 I am currently working on the **Push Swap** project. This project involves creating a program that sorts numbers using a limited set of operations on two stacks. It is a significant challenge in algorithm optimization and efficiency.
 
 Norminette: CURRENT:
-Moves: OK! 
+possible erros: OK
+Moves: 
+  0 ok 
+  1 ok 
+  3 ok 
+  5 ok 
+  10 ok 
+  100 not ok 
+  500 not ok
 Tester: Not OK
 Evaluation: NOT OK
 
+References: https://medium.com/@ayogun/push-swap-c1f5d2d41e97
 ## Completed Exams
 
 ### Exam Rank 2
