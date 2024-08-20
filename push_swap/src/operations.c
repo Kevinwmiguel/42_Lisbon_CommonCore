@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:36:37 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/14 19:46:50 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:09:37 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ void	rrr(t_node **a, t_node **b, char c)
 	rra(a,'c');
 	rrb(b,'c');
 	if (c == 'c')
-		ft_printf("rra\n");
+		ft_printf("rrr\n");
 }

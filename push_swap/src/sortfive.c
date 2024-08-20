@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 19:16:46 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/20 23:10:02 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:53:01 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ void	simple_sort(t_node **a, t_node **b)
         set_target(*a, *b);
         cost_checker(*a, *b);
         cheap = get_cheapest((*a));
-        //printa(*a);
         if (cheap->upmedium 
             && cheap->target->upmedium)
             rotate_both(a, b, cheap);
@@ -152,6 +151,7 @@ void	simple_sort(t_node **a, t_node **b)
 		    rev_rotate_both(a, b, cheap);
         push_prep(a, cheap, 'a');
 	    push_prep(b, cheap->target, 'b');
+		//printa(*a);
         pb(a, b);
     }
     simple_sort_three(a);
@@ -164,5 +164,5 @@ void	simple_sort(t_node **a, t_node **b)
         pa(a, b);
     }
     min_on_top(a);
-    //printaa(a);
+    
 }

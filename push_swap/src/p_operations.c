@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:09:48 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/14 19:46:50 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:10:22 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	pa(t_node **a, t_node **b)
 void	pb(t_node **a, t_node **b)
 {
 	t_node	*hold;
+	static int i = 1;
 
 	if (*a == NULL)
 		return ;
@@ -42,4 +43,7 @@ void	pb(t_node **a, t_node **b)
 	hold->prev = NULL;
 	ft_lstadd_front2(b, hold);
 	ft_printf("pb\n");
+	i++;
+	// if (i == 19)
+	// 	printf(" numero do pb 18 %d target %d index do target %d e index do padrao %d\n", (*a)->number, (*a)->target->number, (*a)->target->index, (*a)->index);
 }
