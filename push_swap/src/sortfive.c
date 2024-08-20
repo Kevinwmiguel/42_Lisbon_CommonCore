@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 19:16:46 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/16 03:46:40 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:10:02 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,41 +83,47 @@ void	set_targetb(t_node *a, t_node *b)
 	}
 }
 
-void prep_push_combined(t_node **a, t_node **b, t_node *cheap, char stack_id, bool is_double_rotation)
+void	push_prep(t_node **stack, t_node *top, char stack_name)
 {
-    while ((*a != cheap && stack_id == 'a') || (*b != cheap && stack_id == 'b'))
-    {
-        create_index(*a);
-        create_index(*b);
-        if (is_double_rotation)
-        {
-            if (cheap->upmedium == false && cheap->target->upmedium == false)
-                rrr(a, b, 'c');
-            else if (cheap->upmedium == true && cheap->target->upmedium == true)
-                rr(a, b, 'c');
-            else
-                break;
-        }
-        else
-        {
-            if (stack_id == 'a')
-            {
-                if (cheap->upmedium == false)
-                    rra(a, 'a');
-                else
-                    ra(a, 'a');
-            }
-            else if (stack_id == 'b')
-            {
-                if (cheap->upmedium == false)
-                    rrb(b, 'b');
-                else
-                    rb(b, 'b');
-            }
-        }
-    }
+	while (*stack != top)
+	{
+		if (stack_name == 'a')
+		{
+			if (top->upmedium)
+				ra(stack, 'a');
+			else
+				rra(stack, 'a');
+		}
+		else if (stack_name == 'b')
+		{
+			if (top->upmedium)
+				rb(stack, 'b');
+			else
+				rrb(stack, 'b');
+		}
+	}
+}
+static void	rotate_both(t_node **a,
+						t_node **b,
+						t_node *cheapest_node)
+{
+	while (*b != cheapest_node->target
+		&& *a != cheapest_node)
+		rr(a, b, 'c');
+	current_index(*a);
+	current_index(*b);
 }
 
+static void	rev_rotate_both(t_node **a,
+								t_node **b,
+								t_node *cheapest_node)
+{
+	while (*b != cheapest_node->target
+		&& *a != cheapest_node)
+		rrr(a, b, 'c');
+	current_index(*a);
+	current_index(*b);
+}
 
 void	simple_sort(t_node **a, t_node **b)
 {
@@ -138,9 +144,14 @@ void	simple_sort(t_node **a, t_node **b)
         cost_checker(*a, *b);
         cheap = get_cheapest((*a));
         //printa(*a);
-        prep_push_combined(a, b, cheap, 'a', true);
-        prep_push_combined(a, b, cheap, 'a', false);
-        prep_push_combined(a, b, cheap->target, 'b', false);
+        if (cheap->upmedium 
+            && cheap->target->upmedium)
+            rotate_both(a, b, cheap);
+        else if (!(cheap->upmedium) 
+            && !(cheap->target->upmedium))
+		    rev_rotate_both(a, b, cheap);
+        push_prep(a, cheap, 'a');
+	    push_prep(b, cheap->target, 'b');
         pb(a, b);
     }
     simple_sort_three(a);
@@ -149,14 +160,9 @@ void	simple_sort(t_node **a, t_node **b)
         create_index(*b);
         create_index(*a);
         set_targetb(*a, *b);
-        cost_checker(*a, *b);
-        cheap = get_cheapest((*b));
-        prep_push_combined(a, b, cheap, 'b', true);
-        prep_push_combined(a, b, cheap, 'b', false);
-        prep_push_combined(a, b, cheap->target, 'a', false);
+        push_prep(a, (*b)->target, 'a');
         pa(a, b);
     }
     min_on_top(a);
+    //printaa(a);
 }
-
-

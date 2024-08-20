@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:11:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/16 03:46:24 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:59:53 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,24 +162,13 @@ t_node	*find_min_to_a(t_node *stack)
 	return (min_node);
 }
 
-void	min_on_top(t_node **stack)
+void	min_on_top(t_node **a)
 {
-	t_node	*min_node;
-	int		len;
-	int		min_index;
-
-	if (stack == NULL || *stack == NULL)
-		return ;
-	min_node = find_min_to_a(*stack);
-	if (min_node == NULL)
-		return ;
-	len = stack_len(*stack);
-	min_index = min_node->index;
-	while ((*stack)->number != min_node->number)
+	while ((*a)->number != find_min(*a)->number)
 	{
-		if (min_index <= len / 2)
-			ra(stack, 'a');
+		if (find_min(*a)->upmedium)
+			ra(a, 'a');
 		else
-			rra(stack, 'a');
+			rra(a, 'a');
 	}
 }

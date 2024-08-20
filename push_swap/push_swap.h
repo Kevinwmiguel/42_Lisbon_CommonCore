@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:03:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/16 03:45:02 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:07:43 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ void	current_index(t_node *stack);
 void	move_b_to_a(t_node **a, t_node **b);
 t_node	*find_best_target(t_node *a, t_node *b);
 void	create_index(t_node *a);
-void	prep_push(t_node **stack, t_node *cheap, char c, t_node **other);
-void	prep_push_combined(t_node **a, t_node **b, t_node *cheap, char c, bool is_double_rotation);
+void	prep_push(t_node **stack, t_node *top, char stack_name);
+void	push_prep(t_node **stack, t_node *top, char stack_name);
 long	ft_atol(const char *str);
 void	simple_sort_three2(t_node **a);
+
+void	printaa(t_node **a);
 #endif
