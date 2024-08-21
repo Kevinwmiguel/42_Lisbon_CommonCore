@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:12:02 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/21 00:08:47 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:58:47 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,24 @@ void	process2args(int argc, char *argv[], t_node **a)
 	}
 }
 
+void	indexes(t_node **a, t_node **b)
+{
+	create_index(*a);
+	create_index(*b);
+}
+
+void	magic_happens(t_node **a, t_node **b)
+{
+	create_index(*a);
+	if (stack_len(*a) > 2)
+		push_3_on_a(a, b);
+	else if (stack_len(*a) == 2)
+	{
+		if ((*a)->number > (*a)->next->number)
+			sa(*a, 'a');
+	}
+	create_index(*a);
+}
 
 void	process_args(int argc, char *argv[], t_node **a, t_node **b)
 {
@@ -46,9 +64,7 @@ void	process_args(int argc, char *argv[], t_node **a, t_node **b)
 
 	i = 0;
 	if (argc > 2)
-	{
 		process2args(argc, argv, a);
-	}
 	else if (argc == 2)
 	{
 		tokens = ft_split(argv[1], ' ');
@@ -64,14 +80,6 @@ void	process_args(int argc, char *argv[], t_node **a, t_node **b)
 		}
 		free_split_args(tokens);
 	}
-	create_index(*a);
-	if (stack_len(*a) > 2)
-		push_3_on_a(a, b);
-	else if (stack_len(*a) == 2)
-	{
-		if ((*a)->number > (*a)->next->number)
-			sa(*a, 'a');
-	}
-	create_index(*a);
+	if (!is_sorted(*a))
+		magic_happens(a, b);
 }
-

@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 06:53:20 by kwillian          #+#    #+#              #
-#    Updated: 2024/08/14 19:48:00 by kwillian         ###   ########.fr        #
+#    Updated: 2024/08/21 13:29:03 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ CC := cc
 CFLAGS := -Wall -Werror -Wextra -I$(LIBFT_DIR) -I$(PRINT_F_DIR) -I$(INCLUDE_DIR) -g
 
 SRC := src/main.c src/push_swap.c src/operations.c src/aditional.c src/aditional2.c \
-	src/r_operations.c src/tudoextra.c src/s_operations.c \
-	 src/p_operations.c src/errors.c src/insert_process.c src/sortfive.c
+	src/sortfive.c src/r_operations.c src/tudoextra.c src/s_operations.c src/errors.c \
+	 src/p_operations.c src/errors2.c src/insert_process.c src/prep.c src/help.c
 OBJ := $(SRC:.c=.o)
 
 # Inclui os diretórios de bibliotecas para o linker

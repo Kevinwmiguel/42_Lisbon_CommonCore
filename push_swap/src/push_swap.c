@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 07:00:13 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/15 04:28:47 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/21 11:17:37 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include "libft/libft.h" 
 #include "printf/ft_printf.h"
-
 
 void	move_cheapest(t_node **a, t_node **b)
 {

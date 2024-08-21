@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 19:16:46 by kwillian          #+#    #+#             */
-/*   Updated: 2024/08/20 23:53:01 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:44:29 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	simple_sort_three(t_node **a)
 	if ((*a)->number > (*a)->next->number)
 		sa(*a, 'a');
 }
-
-
 
 void	set_target(t_node *a, t_node *b)
 {
@@ -83,86 +81,42 @@ void	set_targetb(t_node *a, t_node *b)
 	}
 }
 
-void	push_prep(t_node **stack, t_node *top, char stack_name)
+void	init_prepare(t_node **a, t_node **b)
 {
-	while (*stack != top)
+	if (stack_len(*a) == 4)
+		pb(a, b);
+	else
 	{
-		if (stack_name == 'a')
-		{
-			if (top->upmedium)
-				ra(stack, 'a');
-			else
-				rra(stack, 'a');
-		}
-		else if (stack_name == 'b')
-		{
-			if (top->upmedium)
-				rb(stack, 'b');
-			else
-				rrb(stack, 'b');
-		}
+		pb(a, b);
+		pb(a, b);
 	}
-}
-static void	rotate_both(t_node **a,
-						t_node **b,
-						t_node *cheapest_node)
-{
-	while (*b != cheapest_node->target
-		&& *a != cheapest_node)
-		rr(a, b, 'c');
-	current_index(*a);
-	current_index(*b);
-}
-
-static void	rev_rotate_both(t_node **a,
-								t_node **b,
-								t_node *cheapest_node)
-{
-	while (*b != cheapest_node->target
-		&& *a != cheapest_node)
-		rrr(a, b, 'c');
-	current_index(*a);
-	current_index(*b);
 }
 
 void	simple_sort(t_node **a, t_node **b)
 {
-	t_node  *cheap;
+	t_node	*cheap;
 
-    if (stack_len(*a) == 4)
-         pb(a, b);
-    else
-    {
-        pb(a, b);
-        pb(a, b);
-    }
-    while (stack_len(*a) > 3)
-    {
-        create_index(*b);
-        create_index(*a);
-        set_target(*a, *b);
-        cost_checker(*a, *b);
-        cheap = get_cheapest((*a));
-        if (cheap->upmedium 
-            && cheap->target->upmedium)
-            rotate_both(a, b, cheap);
-        else if (!(cheap->upmedium) 
-            && !(cheap->target->upmedium))
-		    rev_rotate_both(a, b, cheap);
-        push_prep(a, cheap, 'a');
-	    push_prep(b, cheap->target, 'b');
-		//printa(*a);
-        pb(a, b);
-    }
-    simple_sort_three(a);
-    while((*b))
-    {
-        create_index(*b);
-        create_index(*a);
-        set_targetb(*a, *b);
-        push_prep(a, (*b)->target, 'a');
-        pa(a, b);
-    }
-    min_on_top(a);
-    
+	init_prepare(a, b);
+	while (stack_len(*a) > 3)
+	{
+		indexes(a, b);
+		set_target(*a, *b);
+		cost_checker(*a, *b);
+		cheap = get_cheapest((*a));
+		prep_push_combined(a, b, cheap);
+		prep_push(a, cheap, 'a');
+		prep_push(b, cheap->target, 'b');
+		pb(a, b);
+	}
+	simple_sort_three(a);
+	while ((*b))
+	{
+		indexes(a, b);
+		set_targetb(*a, *b);
+		cost_checker(*a, *b);
+		cheap = get_cheapest((*b));
+		prep_push(a, cheap->target, 'a');
+		pa(a, b);
+	}
+	min_on_top(a);
 }
