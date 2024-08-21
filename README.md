@@ -22,7 +22,7 @@ The **Get Next Line** project involves creating a function that reads a line fro
 ### Push Swap
 I am currently working on the **Push Swap** project. This project involves creating a program that sorts numbers using a limited set of operations on two stacks. It is a significant challenge in algorithm optimization and efficiency.
 
-Norminette: CURRENT:<br>
+Norminette: OK:<br>
 possible erros: OK<br>
 Moves: <br>
   0 ok<br>
@@ -30,10 +30,11 @@ Moves: <br>
   3 ok<br>
   5 ok<br>
   10 ok<br>
-  100 not ok<br> 
-  500 not ok<br>
-Tester: Not OK<br>
+  100 ok<br> 
+  500 ok<br>
 Evaluation: NOT OK<br>
+![image](https://github.com/user-attachments/assets/1fd3fe48-29bf-4f66-849b-fef479301005)
+
 
 References: https://medium.com/@ayogun/push-swap-c1f5d2d41e97
 ## Completed Exams
