@@ -32,7 +32,7 @@ Moves: <br>
   10 ok<br>
   100 ok<br> 
   500 ok<br>
-Evaluation: NOT OK<br>
+Evaluation: OK<br>
 ![image](https://github.com/user-attachments/assets/1fd3fe48-29bf-4f66-849b-fef479301005)
 
 
