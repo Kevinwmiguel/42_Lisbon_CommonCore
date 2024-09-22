@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:48:19 by kwillian          #+#    #+#             */
-/*   Updated: 2024/09/03 15:51:20 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:28:22 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char			*ft_strchr(const char *s, int c);
 
 char			*ft_strdup(const char *s1);
 
-char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin(const char *s1, const char *s2);
 
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 

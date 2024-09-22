@@ -6,47 +6,51 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 16:10:05 by kwillian          #+#    #+#              #
-#    Updated: 2024/09/06 19:48:23 by kwillian         ###   ########.fr        #
+#    Updated: 2024/09/22 16:33:22 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= so_long
+NAME 	= so_long
 
-#Dir
-LIB_DIR			= All_libs/libft/
-OBJ_DIR			= obj_dir/
-SRC_DIR			= srcs/
-MLX				= -L./All_libs/libft
-#Sources
-SRCS			=	SOLONG
+CC 		= gcc
 
-OBJS			= $(SRCS:.c=.o)
+CFLAGS 	= -Wall -Wextra -Werror -g
 
-BONUS			=	
+MLX_DIR = ./mlx/
 
-BONUS_OBJS		= $(BONUS:.c=.o)
+OBJ_DIR = objects
+OBJECTS= $(SRC:sources/%.c=%.o)
 
-CC				= cc
+LIBFT_PATH = ./All_libs/libft
+LIBFT = $(LIBFT_PATH)/libft.a
 
-CFLAGS			= -Wall -Wextra -Werror
+SRCS 	=	./srcs/getnextline/get_next_line_utils.c\
+			./srcs/getnextline/get_next_line.c\
+			./srcs/so_long.c ./srcs/valid_file.c\
 
 all: $(NAME)
 
-RM				= rm -f
+$(NAME) : $(OBJS) $(LIBFT)
+	@$(CC) $(CFLAGS) $(SRCS) -L./All_libs/minilibx-linux -lmlx_Linux -lXext -lX11 -o $@ $(LIBFT)
+	clear
+%.o:%.c
+	@$(CC) $(CFLAGS) -c $^ -o $@
 
-$(NAME):		$(OBJS)
-				ar rcs $(NAME) $(OBJS)
+$(MLX): 
+	$(MAKE) -C $(MLX_DIR)
+
+$(LIBFT):
+	@make -C $(LIBFT_PATH) all
+
+$(OBJ_DIR)/%.o: srcs/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-				$(RM) $(OBJS) $(BONUS_OBJS)
+	make -C $(LIBFT_PATH) clean
+	@rm -f *.o
 
-fclean:			clean
-				$(RM) $(NAME)
+fclean: clean
+	make -C $(LIBFT_PATH) fclean
+	@rm -f $(NAME) $(OBJECTS)
 
-re:				fclean all
-
-bonus:			$(OBJS) $(BONUS_OBJS)
-				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
-				touch bonus
-
-.PHONY:			start all clean fclean re
+re: fclean all

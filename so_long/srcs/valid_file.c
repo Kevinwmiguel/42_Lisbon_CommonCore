@@ -1,40 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   valid_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 10:01:41 by kwillian          #+#    #+#             */
-/*   Updated: 2024/09/22 16:28:02 by kwillian         ###   ########.fr       */
+/*   Created: 2024/09/22 12:33:20 by kwillian          #+#    #+#             */
+/*   Updated: 2024/09/22 16:30:24 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-char	*ft_strjoin(const char *s1, const char *s2)
+static int	find(char *str, char *to_find)
 {
-	char			*nova;
-	unsigned int	i;
-	unsigned int	j;
-	int				size;
+	int	i;
 
-	i = -1;
-	if (!s1 || !s2)
-		return (NULL);
-	size = ft_strlen(s1) + ft_strlen(s2);
-	nova = (char *)malloc(size + 1);
-	if (!nova)
-		return (NULL);
-	while (s1[++i] != '\0')
-		nova[i] = s1[i];
-	j = 0;
-	while (s2[j] != '\0')
+	i = 0;
+	while (to_find[i])
 	{
-		nova[i] = s2[j];
-		j++;
+		if (to_find[i] != str[i])
+			return (0);
 		i++;
 	}
-	nova[i] = '\0';
-	return (nova);
+	if (str[i] == '\0')
+		return (1);
+	return (0);
+}
+
+void	check_file_is_valid(char *file_line)
+{
+	while (*file_line)
+	{
+		if (*file_line == '.')
+		{
+			if (find(file_line, ".ber"))
+			{
+				return ;
+			}
+		}
+		file_line++;
+	}
+	write(1, "ERROR: file is not valid\n", 25);
+	exit(1);
 }

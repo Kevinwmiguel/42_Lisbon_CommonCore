@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:01:00 by kwillian          #+#    #+#             */
-/*   Updated: 2024/05/10 06:37:25 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:28:48 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin2(char *s1, char const *s2)
 {
 	char			*nova;
 	unsigned int	i;
