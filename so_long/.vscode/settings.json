@@ -2,6 +2,14 @@
 	"files.associations": {
 		"fcntl.h": "c",
 		"keysym.h": "c",
-		"mlx.h": "c"
+		"mlx.h": "c",
+		"so_long.h": "c",
+		"*.tcc": "c",
+		"cmath": "c",
+		"string": "c",
+		"unordered_map": "c",
+		"functional": "c",
+		"string_view": "c",
+		"streambuf": "c"
 	}
 }

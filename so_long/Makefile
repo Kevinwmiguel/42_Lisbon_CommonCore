@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 16:10:05 by kwillian          #+#    #+#              #
-#    Updated: 2024/09/22 16:33:22 by kwillian         ###   ########.fr        #
+#    Updated: 2024/09/24 20:38:52 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ LIBFT = $(LIBFT_PATH)/libft.a
 
 SRCS 	=	./srcs/getnextline/get_next_line_utils.c\
 			./srcs/getnextline/get_next_line.c\
-			./srcs/so_long.c ./srcs/valid_file.c\
+			./srcs/so_long.c ./srcs/check_map.c\
+			./srcs/check_file.c ./srcs/map.utils.c
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:01:41 by kwillian          #+#    #+#             */
-/*   Updated: 2024/09/22 16:28:02 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:35:59 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	size = ft_strlen(s1) + ft_strlen(s2);
-	nova = (char *)malloc(size + 1);
+	nova = (char *)malloc((size + 1) * sizeof(char));
 	if (!nova)
 		return (NULL);
 	while (s1[++i] != '\0')

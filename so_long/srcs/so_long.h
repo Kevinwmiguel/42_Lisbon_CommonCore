@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/09/22 16:30:52 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:16:00 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,13 @@ typedef struct s_imgs
 
 typedef struct s_assets
 {
-	t_imgs	*lantern;
-	t_imgs	*ground;
+	t_imgs	*water;
 	t_imgs	*character;
-	t_imgs	*gwc;
-	t_imgs	*cwl;
-	t_imgs	*door;
-	t_imgs	*gwl;
-	t_imgs	*par;
-	t_imgs	*gwp;
-	t_imgs	*wall;
-	t_imgs	*gwd;
-	t_imgs	*gwdwc;
-	t_imgs	*gwcwl;
-	t_imgs	*c2;
-	t_imgs	*gwc2;
-	t_imgs	*cwl2;
-	t_imgs	*gwcwl2;
+	t_imgs	*boat;
+	t_imgs	*compass;
+	t_imgs	*map;
+	t_imgs	*wood;
+	t_imgs	*monster;
 }	t_assets;
 
 typedef struct s_vars
@@ -66,30 +56,34 @@ typedef struct s_vars
 	char	**map;
 	int		win_w;
 	int		win_h;
+	int				e_x;
+	int				e_y;
+	t_assets *assets;
+	int		collect;   // Quantidade de colecionáveis
+	int		compass;   // Quantidade da bussola ?
+	int		existscompass;
+	int		movements;
+	int		x_p;       // Posição X do personagem
+	int		y_p;       // Posição Y do personagem
 }	t_vars;
 
 typedef struct s_map
 {
-	int	c;
-	int	p;
-	int	e;
-	int	l;
-	int	x;
-	int	y;
+	int	p; // personagem 
+	int	e; // inimigo
+	int	c; // MApa
+	int	w; // agua
+	int	wo; //madeira
+	int	x; // cordenada
+	int	y; // cordenada
+	int	b; // bussola
 }	t_map;
 
-void	final_cleaner(t_vars *vars, int assets);
-int	key_hook(int keycode, t_vars *vars);
-void	put_image_to_map(char p, int x1, int y1, t_vars *v);
 void	check_file_is_valid(char *file_line);
-void	assets_cleaner2(t_vars *v);
-void	assets_cleaner(t_vars *v);
-void	assets_initiator2(t_vars *v);
-void	put_image_to_map(char p, int x1, int y1, t_vars *v);
-t_imgs	*new_img(int w, int h, t_vars *mlx, t_vars *window);
-t_imgs	*new_file_img(char *path, void *mlx, void *window);
-void	put_pixel_img(t_imgs *img, int x, int y, int color);
-unsigned int	get_pixel_img(t_imgs *img, int x, int y);
-void	put_img_to_img(t_imgs *dst, t_imgs *src, int x, int y);
+int		find(char *str, char *to_find);
+void	fmessage_error(t_vars *vars, int assets);
+void	ferror(char *file);
+void	final_cleaner(t_vars *vars, int assets);
+int	get_height(char **map);
 
 #endif
