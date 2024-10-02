@@ -6,11 +6,34 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/09/29 15:42:51 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/02 22:37:54 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+t_map	map_check_initiatializer(t_vars *vars, t_map map)
+{
+	map.x = 0;
+	while (map.y--)
+	{
+		map.x = 0;
+		while (vars->map[map.y][map.x] != '\0')
+		{
+			if (vars->map[map.y][map.x] == 'E')
+				map.e++;
+			else if (vars->map[map.y][map.x] == 'P')
+				map.p++;
+			else if (vars->map[map.y][map.x] == 'c')
+				map.c++;
+			else if (vars->map[map.y][map.x] == 'B')
+				map.b++;
+			else if (vars->map[map.y][map.x] != '1' && vars->map[map.y][map.x] != '0')
+				map.x++;
+		}
+	}
+	return (map);
+}
 
 void	invisible_door(t_vars *v, int x1, int y1)
 {

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/09/29 19:16:00 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:32:36 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_vars
 typedef struct s_map
 {
 	int	p; // personagem 
-	int	e; // inimigo
+	int	e; //barco
 	int	c; // MApa
 	int	w; // agua
 	int	wo; //madeira

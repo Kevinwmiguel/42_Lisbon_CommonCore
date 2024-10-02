@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/09/29 19:57:58 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/02 22:37:56 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ int	count_map_lines(char *file)
 	return (line_count);
 }
 
-
 void	init_vars(t_vars *vars)
 {
 	vars->collect = 0;
@@ -181,8 +180,6 @@ void	init_vars(t_vars *vars)
 	vars->win_w = ft_strlen(vars->map[0]);
 	vars->win_h = get_height(vars->map);
 }
-
-
 
 int	main(int argc, char **argv)
 {
@@ -202,7 +199,7 @@ int	main(int argc, char **argv)
 		check_map_valid(&vars);
 	}
 	
-	
+
 	// Inicializa a conexão com o MiniLibX
 	vars.mlx = mlx_init();
 	vars.map = malloc(sizeof(char *) * (map_lines + 1));
