@@ -6,11 +6,26 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/02 22:37:54 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/03 21:27:41 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+char	wrongElementals(t_vars *vetor)
+{
+	int	x;
+
+	x = 0;
+	while (vetor->map[x])
+	{
+		free(vetor->map[x]);
+		x++;
+	}
+	free(vetor->map);
+	ft_printf("Wrong element stupid");
+	exit(1);
+}
 
 t_map	map_check_initiatializer(t_vars *vars, t_map map)
 {
@@ -29,7 +44,8 @@ t_map	map_check_initiatializer(t_vars *vars, t_map map)
 			else if (vars->map[map.y][map.x] == 'B')
 				map.b++;
 			else if (vars->map[map.y][map.x] != '1' && vars->map[map.y][map.x] != '0')
-				map.x++;
+				wrongElementals(vars);
+			map.x++;
 		}
 	}
 	return (map);
@@ -104,7 +120,7 @@ static void	check_walls(t_vars *v)
 
 	message = "[ERROR] Not surrounded by walls";
 	if (check_line(v->map[0]))
-		ft_error (v, message);
+		ft_error(v, message);
 	i = get_height(v->map) - 1;
 	while (i)
 	{
@@ -115,7 +131,7 @@ static void	check_walls(t_vars *v)
 	}
 	if (check_line(v->map[get_height(v->map) - 1]))
 	{
-		ft_error (v, message);
+		ft_error(v, message);
 	}
 }
 

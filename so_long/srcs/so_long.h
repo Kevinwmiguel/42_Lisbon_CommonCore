@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/02 21:32:36 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/03 22:13:44 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,11 @@ void	fmessage_error(t_vars *vars, int assets);
 void	ferror(char *file);
 void	final_cleaner(t_vars *vars, int assets);
 int	get_height(char **map);
+t_map	map_check_initiatializer(t_vars *vars, t_map map);
+void	check_map_valid(t_vars *vars);
+void	check_elements(t_vars *vars);
+void	ft_error(t_vars *vars, char *message);
+void	init_vars(t_vars *vars);
+char	*linear(int fd, char *line, char *ml);
 
 #endif

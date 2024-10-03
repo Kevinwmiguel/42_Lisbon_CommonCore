@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/02 22:37:56 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/03 22:26:06 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*linear(int fd, char *line, char *ml)
 	return (ml);
 }
 
-void	**load_map(char *mapfile, t_vars *vars)
+void	**load_map2(char *mapfile, t_vars *vars)
 {
 	int		fd;
 	char	*line;
@@ -134,6 +134,25 @@ void	**load_map(char *mapfile, t_vars *vars)
 	splits = ft_split(mapll, '\n');
 	free(mapll);
 	return (splits);
+}
+void	load_map(t_vars *vars, char **argv)
+{
+	int	map_y;
+	int	y1;
+	int backup_w;
+
+	map_y = 0;
+	y1 = 0;
+	backup_w = vars->win_w;
+	flood_checker(vars, argv);
+	while (vars->win_h > 0)
+	{
+		map_xloop(vars, 0, y1, map_y);
+		vars->win_w = backup_w;
+		map_y;
+		vars->win_h--;
+		y1 = (map_y * 32);
+	}
 }
 
 int	map_height(char **map)
@@ -195,25 +214,22 @@ int	main(int argc, char **argv)
 	vars.map = load_map(argv[1], &vars);
 	if (vars.map != NULL)
 	{
+		//inicia os valores recebendo tudo e atribuindo valores
 		init_vars(&vars);
+		//checa o mapa
 		check_map_valid(&vars);
+		// Inicializa a conexão com o MiniLibX
+		vars.mlx = mlx_init();
+		vars.win = mlx_new_window(vars.mlx, vars.win_w * 32, vars.win_h * 32, "so_long");
+		load_map(&vars, argv);
 	}
 	
-
-	// Inicializa a conexão com o MiniLibX
-	vars.mlx = mlx_init();
-	vars.map = malloc(sizeof(char *) * (map_lines + 1));
-	if (!vars.map)
-	{
-		printf("Erro ao alocar memória para o mapa\n");
-		exit(1);
-	}
 	// Carregar o mapa
 	load_map(&vars, argv[1]);
 	// Definir as dimensões da janela com base no mapa
 	load_images(&vars);
 	
-	vars.win = mlx_new_window(vars.mlx, 500, 500, "so_long");
+	
 	// Desenhar o mapa na janela
 
 	// Loop do MiniLibX
