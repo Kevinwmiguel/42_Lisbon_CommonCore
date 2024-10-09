@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/03 22:26:06 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:38:10 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,57 +15,7 @@
 #include <stdlib.h>
 #include "so_long.h"
 
-void	load_images(t_vars *vars)
-{
-	// Alocando memória para assets
-	vars->assets = malloc(sizeof(t_assets));
-	if (!vars->assets)
-	{
-		printf("Erro ao alocar memória para assets\n");
-		exit(1);
-	}
-	// Carregar imagem da parede (madeira)
-	vars->assets->wood = malloc(sizeof(t_imgs) * 32);
-	vars->assets->wood->img = mlx_xpm_file_to_image(vars->mlx, "assets/textures/ponte.xpm", &vars->img_width, &vars->img_height);
-	if (!vars->assets->wood->img)
-	{
-		printf("Erro ao carregar a imagem da madeira\n");
-		exit(1);
-	}
-	// Carregar imagem do chão (mapa)
-	vars->assets->map = malloc(sizeof(t_imgs) * 32);
-	vars->assets->map->img = mlx_xpm_file_to_image(vars->mlx, "assets/textures/mapa.xpm", &vars->img_width, &vars->img_height);
-	if (!vars->assets->map->img)
-	{
-		printf("Erro ao carregar a imagem do mapa\n");
-		exit(1);
-	}
-	// Carregar outros assets
-	// Água
-	vars->assets->water = malloc(sizeof(t_imgs) * 32);
-	vars->assets->water->img = mlx_xpm_file_to_image(vars->mlx, "assets/textures/agua.xpm", &vars->img_width, &vars->img_height);
-	if (!vars->assets->water->img)
-	{
-		printf("Erro ao carregar a imagem da água\n");
-		exit(1);
-	}
-	// Personagem
-	vars->assets->character = malloc(sizeof(t_imgs) * 32);
-	vars->assets->character->img = mlx_xpm_file_to_image(vars->mlx, "assets/textures/Arrrg.xpm", &vars->img_width, &vars->img_height);
-	if (!vars->assets->character->img)
-	{
-		printf("Erro ao carregar a imagem do personagem\n");
-		exit(1);
-	}
-	// Barco
-	vars->assets->boat = malloc(sizeof(t_imgs) * 32);
-	vars->assets->boat->img = mlx_xpm_file_to_image(vars->mlx, "assets/textures/barco.xpm", &vars->img_width, &vars->img_height);
-	if (!vars->assets->boat->img)
-	{
-		printf("Erro ao carregar a imagem do barco\n");
-		exit(1);
-	}
-}
+
 
 void	put_image_to_map(char p, int x1, int y1, t_vars *v)
 {
@@ -209,9 +159,8 @@ int	main(int argc, char **argv)
 		write(1, "ERROR\n", 6);
 		exit(1);
 	}
-	// Checa se o mapa ´e valido
 	check_file_is_valid(argv[1]);
-	vars.map = load_map(argv[1], &vars);
+	vars.map = get_map(argv[1], &vars);
 	if (vars.map != NULL)
 	{
 		//inicia os valores recebendo tudo e atribuindo valores
@@ -221,19 +170,12 @@ int	main(int argc, char **argv)
 		// Inicializa a conexão com o MiniLibX
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, vars.win_w * 32, vars.win_h * 32, "so_long");
+		// Carregar o mapa
 		load_map(&vars, argv);
+		mlx_string_put(vars.mlx, vars.win, 5, 10, 0xffffff, "Move: 0");
+		mlx_hook(vars.win, 2, (1L << 0), key_hook, &vars);
+		mlx_hook(vars.win, 17, (1L << 0), ft_exit, &vars);
+		mlx_loop(vars.mlx);
 	}
-	
-	// Carregar o mapa
-	load_map(&vars, argv[1]);
-	// Definir as dimensões da janela com base no mapa
-	load_images(&vars);
-	
-	
-	// Desenhar o mapa na janela
-
-	// Loop do MiniLibX
-	mlx_loop(vars.mlx);
-
 	return (0);
 }

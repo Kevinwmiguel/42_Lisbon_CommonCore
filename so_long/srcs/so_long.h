@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/03 22:13:44 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:38:27 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,20 @@ void	check_elements(t_vars *vars);
 void	ft_error(t_vars *vars, char *message);
 void	init_vars(t_vars *vars);
 char	*linear(int fd, char *line, char *ml);
+
+void	flood_checker(t_vars *vars, char **argv);
+void	get_player(t_vars *vars);
+int	check_e(t_vars *vars);
+int	check_c(t_vars *vars);
+char	**get_map(char *fmap, t_vars *vars);
+void	flood_fill(char **map, int x, int y);
+void	assets_initiator(t_vars *v);
+
+void	put_pixel_img(t_imgs *img, int x, int y, int color);
+unsigned int	get_pixel_img(t_imgs *img, int x, int y);
+t_imgs	*new_file_img(char *path, void *mlx, void *window);
+
+void	put_image_to_map(char p, int x1, int y1, t_vars *v);
+void	invisible_door(t_vars *v, int x1, int y1);
 
 #endif
