@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/09 21:38:27 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/10 23:22:50 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_vars
 	char	**map;
 	int		win_w;
 	int		win_h;
+	int		left;
 	int				e_x;
 	int				e_y;
 	t_assets *assets;
@@ -82,9 +83,9 @@ typedef struct s_map
 void	check_file_is_valid(char *file_line);
 int		find(char *str, char *to_find);
 void	fmessage_error(t_vars *vars, int assets);
-void	ferror(char *file);
+void	f_error(char *file);
 void	final_cleaner(t_vars *vars, int assets);
-int	get_height(char **map);
+int		get_height(char **map);
 t_map	map_check_initiatializer(t_vars *vars, t_map map);
 void	check_map_valid(t_vars *vars);
 void	check_elements(t_vars *vars);
@@ -106,5 +107,15 @@ t_imgs	*new_file_img(char *path, void *mlx, void *window);
 
 void	put_image_to_map(char p, int x1, int y1, t_vars *v);
 void	invisible_door(t_vars *v, int x1, int y1);
+
+char	**load_map2(char *mapfile, t_vars *vars);
+int		map_xloop(t_vars *vars, int x1, int y1, int map_y);
+
+
+void	exit_verifier(t_vars *v, int xy, int vet);
+void	exit_door(t_vars *v);
+void	put_text(t_vars *v);
+void	lantern(t_vars *v);
+void	move_idk(t_vars *v);
 
 #endif

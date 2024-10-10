@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/09 21:38:10 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:59:11 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,23 @@
 #include <stdlib.h>
 #include "so_long.h"
 
-
+int	key_hook(int keycode, t_vars *vars)
+{
+	if (keycode == XK_d)
+		move_right(vars);
+	else if (keycode == XK_a)
+		move_left(vars);
+	else if (keycode == XK_w)
+		move_up(vars);
+	else if (keycode == XK_s)
+		move_down(vars);
+	else if (keycode == XK_Escape)
+	{
+		final_cleaner(vars, 1);
+		exit(1);
+	}
+	return (0);
+}
 
 void	put_image_to_map(char p, int x1, int y1, t_vars *v)
 {
@@ -62,7 +78,7 @@ char	*linear(int fd, char *line, char *ml)
 	return (ml);
 }
 
-void	**load_map2(char *mapfile, t_vars *vars)
+char	**load_map2(char *mapfile, t_vars *vars)
 {
 	int		fd;
 	char	*line;
@@ -71,11 +87,11 @@ void	**load_map2(char *mapfile, t_vars *vars)
 
 	line = "";
 	mapll = ft_strdup("");
-	fd = open(mapll, O_RDONLY);
+	fd = open(mapfile, O_RDONLY);
 	if (fd < 0)
 	{
 		free(mapll);
-		ferror(mapll);
+		f_error(mapll);
 	}
 	mapll = linear(fd, line, mapll);
 	close(fd);
@@ -173,8 +189,8 @@ int	main(int argc, char **argv)
 		// Carregar o mapa
 		load_map(&vars, argv);
 		mlx_string_put(vars.mlx, vars.win, 5, 10, 0xffffff, "Move: 0");
-		mlx_hook(vars.win, 2, (1L << 0), key_hook, &vars);
-		mlx_hook(vars.win, 17, (1L << 0), ft_exit, &vars);
+		// mlx_hook(vars.win, 2, (1L << 0), key_hook, &vars);
+		// mlx_hook(vars.win, 17, (1L << 0), ft_exit, &vars);
 		mlx_loop(vars.mlx);
 	}
 	return (0);

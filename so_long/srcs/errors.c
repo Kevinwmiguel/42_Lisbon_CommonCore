@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:12:52 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/03 20:37:59 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:49:07 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	fmessage_error(t_vars *vars, int assets)
 	exit(1);
 }
 
-void	ferror(char *file)
+void	f_error(char *file)
 {
 	ft_printf("can't open the file %s", file);
 	exit(1);
