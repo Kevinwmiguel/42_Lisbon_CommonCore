@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/09 21:39:09 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/11 23:11:33 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,14 @@ t_map	map_check_initiatializer(t_vars *vars, t_map map)
 				map.e++;
 			else if (vars->map[map.y][map.x] == 'P')
 				map.p++;
-			else if (vars->map[map.y][map.x] == 'c')
+			else if (vars->map[map.y][map.x] == 'C')
 				map.c++;
 			else if (vars->map[map.y][map.x] == 'B')
 				map.b++;
-			else if (vars->map[map.y][map.x] != '1' && vars->map[map.y][map.x] != '0')
+			else if (vars->map[map.y][map.x] != '1' \
+						&& vars->map[map.y][map.x] != '0' \
+						&& vars->map[map.y][map.x] != '\n' \
+						&& vars->map[map.y][map.x] != '\0')
 				wrongElementals(vars);
 			map.x++;
 		}

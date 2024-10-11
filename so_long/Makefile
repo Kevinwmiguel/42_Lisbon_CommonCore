@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 16:10:05 by kwillian          #+#    #+#              #
-#    Updated: 2024/09/24 20:38:52 by kwillian         ###   ########.fr        #
+#    Updated: 2024/10/11 23:03:41 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,18 @@ MLX_DIR = ./mlx/
 
 OBJ_DIR = objects
 OBJECTS= $(SRC:sources/%.c=%.o)
+SRC_DIR				= ./srcs/
 
 LIBFT_PATH = ./All_libs/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
-SRCS 	=	./srcs/getnextline/get_next_line_utils.c\
-			./srcs/getnextline/get_next_line.c\
-			./srcs/so_long.c ./srcs/check_map.c\
-			./srcs/check_file.c ./srcs/map.utils.c
+SRCS 	=	./srcs/Lopie_Get_Next_Soda_13/get_next_line_utils.c \
+			./srcs/Lopie_Get_Next_Soda_13/get_next_line.c \
+			$(SRC_DIR)so_long.c $(SRC_DIR)check_map.c\
+			$(SRC_DIR)check_file.c $(SRC_DIR)map.functions.c \
+			$(SRC_DIR)assets.c $(SRC_DIR)clean.c \
+			$(SRC_DIR)errors.c $(SRC_DIR)extras.c \
+			$(SRC_DIR)move.c
 
 all: $(NAME)
 

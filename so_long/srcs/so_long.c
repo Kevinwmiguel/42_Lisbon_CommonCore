@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/10 22:59:11 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/11 23:15:51 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,29 @@ int	key_hook(int keycode, t_vars *vars)
 
 void	put_image_to_map(char p, int x1, int y1, t_vars *v)
 {
-	if (p == '1') // Parede
-		mlx_put_image_to_window(v->mlx, v->win, v->assets->wood->img, x1, y1);
-	else if (p == 'C') // Colecionável
+	if (p == '1')
+		mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, x1, y1);
+	else if (p == 'C')
 	{
 		mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, x1, y1);
-		v->collect++;  // Incrementa a quantidade de colecionáveis no mapa
+		v->collect++;
 	}
-	else if (p == 'E') // Saída/Inimigo
-		invisible_door(v, x1, y1); // Supondo que você já tenha essa função implementada
-	else if (p == 'P') // Personagem
+	else if (p == 'E')
+		invisible_door(v, x1, y1);
+	else if (p == 'P')
 	{
-		v->y_p = y1;  // Armazena a posição Y do personagem
-		v->x_p = x1;  // Armazena a posição X do personagem
-		mlx_put_image_to_window(v->mlx, v->win, v->assets->boat->img, x1, y1);
+		v->y_p = y1;
+		v->x_p = x1;
+		mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, x1, y1);
 	}
-	else if (p == 'W') // Água
+	else if (p == 'B')
 	{
-		mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, x1, y1);
+		mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, x1, y1);
+		v->compass++;
+		v->existscompass++;
 	}
-	else // Chão
-		mlx_put_image_to_window(v->mlx, v->win, v->assets->map->img, x1, y1);
+	else
+		mlx_put_image_to_window(v->mlx, v->win, v->assets->wood->img, x1, y1);
 }
 
 char	*linear(int fd, char *line, char *ml)
@@ -65,7 +67,7 @@ char	*linear(int fd, char *line, char *ml)
 	while (line)
 	{
 		line = get_next_line(fd);
-		if (line == NULL || line[0] == '\0')
+		if (line == NULL)
 		{
 			free(line);
 			break ;
@@ -90,8 +92,8 @@ char	**load_map2(char *mapfile, t_vars *vars)
 	fd = open(mapfile, O_RDONLY);
 	if (fd < 0)
 	{
-		free(mapll);
 		f_error(mapll);
+		free(mapll);
 	}
 	mapll = linear(fd, line, mapll);
 	close(fd);
@@ -115,7 +117,7 @@ void	load_map(t_vars *vars, char **argv)
 	{
 		map_xloop(vars, 0, y1, map_y);
 		vars->win_w = backup_w;
-		map_y;
+		map_y++;
 		vars->win_h--;
 		y1 = (map_y * 32);
 	}

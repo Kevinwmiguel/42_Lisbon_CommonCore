@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:11:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/10 23:22:08 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/11 23:12:52 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	exit_door(t_vars *v)
 	exit(1);
 }
 
-
 void	put_text(t_vars *v)
 {
 	int		img_w;
@@ -65,7 +64,6 @@ void	put_text(t_vars *v)
 	free(number);
 }
 
-
 void	lantern(t_vars *v)
 {
 	v->compass--;
@@ -76,7 +74,7 @@ void	move_idk(t_vars *v)
 {
 	if ((v)->map[((v)->y_p / 32)][((v)->x_p / 32)] == 'C')
 		collected(v);
-	if ((v)->map[((v)->y_p / 32)][((v)->x_p / 32)] == 'L')
+	if ((v)->map[((v)->y_p / 32)][((v)->x_p / 32)] == 'B')
 		lantern(v);
 	if (v->existscompass == 1 && v->compass == 0 && v->left == 0)
 		mlx_put_image_to_window(v->mlx, v->win,

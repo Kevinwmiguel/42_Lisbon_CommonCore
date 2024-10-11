@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:58:41 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/10 23:09:15 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/11 23:10:32 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	move_left(t_vars *v)
 	}
 	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'C')
 		collected(v);
-	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'L')
+	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'B')
 		lantern(v);
 	v->left = 1;
 	if (v->existscompass== 1 && v->compass == 0)
@@ -60,7 +60,7 @@ void	move_right(t_vars *v)
 	}
 	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'C')
 		collected(v);
-	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'L')
+	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'B')
 		lantern(v);
 	v->left = 0;
 	if (v->existscompass== 1 && v->compass == 0)

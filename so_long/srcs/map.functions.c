@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:58:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/09 20:32:16 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/11 23:18:28 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,5 @@ void	flood_checker(t_vars *vars, char **argv)
 	final_cleaner(vars, 0);
 	vars->map = get_map(argv[1], vars);
 	vars->assets = malloc(sizeof(t_assets));
-	assets_init(vars);
+	assets_initiator(vars);
 }

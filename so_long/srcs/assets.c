@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:22:50 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/09 21:30:59 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/11 23:20:43 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,10 @@ unsigned int	get_pixel_img(t_imgs *img, int x, int y)
 void	assets_initiator(t_vars *v)
 {
 	v->assets->character = new_file_img("assets/textures/Arrrg.xpm", v->mlx, v->win);
-	put_img_to_img(v->assets->character, v->assets->character, 0, 0);
 	v->assets->water = new_file_img("assets/textures/agua.xpm", v->mlx, v->win);
-	put_img_to_img(v->assets->water, v->assets->water, 0, 0);
 	v->assets->wood = new_file_img("assets/textures/ponte.xpm", v->mlx, v->win);
-	put_img_to_img(v->assets->wood, v->assets->wood, 0, 0);
 	v->assets->compass = new_file_img("assets/textures/mapa.xpm", v->mlx, v->win);
-	put_img_to_img(v->assets->compass, v->assets->compass, 0, 0);
 	v->assets->boat = new_file_img("assets/textures/barco.xpm", v->mlx, v->win);
-	put_img_to_img(v->assets->boat, v->assets->boat, 0, 0);
-	assets_initiator2(v);
 }
 void	put_img_to_img(t_imgs *dst, t_imgs *src, int x, int y)
 {
