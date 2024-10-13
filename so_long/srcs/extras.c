@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:11:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/11 23:12:52 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/13 22:35:51 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	move_idk(t_vars *v)
 	else if (v->left == 1)
 	{
 		mlx_put_image_to_window(v->mlx, v->win,
-			v->assets->character->img, v->x_p, v->y_p);
+			v->assets->compass->img, v->x_p, v->y_p);
 		if (v->existscompass == 1 && v->compass == 0)
 			mlx_put_image_to_window(v->mlx, v->win,
 				v->assets->character->img,

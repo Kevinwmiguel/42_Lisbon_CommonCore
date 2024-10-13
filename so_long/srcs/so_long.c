@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/11 23:15:51 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/13 22:15:05 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,12 @@ void	init_vars(t_vars *vars)
 	vars->win_w = ft_strlen(vars->map[0]);
 	vars->win_h = get_height(vars->map);
 }
+int	ft_exit(t_vars *vars)
+{
+	final_cleaner(vars, 1);
+	exit(1);
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -191,9 +197,10 @@ int	main(int argc, char **argv)
 		// Carregar o mapa
 		load_map(&vars, argv);
 		mlx_string_put(vars.mlx, vars.win, 5, 10, 0xffffff, "Move: 0");
-		// mlx_hook(vars.win, 2, (1L << 0), key_hook, &vars);
-		// mlx_hook(vars.win, 17, (1L << 0), ft_exit, &vars);
+		mlx_hook(vars.win, 2, (1L << 0), key_hook, &vars);
+		mlx_hook(vars.win, 17, (1L << 0), ft_exit, &vars);
 		mlx_loop(vars.mlx);
+		mlx_destroy_display(vars.mlx);
 	}
 	return (0);
 }
