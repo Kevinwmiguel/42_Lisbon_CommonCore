@@ -35,7 +35,7 @@ void	move_left(t_vars *v)
 	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'C')
 		collected(v);
 	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'B')
-		lantern(v);
+		you_died(v, 0, 0);
 	v->left = 1;
 	if (v->existscompass== 1 && v->compass == 0)
 		mlx_put_image_to_window(v->mlx, v->win,
@@ -61,7 +61,7 @@ void	move_right(t_vars *v)
 	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'C')
 		collected(v);
 	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'B')
-		lantern(v);
+		you_died(v, 0, 1);
 	v->left = 0;
 	if (v->existscompass== 1 && v->compass == 0)
 		mlx_put_image_to_window(v->mlx, v->win,

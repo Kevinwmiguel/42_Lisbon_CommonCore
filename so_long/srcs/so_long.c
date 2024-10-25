@@ -39,7 +39,7 @@ void	put_image_to_map(char p, int x1, int y1, t_vars *v)
 		mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, x1, y1);
 	else if (p == 'C')
 	{
-		mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, x1, y1);
+		mlx_put_image_to_window(v->mlx, v->win, v->assets->compass->img, x1, y1);
 		v->collect++;
 	}
 	else if (p == 'E')
@@ -50,11 +50,12 @@ void	put_image_to_map(char p, int x1, int y1, t_vars *v)
 		v->x_p = x1;
 		mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, x1, y1);
 	}
+	// Problema em monster. Imagem não atribuida -- CRiar em gimp
 	else if (p == 'B')
 	{
-		mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, x1, y1);
-		v->compass++;
-		v->existscompass++;
+		mlx_put_image_to_window(v->mlx, v->win, v->assets->monster->img, x1, y1);
+		// v->compass++;
+		// v->existscompass++;
 	}
 	else
 		mlx_put_image_to_window(v->mlx, v->win, v->assets->wood->img, x1, y1);
@@ -200,7 +201,6 @@ int	main(int argc, char **argv)
 		mlx_hook(vars.win, 2, (1L << 0), key_hook, &vars);
 		mlx_hook(vars.win, 17, (1L << 0), ft_exit, &vars);
 		mlx_loop(vars.mlx);
-		mlx_destroy_display(vars.mlx);
 	}
 	return (0);
 }

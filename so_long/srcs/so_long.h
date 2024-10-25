@@ -77,7 +77,7 @@ typedef struct s_map
 	int	wo; //madeira
 	int	x; // cordenada
 	int	y; // cordenada
-	int	b; // bussola
+	int	b; // monster
 }	t_map;
 
 void	check_file_is_valid(char *file_line);
@@ -116,7 +116,7 @@ int		map_xloop(t_vars *vars, int x1, int y1, int map_y);
 void	exit_verifier(t_vars *v, int xy, int vet);
 void	exit_door(t_vars *v);
 void	put_text(t_vars *v);
-void	lantern(t_vars *v);
+void	you_died(t_vars *v, int xy, int vet);
 void	move_idk(t_vars *v);
 
 void	move_up(t_vars *v);

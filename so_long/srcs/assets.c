@@ -76,6 +76,7 @@ void	assets_initiator(t_vars *v)
 	v->assets->wood = new_file_img("assets/textures/ponte.xpm", v->mlx, v->win);
 	v->assets->compass = new_file_img("assets/textures/mapa.xpm", v->mlx, v->win);
 	v->assets->boat = new_file_img("assets/textures/barco.xpm", v->mlx, v->win);
+	v->assets->monster = new_file_img("assets/textures/monster.xpm", v->mlx, v->win);
 }
 void	put_img_to_img(t_imgs *dst, t_imgs *src, int x, int y)
 {
