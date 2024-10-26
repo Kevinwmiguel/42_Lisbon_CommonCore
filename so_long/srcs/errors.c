@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:12:52 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/10 22:49:07 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/26 20:45:34 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	fmessage_error(t_vars *vars, int assets)
 {
 	ft_printf("Error");
 	final_cleaner(vars, assets);
-	exit(1);
+	exit(0);
 }
 
 void	f_error(char *file)
 {
 	ft_printf("can't open the file %s", file);
-	exit(1);
+	exit(0);
 }
 
 static char	*error_possibility(t_map *map)

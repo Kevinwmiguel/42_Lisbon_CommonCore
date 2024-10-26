@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:11:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/13 22:35:51 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/26 22:16:09 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	exit_verifier(t_vars *v, int xy, int vet)
 {
 	if (v->collect <= 0)
+	{
 		exit_door(v);
+	}
 	else
 	{
 		if (xy == 0)
@@ -33,8 +35,6 @@ void	exit_verifier(t_vars *v, int xy, int vet)
 				v->y_p += 32;
 		}
 	}
-	final_cleaner(v, 0);
-	exit (1);
 }
 
 void	exit_door(t_vars *v)
@@ -66,29 +66,11 @@ void	put_text(t_vars *v)
 	free(number);
 }
 
-void	you_died(t_vars *v, int xy, int vet)
+void	you_died(t_vars *v)
 {
 	ft_printf("You died\n");
-	if (v->collect <= 0)
-		exit_door(v);
-	else
-	{
-		if (xy == 0)
-		{
-			if (vet == 0)
-				v->x_p -= 32;
-			else if (vet == 1)
-				v->x_p += 32;
-		}
-		else if (xy == 1)
-		{
-			if (vet == 0)
-				v->y_p -= 32;
-			else if (vet == 1)
-				v->y_p += 32;
-		}
-	}
-	final_cleaner(v, 1);
+	printf("coletaveis %d\n", v->collect);
+	exit_door(v);
 }
 
 void	move_idk(t_vars *v)
@@ -96,7 +78,7 @@ void	move_idk(t_vars *v)
 	if ((v)->map[((v)->y_p / 32)][((v)->x_p / 32)] == 'C')
 		collected(v);
 	if ((v)->map[((v)->y_p / 32)][((v)->x_p / 32)] == 'B')
-		you_died(v, 0, 1);
+		you_died(v);
 	if (v->existscompass == 1 && v->compass == 0 && v->left == 0)
 		mlx_put_image_to_window(v->mlx, v->win,
 			v->assets->character->img,
@@ -106,12 +88,8 @@ void	move_idk(t_vars *v)
 		mlx_put_image_to_window(v->mlx, v->win,
 			v->assets->character->img, v->x_p, v->y_p);
 		if (v->existscompass == 1 && v->compass == 0)
-			mlx_put_image_to_window(v->mlx, v->win,
-				v->assets->character->img,
-				v->x_p, v->y_p);
+			mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, v->x_p, v->y_p);
 	}
 	else
-		mlx_put_image_to_window(v->mlx, v->win,
-			v->assets->character->img,
-			v->x_p, v->y_p);
+		mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, v->x_p, v->y_p);
 }

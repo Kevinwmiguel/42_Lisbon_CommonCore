@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:03:43 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/11 22:10:33 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/26 22:08:09 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 void	assets_cleaner(t_vars *vetor)
 {
 	mlx_destroy_image(vetor->mlx, vetor->assets->character->img);
-	mlx_destroy_image(vetor->mlx, vetor->assets->water->img);
-	mlx_destroy_image(vetor->mlx, vetor->assets->wood->img);
-	mlx_destroy_image(vetor->mlx, vetor->assets->compass->img);
-	mlx_destroy_image(vetor->mlx, vetor->assets->map->img);
-	mlx_destroy_image(vetor->mlx, vetor->assets->monster->img);
-	mlx_destroy_image(vetor->mlx, vetor->assets->boat->img);
 	free(vetor->assets->character);
+	mlx_destroy_image(vetor->mlx, vetor->assets->water->img);
 	free(vetor->assets->water);
+	mlx_destroy_image(vetor->mlx, vetor->assets->wood->img);
 	free(vetor->assets->wood);
+	mlx_destroy_image(vetor->mlx, vetor->assets->compass->img);
 	free(vetor->assets->compass);
-	free(vetor->assets->map);
+	mlx_destroy_image(vetor->mlx, vetor->assets->monster->img);
 	free(vetor->assets->monster);
+	mlx_destroy_image(vetor->mlx, vetor->assets->boat->img);
 	free(vetor->assets->boat);
 }
+
+
 
 void	final_cleaner(t_vars *vars, int assets)
 {
@@ -41,6 +41,7 @@ void	final_cleaner(t_vars *vars, int assets)
 		i++;
 	}
 	free(vars->map);
+	printf("assets %d\n", assets);
 	if (assets == 1)
 	{
 		assets_cleaner(vars);
@@ -50,6 +51,7 @@ void	final_cleaner(t_vars *vars, int assets)
 	}
 	else if (assets == 2)
 	{
+		assets_cleaner(vars);
 		mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);

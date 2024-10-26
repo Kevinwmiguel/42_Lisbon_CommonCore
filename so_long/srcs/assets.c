@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:22:50 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/13 22:26:35 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/26 21:20:52 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	map_xloop(t_vars *vars, int x1, int y1, int map_y)
 	map_x = 0;
 	if (vars->map[map_y] == NULL)
 	{
-		final_cleaner(vars, 1);
+		checksss(vars);
 		exit (1);
 	}
 	while (vars->win_w > 0)
@@ -32,7 +32,6 @@ int	map_xloop(t_vars *vars, int x1, int y1, int map_y)
 	x1 = (map_x * 32);
 	return (x1);
 }
-
 
 t_imgs	*new_file_img(char *path, void *mlx, void *window)
 {
@@ -78,6 +77,7 @@ void	assets_initiator(t_vars *v)
 	v->assets->boat = new_file_img("assets/textures/barco.xpm", v->mlx, v->win);
 	v->assets->monster = new_file_img("assets/textures/monster.xpm", v->mlx, v->win);
 }
+
 void	put_img_to_img(t_imgs *dst, t_imgs *src, int x, int y)
 {
 	int	i;

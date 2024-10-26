@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/13 22:15:05 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/26 22:18:55 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	put_image_to_map(char p, int x1, int y1, t_vars *v)
 		v->x_p = x1;
 		mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, x1, y1);
 	}
-	// Problema em monster. Imagem não atribuida -- CRiar em gimp
 	else if (p == 'B')
 	{
 		mlx_put_image_to_window(v->mlx, v->win, v->assets->monster->img, x1, y1);
@@ -81,29 +80,7 @@ char	*linear(int fd, char *line, char *ml)
 	return (ml);
 }
 
-char	**load_map2(char *mapfile, t_vars *vars)
-{
-	int		fd;
-	char	*line;
-	char	**splits;
-	char	*mapll;
 
-	line = "";
-	mapll = ft_strdup("");
-	fd = open(mapfile, O_RDONLY);
-	if (fd < 0)
-	{
-		f_error(mapll);
-		free(mapll);
-	}
-	mapll = linear(fd, line, mapll);
-	close(fd);
-	if (!mapll)
-		fmessage_error(vars, 0);
-	splits = ft_split(mapll, '\n');
-	free(mapll);
-	return (splits);
-}
 void	load_map(t_vars *vars, char **argv)
 {
 	int	map_y;
@@ -162,7 +139,7 @@ void	init_vars(t_vars *vars)
 	if (vars->map[0] == NULL)
 	{
 		write(1, "ERROR in map\n", 13);
-		final_cleaner(vars, 0);
+		final_cleaner(vars, 1);
 		exit(1);
 	}
 	vars->win_w = ft_strlen(vars->map[0]);
@@ -194,7 +171,7 @@ int	main(int argc, char **argv)
 		check_map_valid(&vars);
 		// Inicializa a conexão com o MiniLibX
 		vars.mlx = mlx_init();
-		vars.win = mlx_new_window(vars.mlx, vars.win_w * 32, vars.win_h * 32, "so_long");
+		vars.win = mlx_new_window(vars.mlx, vars.win_w * 32, vars.win_h * 32, "So_long");
 		// Carregar o mapa
 		load_map(&vars, argv);
 		mlx_string_put(vars.mlx, vars.win, 5, 10, 0xffffff, "Move: 0");

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/11 22:56:23 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/26 22:03:37 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_assets
 	t_imgs	*character;
 	t_imgs	*boat;
 	t_imgs	*compass;
-	t_imgs	*map;
 	t_imgs	*wood;
 	t_imgs	*monster;
 }	t_assets;
@@ -116,7 +115,7 @@ int		map_xloop(t_vars *vars, int x1, int y1, int map_y);
 void	exit_verifier(t_vars *v, int xy, int vet);
 void	exit_door(t_vars *v);
 void	put_text(t_vars *v);
-void	you_died(t_vars *v, int xy, int vet);
+void	you_died(t_vars *v);
 void	move_idk(t_vars *v);
 
 void	move_up(t_vars *v);
@@ -126,4 +125,6 @@ void	move_left(t_vars *v);
 void	collected(t_vars *v);
 
 char	*ft_join_strings(char *s1, char *s2);
+
+void	checksss(t_vars *vetor);
 #endif

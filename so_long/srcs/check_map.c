@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/13 22:21:43 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/10/26 21:31:42 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ char	wrongElementals(t_vars *vetor)
 	free(vetor->map);
 	ft_printf("Wrong element stupid");
 	exit(1);
+}
+
+void	checksss(t_vars *vetor)
+{
+	int	x;
+
+	x = 0;
+	while (vetor->map[x])
+	{
+		free(vetor->map[x]);
+		x++;
+	}
+	free(vetor->map);
+	return ;
 }
 
 t_map	map_check_initiatializer(t_vars *vars, t_map map)
