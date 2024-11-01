@@ -47,18 +47,18 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// int main()
-// {
-//     int fd;
-//     char *line;
-//     fd = open("archive.txt", O_RDONLY);
-//     if (fd == -1)
-//     {
-//         write(1, "error", 5);
-//         return (1);
-//     }
-//     line = get_next_line(fd);
-//     printf("%s", line);
-//     close(fd);
-//     return (0);
-// }
+int main()
+{
+    int fd;
+    char *line;
+    fd = open("archive.txt", O_RDONLY);
+    if (fd == -1)
+    {
+        write(1, "error", 5);
+        return (1);
+    }
+    line = get_next_line(fd);
+    printf("%s", line);
+    close(fd);
+    return (0);
+}

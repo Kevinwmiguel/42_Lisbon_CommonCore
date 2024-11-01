@@ -81,7 +81,7 @@ typedef struct s_map
 
 void	check_file_is_valid(char *file_line);
 int		find(char *str, char *to_find);
-void	fmessage_error(t_vars *vars, int assets);
+void	fmessage_error(t_vars *vars);
 void	f_error(char *file);
 void	final_cleaner(t_vars *vars, int assets);
 int		get_height(char **map);

@@ -145,6 +145,7 @@ void	init_vars(t_vars *vars)
 	vars->win_w = ft_strlen(vars->map[0]);
 	vars->win_h = get_height(vars->map);
 }
+
 int	ft_exit(t_vars *vars)
 {
 	final_cleaner(vars, 1);
@@ -165,14 +166,10 @@ int	main(int argc, char **argv)
 	vars.map = get_map(argv[1], &vars);
 	if (vars.map != NULL)
 	{
-		//inicia os valores recebendo tudo e atribuindo valores
 		init_vars(&vars);
-		//checa o mapa
 		check_map_valid(&vars);
-		// Inicializa a conexão com o MiniLibX
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, vars.win_w * 32, vars.win_h * 32, "So_long");
-		// Carregar o mapa
 		load_map(&vars, argv);
 		mlx_string_put(vars.mlx, vars.win, 5, 10, 0xffffff, "Move: 0");
 		mlx_hook(vars.win, 2, (1L << 0), key_hook, &vars);

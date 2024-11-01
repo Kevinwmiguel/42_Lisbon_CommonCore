@@ -22,11 +22,11 @@ char	**get_map(char *fmap, t_vars *vars)
 	all_lines = ft_strdup("");
 	fd = open(fmap, O_RDONLY);
 	if (fd < 0)
-		fmessage_error(vars, 0);
+		fmessage_error(vars);
 	all_lines = linear(fd, line, all_lines);
 	close(fd);
 	if (!all_lines)
-		fmessage_error(vars, 0);
+		fmessage_error(vars);
 	return (ft_split(all_lines, '\n'));
 }
 
@@ -45,7 +45,7 @@ int	check_c(t_vars *vars)
 			if (vars->map[i][n - 1] == 'C')
 			{
 				ft_printf("YOU IDIOT!");
-				final_cleaner(vars, 2);
+				final_cleaner(vars, 1);
 				exit(1);
 			}
 		}
@@ -70,7 +70,7 @@ int	check_e(t_vars *vars)
 			if (vars->map[i][n] == 'E')
 			{
 				ft_printf("YOU IDIOT!");
-				final_cleaner(vars, 2);
+				final_cleaner(vars, 1);
 				exit(1);
 			}
 		}

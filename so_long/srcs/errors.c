@@ -12,10 +12,10 @@
 
 #include "so_long.h"
 
-void	fmessage_error(t_vars *vars, int assets)
+void	fmessage_error(t_vars *vars)
 {
 	ft_printf("Error");
-	final_cleaner(vars, assets);
+	final_cleaner(vars, 0);
 	exit(0);
 }
 

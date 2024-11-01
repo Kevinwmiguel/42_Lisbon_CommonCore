@@ -69,7 +69,6 @@ void	put_text(t_vars *v)
 void	you_died(t_vars *v)
 {
 	ft_printf("You died\n");
-	printf("coletaveis %d\n", v->collect);
 	exit_door(v);
 }
 
