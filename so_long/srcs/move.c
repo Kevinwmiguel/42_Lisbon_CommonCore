@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:58:41 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/26 22:14:26 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 15:10:20 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,7 @@ void	move_right(t_vars *v)
 	if (v->map[(v->y_p / 32)][(v->x_p / 32)] == 'B')
 		you_died(v);
 	v->left = 0;
-	if (v->existscompass == 1 && v->compass == 0)
-		mlx_put_image_to_window(v->mlx, v->win,
-			v->assets->character->img,
-			v->x_p, v->y_p);
-	else
-		mlx_put_image_to_window(v->mlx, v->win,
-			v->assets->character->img,
-			v->x_p, v->y_p);
+	mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, v->x_p, v->y_p);
 }
 
 void	move_up(t_vars *v)

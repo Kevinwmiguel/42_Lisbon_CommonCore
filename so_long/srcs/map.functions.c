@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:58:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/26 22:08:15 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 14:44:54 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ char	**get_map(char *fmap, t_vars *vars)
 	close(fd);
 	if (!all_lines)
 		fmessage_error(vars);
-	return (ft_split(all_lines, '\n'));
+	char **result = ft_split(all_lines, '\n');
+	free(all_lines);
+	return (result);
 }
 
 int	check_c(t_vars *vars)

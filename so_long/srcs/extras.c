@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:11:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/26 22:16:09 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 15:02:54 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ void	put_text(t_vars *v)
 
 	number = ft_itoa(++(v)->movements);
 	text = ft_join_strings("Move: ", number);
-	v->img_wall = mlx_xpm_file_to_image(
-			v->mlx, "assets/textures/agua.xpm", &img_w, &img_h);
+	if (v->img_wall)
+		mlx_destroy_image(v->mlx, v->img_wall);
+	v->img_wall = mlx_xpm_file_to_image(v->mlx, "assets/textures/agua.xpm", &img_w, &img_h);
 	mlx_put_image_to_window(
 		v->mlx, v->win, v->assets->water->img, 0, 0);
 	mlx_put_image_to_window(

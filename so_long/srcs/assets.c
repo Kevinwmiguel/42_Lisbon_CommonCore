@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:22:50 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/26 21:20:52 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 14:08:56 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_imgs	*new_file_img(char *path, void *mlx, void *window)
 	t_imgs	*image;
 
 	image = (t_imgs *)malloc(sizeof(t_imgs));
-	image->win = window;
+	image->win2 = window;
 	image->img = mlx_xpm_file_to_image(mlx, path, &image->width,
 			&image->height);
 	if (!image->img)

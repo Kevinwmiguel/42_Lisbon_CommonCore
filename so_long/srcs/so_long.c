@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/26 22:18:55 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 14:36:09 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	put_image_to_map(char p, int x1, int y1, t_vars *v)
 	else if (p == 'B')
 	{
 		mlx_put_image_to_window(v->mlx, v->win, v->assets->monster->img, x1, y1);
-		// v->compass++;
-		// v->existscompass++;
 	}
 	else
 		mlx_put_image_to_window(v->mlx, v->win, v->assets->wood->img, x1, y1);
@@ -150,7 +148,6 @@ int	ft_exit(t_vars *vars)
 {
 	final_cleaner(vars, 1);
 	exit(1);
-	return (0);
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/26 22:03:37 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 14:08:28 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_imgs
 	int		height;
 	int		line_len;
 	int		width;
-	void	*win;
+	void	*win2;
 	void	*img;
 }				t_imgs;
 
