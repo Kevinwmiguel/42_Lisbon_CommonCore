@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:11:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 15:02:54 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:43:57 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	exit_verifier(t_vars *v, int xy, int vet)
 	}
 }
 
-void	exit_door(t_vars *v)
+void	exit_door(t_vars *vars)
 {
-	final_cleaner(v, 1);
+	final_cleaner(vars, 1);
 	exit(1);
 }
 
@@ -49,18 +49,17 @@ void	put_text(t_vars *v)
 	int		img_h;
 	char	*text;
 	char	*number;
+	char	*path;
 
+	path = "assets/textures/agua.xpm";
 	number = ft_itoa(++(v)->movements);
 	text = ft_join_strings("Move: ", number);
 	if (v->img_wall)
 		mlx_destroy_image(v->mlx, v->img_wall);
-	v->img_wall = mlx_xpm_file_to_image(v->mlx, "assets/textures/agua.xpm", &img_w, &img_h);
-	mlx_put_image_to_window(
-		v->mlx, v->win, v->assets->water->img, 0, 0);
-	mlx_put_image_to_window(
-		v->mlx, v->win, v->assets->water->img, 32, 0);
-	mlx_put_image_to_window(
-		v->mlx, v->win, v->assets->water->img, 32 * 2, 0);
+	v->img_wall = mlx_xpm_file_to_image(v->mlx, path, &img_w, &img_h);
+	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 0, 0);
+	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 32, 0);
+	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 32 * 2, 0);
 	mlx_string_put(v->mlx, v->win, 5, 10, 0xfffffff, text);
 	ft_printf("%s\n", number);
 	free(text);

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 14:36:09 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/03 20:01:26 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ void	init_vars(t_vars *vars)
 	vars->compass = 0;
 	vars->existscompass = 0;
 	vars->movements = 0;
+	vars->img_wall = NULL;  // Garante que img_wall esteja NULL no início
+	vars->img_floor = NULL; // Idem para img_floor
 	if (vars->map[0] == NULL)
 	{
 		write(1, "ERROR in map\n", 13);
@@ -163,8 +165,8 @@ int	main(int argc, char **argv)
 	vars.map = get_map(argv[1], &vars);
 	if (vars.map != NULL)
 	{
-		init_vars(&vars);
 		check_map_valid(&vars);
+		init_vars(&vars);
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, vars.win_w * 32, vars.win_h * 32, "So_long");
 		load_map(&vars, argv);

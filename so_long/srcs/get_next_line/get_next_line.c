@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 23:40:23 by kwillian          #+#    #+#             */
-/*   Updated: 2024/05/10 06:36:03 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/03 20:01:30 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,29 @@ char	*get_next_line(int fd)
 	line = NULL;
 	while (buffer[0] || (read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		line = ft_strjoin(line, buffer);
+		line = ft_strjoin2(line, buffer);
 		if (freefunc(buffer))
 			break ;
 	}
 	return (line);
 }
 
-// int main()
+// int	main()
 // {
-//     int fd;
-//     char *line;
-//     fd = open("archive.txt", O_RDONLY);
-//     if (fd == -1)
-//     {
-//         write(1, "error", 5);
-//         return (1);
-//     }
-//     line = get_next_line(fd);
-//     printf("%s", line);
-//     close(fd);
-//     return (0);
+// 	int		fd;
+// 	char	*line;
+
+// 	fd = open("archive.txt", O_RDONLY);
+// 	if (fd == -1)
+// 	{
+// 		write(1, "error", 5);
+// 		return (1);
+// 	}
+// 	while ((line = get_next_line(fd)) != NULL)
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	close(fd);
+// 	return 0;
 // }

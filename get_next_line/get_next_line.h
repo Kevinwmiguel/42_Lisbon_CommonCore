@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmata-al <mmata-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 11:02:14 by mmata-al          #+#    #+#             */
-/*   Updated: 2024/03/23 11:03:27 by mmata-al         ###   ########.fr       */
+/*   Created: 2024/05/07 18:55:56 by kwillian          #+#    #+#             */
+/*   Updated: 2024/11/02 20:29:06 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 # define GET_NEXT_LINE_H
 
 # include <stdio.h>
+# include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 150
 # endif
 
 char	*get_next_line(int fd);
-size_t	ft_strlenn(char *s);
-char	*ftstrjoin(char *s1, char *s2);
-int		clean_buff(char *buf);
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin2(char *s1, char const *s2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 14:08:28 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 20:26:29 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "../All_libs/minilibx-linux/mlx.h"
-# include "./Lopie_Get_Next_Soda_13/get_next_line.h"
+# include "./get_next_line/get_next_line.h"
 # include <X11/keysym.h>
 # include "../All_libs/libft/libft.h"
 

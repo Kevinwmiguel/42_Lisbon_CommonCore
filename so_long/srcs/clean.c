@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:03:43 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 14:47:59 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:50:28 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	assets_cleaner(t_vars *vetor)
 	free(vetor->assets->boat);
 }
 
-
-
 void	final_cleaner(t_vars *vars, int assets)
 {
 	int	i;
@@ -46,34 +44,11 @@ void	final_cleaner(t_vars *vars, int assets)
 		assets_cleaner(vars);
 		if (vars->mlx && vars->win)
 		{
-			printf("hello");
 			mlx_destroy_window(vars->mlx, vars->win);
 			mlx_destroy_display(vars->mlx);
-		}
-		if (vars->mlx)	
 			free(vars->mlx);
-		vars->mlx = NULL;
-		//free(vars->img_wall);
-		if (vars->mlx != NULL)
-			printf("letters");
-		
+		}
 	}
-	// else if (assets == 2)
-	// {
-	// 	assets_cleaner(vars);
-	// 	if (vars->mlx && vars->win)
-	// 	{
-	// 		printf("hello2");
-	// 		mlx_destroy_window(vars->mlx, vars->win);
-	// 		mlx_destroy_display(vars->mlx);
-	// 	}
-	// 	if (vars->win)
-	// 		free(vars->win);
-	// 	if (vars->mlx)	
-	// 		free(vars->mlx);
-	// 	if (vars->mlx != NULL)
-	// 		printf("letters2");
-	// }
 }
 
 char	*ft_join_strings(char *s1, char *s2)

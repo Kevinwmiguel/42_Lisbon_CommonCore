@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:12:52 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/26 20:45:34 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:41:53 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ void	f_error(char *file)
 static char	*error_possibility(t_map *map)
 {
 	if (map->c == 0)
-		return ("Miss 'C'");
+		return ("Miss 'C'\n");
 	else if (map->p == 0)
-		return ("Miss 'P");
+		return ("Miss 'P\n");
 	else if (map->e == 0)
-		return ("Miss 'e");
+		return ("Miss 'e\n");
 	else if (map->p > 1)
-		return ("> 1 p");
+		return ("> 1 p\n");
 	else if (map->e)
-		return ("> 1 e");
+		return ("> 1 e\n");
 	else if (map->b)
-		return ("> 1 b");
-	return ("Missing Map");
+		return ("> 1 b\n");
+	return ("Missing Map\n");
 }
 
 void	check_elements(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/10/26 21:31:42 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:24:47 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,12 @@ static void	check_walls(t_vars *v)
 	char	*message;
 
 	message = "[ERROR] Not surrounded by walls";
-	if (check_line(v->map[0]))
+	
+	if (v->map[0] && check_line(v->map[0]))
 		ft_error(v, message);
 	i = get_height(v->map) - 1;
+	if (i < 0)
+		i = 0;
 	while (i)
 	{
 		if (v->map[i][0] != '1' ||
