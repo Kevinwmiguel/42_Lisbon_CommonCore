@@ -49,14 +49,12 @@ void	put_text(t_vars *v)
 	int		img_h;
 	char	*text;
 	char	*number;
-	char	*path;
 
-	path = "assets/textures/agua.xpm";
 	number = ft_itoa(++(v)->movements);
 	text = ft_join_strings("Move: ", number);
 	if (v->img_wall)
 		mlx_destroy_image(v->mlx, v->img_wall);
-	v->img_wall = mlx_xpm_file_to_image(v->mlx, path, &img_w, &img_h);
+	v->img_wall = mlx_xpm_file_to_image(v->mlx, "assets/textures/agua.xpm", &img_w, &img_h);
 	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 0, 0);
 	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 32, 0);
 	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 32 * 2, 0);
