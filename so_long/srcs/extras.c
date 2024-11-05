@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:11:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 22:43:57 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:46:11 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	put_text(t_vars *v)
 	text = ft_join_strings("Move: ", number);
 	if (v->img_wall)
 		mlx_destroy_image(v->mlx, v->img_wall);
-	v->img_wall = mlx_xpm_file_to_image(v->mlx, "assets/textures/agua.xpm", &img_w, &img_h);
+	v->img_wall = mlx_xpm_file_to_image(v->mlx, \
+		"assets/textures/agua.xpm", &img_w, &img_h);
 	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 0, 0);
 	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 32, 0);
 	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 32 * 2, 0);
@@ -62,12 +63,6 @@ void	put_text(t_vars *v)
 	ft_printf("%s\n", number);
 	free(text);
 	free(number);
-}
-
-void	you_died(t_vars *v)
-{
-	ft_printf("You died\n");
-	exit_door(v);
 }
 
 void	move_idk(t_vars *v)
@@ -85,8 +80,33 @@ void	move_idk(t_vars *v)
 		mlx_put_image_to_window(v->mlx, v->win,
 			v->assets->character->img, v->x_p, v->y_p);
 		if (v->existscompass == 1 && v->compass == 0)
-			mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, v->x_p, v->y_p);
+			mlx_put_image_to_window(v->mlx, v->win,
+				v->assets->character->img, v->x_p, v->y_p);
 	}
 	else
-		mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, v->x_p, v->y_p);
+		mlx_put_image_to_window(v->mlx, v->win,
+			v->assets->character->img, v->x_p, v->y_p);
+}
+
+char	*ft_join_strings(char *s1, char *s2)
+{
+	unsigned int	s1_len;
+	unsigned int	s2_len;
+	unsigned int	i;
+	char			*ptr;
+
+	if (!s1)
+		return (0);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	ptr = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (s1_len-- != 0)
+		ptr[i++] = *s1++;
+	while (s2_len-- != 0)
+		ptr[i++] = *s2++;
+	ptr[i] = '\0';
+	return (ptr);
 }

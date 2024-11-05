@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/03 20:01:26 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:37:06 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,14 @@
 #include <stdlib.h>
 #include "so_long.h"
 
-int	key_hook(int keycode, t_vars *vars)
-{
-	if (keycode == XK_d)
-		move_right(vars);
-	else if (keycode == XK_a)
-		move_left(vars);
-	else if (keycode == XK_w)
-		move_up(vars);
-	else if (keycode == XK_s)
-		move_down(vars);
-	else if (keycode == XK_Escape)
-	{
-		final_cleaner(vars, 1);
-		exit(1);
-	}
-	return (0);
-}
-
 void	put_image_to_map(char p, int x1, int y1, t_vars *v)
 {
 	if (p == '1')
 		mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, x1, y1);
 	else if (p == 'C')
 	{
-		mlx_put_image_to_window(v->mlx, v->win, v->assets->compass->img, x1, y1);
+		mlx_put_image_to_window(v->mlx, \
+			v->win, v->assets->compass->img, x1, y1);
 		v->collect++;
 	}
 	else if (p == 'E')
@@ -48,11 +31,13 @@ void	put_image_to_map(char p, int x1, int y1, t_vars *v)
 	{
 		v->y_p = y1;
 		v->x_p = x1;
-		mlx_put_image_to_window(v->mlx, v->win, v->assets->character->img, x1, y1);
+		mlx_put_image_to_window(v->mlx, v->win, \
+			v->assets->character->img, x1, y1);
 	}
 	else if (p == 'B')
 	{
-		mlx_put_image_to_window(v->mlx, v->win, v->assets->monster->img, x1, y1);
+		mlx_put_image_to_window(v->mlx, v->win, \
+			v->assets->monster->img, x1, y1);
 	}
 	else
 		mlx_put_image_to_window(v->mlx, v->win, v->assets->wood->img, x1, y1);
@@ -78,12 +63,11 @@ char	*linear(int fd, char *line, char *ml)
 	return (ml);
 }
 
-
 void	load_map(t_vars *vars, char **argv)
 {
 	int	map_y;
 	int	y1;
-	int backup_w;
+	int	backup_w;
 
 	map_y = 0;
 	y1 = 0;
@@ -99,16 +83,6 @@ void	load_map(t_vars *vars, char **argv)
 	}
 }
 
-int	map_height(char **map)
-{
-	int	height;
-
-	height = 0;
-	while (map[height])
-		height++;
-	return (height);
-}
-
 int	count_map_lines(char *file)
 {
 	int		fd;
@@ -119,40 +93,18 @@ int	count_map_lines(char *file)
 	if (fd < 0)
 		return (-1);
 	line_count = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		free(line);
 		line_count++;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (line_count);
 }
 
-void	init_vars(t_vars *vars)
-{
-	vars->collect = 0;
-	vars->compass = 0;
-	vars->existscompass = 0;
-	vars->movements = 0;
-	vars->img_wall = NULL;  // Garante que img_wall esteja NULL no início
-	vars->img_floor = NULL; // Idem para img_floor
-	if (vars->map[0] == NULL)
-	{
-		write(1, "ERROR in map\n", 13);
-		final_cleaner(vars, 1);
-		exit(1);
-	}
-	vars->win_w = ft_strlen(vars->map[0]);
-	vars->win_h = get_height(vars->map);
-}
-
-int	ft_exit(t_vars *vars)
-{
-	final_cleaner(vars, 1);
-	exit(1);
-}
-
-int	main(int argc, char **argv)
+int	main(int argc, char *argv[])
 {
 	t_vars	vars;
 
@@ -168,7 +120,8 @@ int	main(int argc, char **argv)
 		check_map_valid(&vars);
 		init_vars(&vars);
 		vars.mlx = mlx_init();
-		vars.win = mlx_new_window(vars.mlx, vars.win_w * 32, vars.win_h * 32, "So_long");
+		vars.win = mlx_new_window(vars.mlx, \
+				vars.win_w * 32, vars.win_h * 32, "So_long");
 		load_map(&vars, argv);
 		mlx_string_put(vars.mlx, vars.win, 5, 10, 0xffffff, "Move: 0");
 		mlx_hook(vars.win, 2, (1L << 0), key_hook, &vars);

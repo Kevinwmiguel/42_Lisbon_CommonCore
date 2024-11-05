@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/05 21:11:57 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 22:08:18 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,7 @@ void	invisible_door(t_vars *v, int x1, int y1)
 	v->e_y = y1;
 }
 
-void	ft_error(t_vars *vars, char *message)
-{
-	int	x;
-
-	x = 0;
-	while (vars->map[x])
-	{
-		free(vars->map[x]);
-		x++;
-	}
-	free (vars->map);
-	ft_printf("%s", message);
-	exit (1);
-}
-
-static void	check_is_rectangular(t_vars *vars)
+void	check_is_rectangular(t_vars *vars)
 {
 	int	map_x;
 	int	map_y;
@@ -87,7 +72,7 @@ static void	check_is_rectangular(t_vars *vars)
 	}
 }
 
-static int	check_line(char *line)
+int	check_line(char *line)
 {
 	int	i;
 
@@ -101,13 +86,12 @@ static int	check_line(char *line)
 	return (0);
 }
 
-static void	check_walls(t_vars *v)
+void	check_walls(t_vars *v)
 {
 	int		i;
 	char	*message;
 
 	message = "[ERROR] Not surrounded by walls";
-	
 	if (v->map[0] && check_line(v->map[0]))
 		ft_error(v, message);
 	i = get_height(v->map) - 1;
@@ -124,21 +108,4 @@ static void	check_walls(t_vars *v)
 	{
 		ft_error(v, message);
 	}
-}
-
-void	check_map_valid(t_vars *vars)
-{
-	check_is_rectangular(vars);
-	check_walls(vars);
-	check_elements(vars);
-}
-
-int	get_height(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i] != NULL)
-		i++;
-	return (i);
 }

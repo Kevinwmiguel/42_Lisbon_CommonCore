@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/05 21:13:48 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 22:05:13 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,10 @@ void			move_down(t_vars *v);
 void			move_left(t_vars *v);
 void			collected(t_vars *v);
 char			*ft_join_strings(char *s1, char *s2);
+int				ft_exit(t_vars *vars);
+int				key_hook(int keycode, t_vars *vars);
+void			collected(t_vars *v);
+void			check_walls(t_vars *v);
+int				check_line(char *line);
+void			check_is_rectangular(t_vars *vars);
 #endif

@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 16:10:05 by kwillian          #+#    #+#              #
-#    Updated: 2024/11/02 20:30:09 by kwillian         ###   ########.fr        #
+#    Updated: 2024/11/05 21:53:49 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRCS 	=	./srcs/get_next_line/get_next_line_utils.c \
 			$(SRC_DIR)check_file.c $(SRC_DIR)map.functions.c \
 			$(SRC_DIR)assets.c $(SRC_DIR)clean.c \
 			$(SRC_DIR)errors.c $(SRC_DIR)extras.c \
-			$(SRC_DIR)move.c
+			$(SRC_DIR)move.c $(SRC_DIR)extras2.c
 
 all: $(NAME)
 

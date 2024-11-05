@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:58:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 22:14:10 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 22:04:29 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	**get_map(char *fmap, t_vars *vars)
 	char	*line;
 	char	*all_lines;
 	int		fd;
+	char	**result;
 
 	line = "";
 	all_lines = ft_strdup("");
@@ -27,59 +28,9 @@ char	**get_map(char *fmap, t_vars *vars)
 	close(fd);
 	if (!all_lines)
 		fmessage_error(vars);
-	char **result = ft_split(all_lines, '\n');
+	result = ft_split(all_lines, '\n');
 	free(all_lines);
 	return (result);
-}
-
-int	check_c(t_vars *vars)
-{
-	int	i;
-	int	n;
-
-	i = 0;
-	n = 0;
-	while (vars->map[i])
-	{
-		while (vars->map[i][n] != '\0' && vars->map[i][n] != '\n')
-		{
-			n++;
-			if (vars->map[i][n - 1] == 'C')
-			{
-				ft_printf("YOU IDIOT!");
-				final_cleaner(vars, 1);
-				exit(1);
-			}
-		}
-		n = 0;
-		i++;
-	}
-	return (1);
-}
-
-int	check_e(t_vars *vars)
-{
-	int	i;
-	int	n;
-
-	i = 0;
-	n = 0;
-	while (vars->map[i])
-	{
-		while (vars->map[i][n] != '\0' && vars->map[i][n] != '\n')
-		{
-			n++;
-			if (vars->map[i][n] == 'E')
-			{
-				ft_printf("YOU IDIOT!");
-				final_cleaner(vars, 1);
-				exit(1);
-			}
-		}
-		n = 0;
-		i++;
-	}
-	return (1);
 }
 
 void	flood_fill(char **map, int x, int y)
@@ -142,4 +93,14 @@ void	flood_checker(t_vars *vars, char **argv)
 	vars->map = get_map(argv[1], vars);
 	vars->assets = malloc(sizeof(t_assets));
 	assets_initiator(vars);
+}
+
+int	map_height(char **map)
+{
+	int	height;
+
+	height = 0;
+	while (map[height])
+		height++;
+	return (height);
 }

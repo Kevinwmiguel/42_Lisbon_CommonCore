@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:03:43 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 22:50:28 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:22:23 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,8 @@ void	final_cleaner(t_vars *vars, int assets)
 	}
 }
 
-char	*ft_join_strings(char *s1, char *s2)
+int	ft_exit(t_vars *vars)
 {
-	unsigned int	s1_len;
-	unsigned int	s2_len;
-	unsigned int	i;
-	char			*ptr;
-
-	if (!s1)
-		return (0);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	ptr = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (s1_len-- != 0)
-		ptr[i++] = *s1++;
-	while (s2_len-- != 0)
-		ptr[i++] = *s2++;
-	ptr[i] = '\0';
-	return (ptr);
+	final_cleaner(vars, 1);
+	exit(1);
 }
