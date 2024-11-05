@@ -6,26 +6,27 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:03:43 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/05 21:22:23 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 22:36:02 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	assets_cleaner(t_vars *vetor)
+void	assets_cleaner(t_vars *vars)
 {
-	mlx_destroy_image(vetor->mlx, vetor->assets->character->img);
-	free(vetor->assets->character);
-	mlx_destroy_image(vetor->mlx, vetor->assets->water->img);
-	free(vetor->assets->water);
-	mlx_destroy_image(vetor->mlx, vetor->assets->wood->img);
-	free(vetor->assets->wood);
-	mlx_destroy_image(vetor->mlx, vetor->assets->compass->img);
-	free(vetor->assets->compass);
-	mlx_destroy_image(vetor->mlx, vetor->assets->monster->img);
-	free(vetor->assets->monster);
-	mlx_destroy_image(vetor->mlx, vetor->assets->boat->img);
-	free(vetor->assets->boat);
+	mlx_destroy_image(vars->mlx, vars->assets->character->img);
+	free(vars->assets->character);
+	mlx_destroy_image(vars->mlx, vars->assets->water->img);
+	free(vars->assets->water);
+	mlx_destroy_image(vars->mlx, vars->assets->wood->img);
+	free(vars->assets->wood);
+	mlx_destroy_image(vars->mlx, vars->assets->compass->img);
+	free(vars->assets->compass);
+	mlx_destroy_image(vars->mlx, vars->assets->monster->img);
+	free(vars->assets->monster);
+	mlx_destroy_image(vars->mlx, vars->assets->boat->img);
+	free(vars->assets->boat);
+	free(vars->assets);
 }
 
 void	final_cleaner(t_vars *vars, int assets)

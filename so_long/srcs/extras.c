@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:11:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/05 21:46:11 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 23:05:57 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ void	exit_door(t_vars *vars)
 
 void	put_text(t_vars *v)
 {
-	int		img_w;
-	int		img_h;
+	// int		img_w;
+	// int		img_h;
 	char	*text;
 	char	*number;
 
 	number = ft_itoa(++(v)->movements);
 	text = ft_join_strings("Move: ", number);
-	if (v->img_wall)
-		mlx_destroy_image(v->mlx, v->img_wall);
-	v->img_wall = mlx_xpm_file_to_image(v->mlx, \
-		"assets/textures/agua.xpm", &img_w, &img_h);
+	// if (v->img_wall)
+	// 	mlx_destroy_image(v->mlx, v->img_wall);
+	// v->img_wall = mlx_xpm_file_to_image(v->mlx,
+	// 	"assets/textures/agua.xpm", &img_w, &img_h);
 	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 0, 0);
 	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 32, 0);
 	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, 32 * 2, 0);
