@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:12:52 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 22:41:53 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:07:38 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	check_elements(t_vars *vars)
 	map = map_check_initiatializer(vars, map);
 	if (map.b == 1)
 		vars->compass++;
-	if (map.e == 00 || map.p == 0 || map.c == 0 || map.p > 1 || map.b > 1 || map.e > 1)
+	if (map.e == 00 || map.p == 0 \
+		|| map.c == 0 || map.p > 1 || map.b > 1 || map.e > 1)
 		ft_error(vars, error_possibility(&map));
 }

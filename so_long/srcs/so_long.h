@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 20:26:29 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:13:48 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,25 @@ typedef struct s_assets
 
 typedef struct s_vars
 {
-	void	*mlx;
-	void	*win;
-	void	*img_wall;
-	void	*img_floor;
-	int		img_width;
-	int		img_height;
-	char	**map;
-	int		win_w;
-	int		win_h;
-	int		left;
+	void			*mlx;
+	void			*win;
+	void			*img_wall;
+	void			*img_floor;
+	int				img_width;
+	int				img_height;
+	char			**map;
+	int				win_w;
+	int				win_h;
+	int				left;
 	int				e_x;
 	int				e_y;
-	t_assets *assets;
-	int		collect;   // Quantidade de colecionáveis
-	int		compass;   // Quantidade da bussola ?
-	int		existscompass;
-	int		movements;
-	int		x_p;       // Posição X do personagem
-	int		y_p;       // Posição Y do personagem
+	int				collect;
+	int				compass;
+	int				existscompass;
+	int				movements;
+	int				x_p;
+	int				y_p;
+	t_assets		*assets;
 }	t_vars;
 
 typedef struct s_map
@@ -79,52 +79,43 @@ typedef struct s_map
 	int	b; // monster
 }	t_map;
 
-void	check_file_is_valid(char *file_line);
-int		find(char *str, char *to_find);
-void	fmessage_error(t_vars *vars);
-void	f_error(char *file);
-void	final_cleaner(t_vars *vars, int assets);
-int		get_height(char **map);
-t_map	map_check_initiatializer(t_vars *vars, t_map map);
-
-void	check_map_valid(t_vars *vars);
-void	check_elements(t_vars *vars);
-void	ft_error(t_vars *vars, char *message);
-void	init_vars(t_vars *vars);
-char	*linear(int fd, char *line, char *ml);
-
-void	flood_checker(t_vars *vars, char **argv);
-void	get_player(t_vars *vars);
-int	check_e(t_vars *vars);
-int	check_c(t_vars *vars);
-char	**get_map(char *fmap, t_vars *vars);
-void	flood_fill(char **map, int x, int y);
-void	assets_initiator(t_vars *v);
-void	assets_cleaner(t_vars *vetor);
-void	put_pixel_img(t_imgs *img, int x, int y, int color);
-void	put_image_to_map(char p, int x1, int y1, t_vars *v);
-void	put_img_to_img(t_imgs *dst, t_imgs *src, int x, int y);
-
+void			check_file_is_valid(char *file_line);
+int				find(char *str, char *to_find);
+void			fmessage_error(t_vars *vars);
+void			f_error(char *file);
+void			final_cleaner(t_vars *vars, int assets);
+int				get_height(char **map);
+t_map			map_check_initiatializer(t_vars *vars, t_map map);
+void			check_map_valid(t_vars *vars);
+void			check_elements(t_vars *vars);
+void			ft_error(t_vars *vars, char *message);
+void			init_vars(t_vars *vars);
+char			*linear(int fd, char *line, char *ml);
+void			flood_checker(t_vars *vars, char **argv);
+void			get_player(t_vars *vars);
+int				check_e(t_vars *vars);
+int				check_c(t_vars *vars);
+char			**get_map(char *fmap, t_vars *vars);
+void			flood_fill(char **map, int x, int y);
+void			assets_initiator(t_vars *v);
+void			assets_cleaner(t_vars *vetor);
+void			put_pixel_img(t_imgs *img, int x, int y, int color);
+void			put_image_to_map(char p, int x1, int y1, t_vars *v);
+void			put_img_to_img(t_imgs *dst, t_imgs *src, int x, int y);
 unsigned int	get_pixel_img(t_imgs *img, int x, int y);
-t_imgs	*new_file_img(char *path, void *mlx, void *window);
-
-void	invisible_door(t_vars *v, int x1, int y1);
-
-char	**load_map2(char *mapfile, t_vars *vars);
-int		map_xloop(t_vars *vars, int x1, int y1, int map_y);
-void	exit_verifier(t_vars *v, int xy, int vet);
-void	exit_door(t_vars *v);
-void	put_text(t_vars *v);
-void	you_died(t_vars *v);
-void	move_idk(t_vars *v);
-
-void	move_up(t_vars *v);
-void	move_right(t_vars *v);
-void	move_down(t_vars *v);
-void	move_left(t_vars *v);
-void	collected(t_vars *v);
-
-char	*ft_join_strings(char *s1, char *s2);
-
-void	checksss(t_vars *vetor);
+t_imgs			*new_file_img(char *path, void *mlx, void *window);
+void			invisible_door(t_vars *v, int x1, int y1);
+char			**load_map2(char *mapfile, t_vars *vars);
+int				map_xloop(t_vars *vars, int x1, int y1, int map_y);
+void			exit_verifier(t_vars *v, int xy, int vet);
+void			exit_door(t_vars *v);
+void			put_text(t_vars *v);
+void			you_died(t_vars *v);
+void			move_idk(t_vars *v);
+void			move_up(t_vars *v);
+void			move_right(t_vars *v);
+void			move_down(t_vars *v);
+void			move_left(t_vars *v);
+void			collected(t_vars *v);
+char			*ft_join_strings(char *s1, char *s2);
 #endif

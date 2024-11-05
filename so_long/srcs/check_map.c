@@ -6,40 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 22:24:47 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:11:57 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-char	wrongElementals(t_vars *vetor)
-{
-	int	x;
-
-	x = 0;
-	while (vetor->map[x])
-	{
-		free(vetor->map[x]);
-		x++;
-	}
-	free(vetor->map);
-	ft_printf("Wrong element stupid");
-	exit(1);
-}
-
-void	checksss(t_vars *vetor)
-{
-	int	x;
-
-	x = 0;
-	while (vetor->map[x])
-	{
-		free(vetor->map[x]);
-		x++;
-	}
-	free(vetor->map);
-	return ;
-}
 
 t_map	map_check_initiatializer(t_vars *vars, t_map map)
 {
@@ -61,7 +32,7 @@ t_map	map_check_initiatializer(t_vars *vars, t_map map)
 						&& vars->map[map.y][map.x] != '0' \
 						&& vars->map[map.y][map.x] != '\n' \
 						&& vars->map[map.y][map.x] != '\0')
-				wrongElementals(vars);
+				ft_error(vars, "Wrong Element stupid");
 			map.x++;
 		}
 	}
