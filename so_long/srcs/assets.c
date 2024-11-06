@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:22:50 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/05 22:37:56 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/06 00:27:35 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void	assets_initiator(t_vars *v)
 	v->assets->compass = new_file_img("assets/textures/mapa.xpm", \
 		v->mlx, v->win);
 	v->assets->boat = new_file_img("assets/textures/barco.xpm", v->mlx, v->win);
-	v->assets->monster = new_file_img("assets/textures/monster.xpm", \
+	v->assets->monster = new_file_img("assets/textures/mermaid.xpm", \
 		v->mlx, v->win);
 }
