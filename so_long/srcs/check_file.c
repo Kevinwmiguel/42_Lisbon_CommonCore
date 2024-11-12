@@ -60,7 +60,7 @@ int	check_c(t_vars *vars)
 			if (vars->map[i][n - 1] == 'C')
 			{
 				ft_printf("YOU IDIOT!");
-				final_cleaner(vars, 1);
+				final_cleaner(vars, 0);
 				exit(1);
 			}
 		}
@@ -85,7 +85,7 @@ int	check_e(t_vars *vars)
 			if (vars->map[i][n] == 'E')
 			{
 				ft_printf("YOU IDIOT!");
-				final_cleaner(vars, 1);
+				final_cleaner(vars, 0);
 				exit(1);
 			}
 		}

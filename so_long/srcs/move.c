@@ -17,7 +17,7 @@ void	move_left(t_vars *v)
 	mlx_put_image_to_window(
 		v->mlx, v->win, v->assets->wood->img, v->x_p, v->y_p);
 	if (v->map[(v->y_p / 32)][(v->x_p / 32) - 1] == 'E')
-		exit_verifier(v, 0, 1);
+		exit_verifier(v, 0, -1);
 	else if (v->map[(v->y_p / 32)][(v->x_p / 32) - 1] != '1')
 	{
 		v->x_p -= 32;
@@ -43,7 +43,7 @@ void	move_right(t_vars *v)
 	mlx_put_image_to_window(v->mlx, v->win, \
 		v->assets->wood->img, v->x_p, v->y_p);
 	if (v->map[(v->y_p / 32)][(v->x_p / 32) + 1] == 'E')
-		exit_verifier(v, 0, 1);
+		exit_verifier(v, 0, -1);
 	else if (v->map[(v->y_p / 32)][(v->x_p / 32) + 1] != '1')
 	{
 		v->x_p += 32;
@@ -63,7 +63,7 @@ void	move_up(t_vars *v)
 	mlx_put_image_to_window(v->mlx, v->win,
 		v->assets->wood->img, v->x_p, v->y_p);
 	if ((v)->map[((v)->y_p / 32) - 1][((v)->x_p / 32)] == 'E')
-		exit_verifier(v, 1, 0);
+		exit_verifier(v, 1, -1);
 	else if ((v)->map[((v)->y_p / 32) - 1][((v)->x_p / 32)] != '1')
 	{
 		(v)->y_p -= 32;
@@ -77,7 +77,7 @@ void	move_down(t_vars *v)
 	mlx_put_image_to_window(v->mlx, v->win,
 		v->assets->wood->img, v->x_p, v->y_p);
 	if (v->map[(v->y_p / 32) + 1][(v->x_p / 32)] == 'E')
-		exit_verifier(v, 1, 1);
+		exit_verifier(v, 1, -1);
 	else if (v->map[(v->y_p / 32) + 1][(v->x_p / 32)] != '1')
 	{
 		v->y_p += 32;
