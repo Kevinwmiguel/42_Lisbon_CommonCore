@@ -114,7 +114,9 @@ int	main(int argc, char *argv[])
 		exit(1);
 	}
 	check_file_is_valid(argv[1]);
+	
 	vars.map = get_map(argv[1], &vars);
+	
 	if (vars.map != NULL)
 	{
 		check_map_valid(&vars);

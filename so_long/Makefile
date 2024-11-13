@@ -45,7 +45,7 @@ $(MLX):
 	$(MAKE) -C $(MLX_DIR)
 
 $(LIBFT):
-	@make -C $(LIBFT_PATH) all
+	make -s -C $(LIBFT_PATH)
 
 $(OBJ_DIR)/%.o: srcs/%.c
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "../All_libs/minilibx-linux/mlx.h"
+//# include "get_next_line_miguel/get_next_line.h"
 # include "./get_next_line/get_next_line.h"
 # include <X11/keysym.h>
 # include "../All_libs/libft/libft.h"
