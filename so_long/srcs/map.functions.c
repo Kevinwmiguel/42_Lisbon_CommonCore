@@ -33,6 +33,36 @@ char	**get_map(char *fmap, t_vars *vars)
 	return (result);
 }
 
+// int	checker_way_out(char **map, int x, int y, t_vars *vars)
+// {
+// 	int accessible;
+
+// 	accessible = 0;
+// 	while (map[y])
+// 	{
+// 		x = 0;
+// 		while (map[y][x])
+// 		{
+// 			if (map[y][x] == 'C')
+// 			{
+// 				// Verifica se há pelo menos um caminho livre adjacente
+// 				if ((y > 0 && (map[y - 1][x] == '0' || map[y - 1][x] == 'C')) || // Acima
+// 					(map[y + 1] && (map[y + 1][x] == '0' || map[y + 1][x] == 'C')) || // Abaixo
+// 					(x > 0 && (map[y][x - 1] == '0' || map[y][x - 1] == 'C')) || // Esquerda
+// 					(map[y][x + 1] && (map[y][x + 1] == '0' || map[y][x + 1] == 'C'))) // Direita
+// 				{
+// 					accessible = 1;
+// 				}
+// 				else
+// 					return (0); // Coletável isolado, retorna falso
+// 			}
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	return (accessible);
+// }
+
 void	flood_fill(char **map, int x, int y)
 {
 	int	w;
