@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:58:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/05 22:04:29 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:57:51 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,45 +23,48 @@ char	**get_map(char *fmap, t_vars *vars)
 	all_lines = ft_strdup("");
 	fd = open(fmap, O_RDONLY);
 	if (fd < 0)
-		fmessage_error(vars);
+	{
+		free(all_lines);
+		fmessage_error(vars, 4);
+	}
 	all_lines = linear(fd, line, all_lines);
 	close(fd);
 	if (!all_lines)
-		fmessage_error(vars);
+		fmessage_error(vars, 0);
 	result = ft_split(all_lines, '\n');
 	free(all_lines);
 	return (result);
 }
 
-// int	checker_way_out(char **map, int x, int y, t_vars *vars)
-// {
-// 	int accessible;
+int	checker_way_out(char **map, int x, int y)
+{
+	int	accessible;
 
-// 	accessible = 0;
-// 	while (map[y])
-// 	{
-// 		x = 0;
-// 		while (map[y][x])
-// 		{
-// 			if (map[y][x] == 'C')
-// 			{
-// 				// Verifica se há pelo menos um caminho livre adjacente
-// 				if ((y > 0 && (map[y - 1][x] == '0' || map[y - 1][x] == 'C')) || // Acima
-// 					(map[y + 1] && (map[y + 1][x] == '0' || map[y + 1][x] == 'C')) || // Abaixo
-// 					(x > 0 && (map[y][x - 1] == '0' || map[y][x - 1] == 'C')) || // Esquerda
-// 					(map[y][x + 1] && (map[y][x + 1] == '0' || map[y][x + 1] == 'C'))) // Direita
-// 				{
-// 					accessible = 1;
-// 				}
-// 				else
-// 					return (0); // Coletável isolado, retorna falso
-// 			}
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	return (accessible);
-// }
+	accessible = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'C')
+			{
+				
+				if ((y > 0 && (map[y - 1][x] == '0' || map[y - 1][x] == 'C')) ||
+					(map[y + 1] && (map[y + 1][x] == '0' || map[y + 1][x] == 'C')) ||
+					(x > 0 && (map[y][x - 1] == '0' || map[y][x - 1] == 'C')) ||
+					(map[y][x + 1] && (map[y][x + 1] == '0' || map[y][x + 1] == 'C')))
+				{
+					accessible = 1;
+				}
+				else
+					return (0);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (accessible);
+}
 
 void	flood_fill(char **map, int x, int y)
 {

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 23:40:23 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/03 20:01:30 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:04:12 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	*get_next_line(int fd)
 // {
 // 	int		fd;
 // 	char	*line;
-
 // 	fd = open("archive.txt", O_RDONLY);
 // 	if (fd == -1)
 // 	{

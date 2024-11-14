@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/05 22:08:18 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:10:22 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	check_is_rectangular(t_vars *vars)
 		if (backup != 0)
 		{
 			if (backup != map_x)
-				ft_error(vars, "Error");
+				ft_error(vars, "Error not retangular");
 		}
 		else
 			backup = map_x;

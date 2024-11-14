@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/05 22:05:13 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:50:24 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include <stdlib.h>
+# include <string.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -80,9 +81,9 @@ typedef struct s_map
 	int	b; // monster
 }	t_map;
 
-void			check_file_is_valid(char *file_line);
+int				check_file_is_valid(char *file_line);
 int				find(char *str, char *to_find);
-void			fmessage_error(t_vars *vars);
+void			fmessage_error(t_vars *vars, int n);
 void			f_error(char *file);
 void			final_cleaner(t_vars *vars, int assets);
 int				get_height(char **map);
@@ -125,4 +126,6 @@ void			collected(t_vars *v);
 void			check_walls(t_vars *v);
 int				check_line(char *line);
 void			check_is_rectangular(t_vars *vars);
+int				checker_way_out(char **map, int x, int y);
+
 #endif

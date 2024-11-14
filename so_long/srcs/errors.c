@@ -6,16 +6,17 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:12:52 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/05 22:08:29 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:03:45 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	fmessage_error(t_vars *vars)
+void	fmessage_error(t_vars *vars, int n)
 {
-	ft_printf("Error");
-	final_cleaner(vars, 0);
+	n = 9;
+	ft_printf("Error in map\n");
+	final_cleaner(vars, n);
 	exit(0);
 }
 
@@ -28,18 +29,18 @@ void	f_error(char *file)
 static char	*error_possibility(t_map *map)
 {
 	if (map->c == 0)
-		return ("Miss 'C'\n");
+		return ("Miss 'C'");
 	else if (map->p == 0)
-		return ("Miss 'P\n");
+		return ("Miss 'P'");
 	else if (map->e == 0)
-		return ("Miss 'e\n");
+		return ("Miss 'E'");
 	else if (map->p > 1)
-		return ("> 1 p\n");
+		return ("> 1 p");
 	else if (map->e)
-		return ("> 1 e\n");
+		return ("> 1 e");
 	else if (map->b)
-		return ("> 1 b\n");
-	return ("Missing Map\n");
+		return ("> 1 b");
+	return ("Missing Map");
 }
 
 void	check_elements(t_vars *vars)
@@ -70,6 +71,6 @@ void	ft_error(t_vars *vars, char *message)
 		x++;
 	}
 	free (vars->map);
-	ft_printf("%s", message);
+	ft_printf("%s\n", message);
 	exit (1);
 }

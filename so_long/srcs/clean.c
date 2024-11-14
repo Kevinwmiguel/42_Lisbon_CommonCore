@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:03:43 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/05 22:36:02 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:07:43 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,45 @@ void	assets_cleaner(t_vars *vars)
 	free(vars->assets);
 }
 
+// static void	free_map(t_vars *vars)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (vars->map && vars->map[i] != NULL)
+// 	{
+// 		free(vars->map[i]);
+// 		i++;
+// 	}
+// 	free(vars->map);
+// }
+
 void	final_cleaner(t_vars *vars, int assets)
 {
 	int	i;
 
 	i = 0;
-	while (vars->map && vars->map[i] != NULL)
+	if (assets == 4)
 	{
-		free(vars->map[i]);
-		i++;
+		while (vars->map && vars->map[i] != NULL)
+		{
+			free(vars->map[i]);
+			i++;
+		}
+		free(vars->map);
+		mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_display(vars->mlx);
+		free(vars->mlx);
+		return ;
 	}
-	free(vars->map);
 	if (assets == 1)
 	{
+		while (vars->map && vars->map[i] != NULL)
+		{
+			free(vars->map[i]);
+			i++;
+		}
+		free(vars->map);
 		assets_cleaner(vars);
 		if (vars->mlx && vars->win)
 		{
