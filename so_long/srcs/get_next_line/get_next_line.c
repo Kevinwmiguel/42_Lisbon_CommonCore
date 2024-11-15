@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 23:40:23 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/15 15:37:04 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:04:12 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,13 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	buffer[BUFFER_SIZE + 1];
-	int	i;
 
-	i = 0;
 	line = NULL;
 	while (buffer[0] || (read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		line = ft_strjoin(line, buffer);
+		line = ft_strjoin2(line, buffer);
 		if (freefunc(buffer))
 			break ;
-		i++;
 	}
 	return (line);
 }

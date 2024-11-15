@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:10:30 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/15 13:38:11 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/14 22:56:45 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_file_is_valid(char *file_line)
 	}
 	else
 	{
-		ft_printf("erro encontrado no nome do mapa\n");
+		ft_printf("erro encontrado no nome do mapa");
 		return (0);
 	}
 	return (1);

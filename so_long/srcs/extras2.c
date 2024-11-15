@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 21:45:18 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/15 14:39:26 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:40:35 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ int	get_height(char **map)
 
 	i = 0;
 	while (map[i] != NULL)
-	{
 		i++;
-	}
 	return (i);
 }
 
