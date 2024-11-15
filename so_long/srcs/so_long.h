@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/14 14:50:24 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:32:09 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct s_map
 }	t_map;
 
 int				check_file_is_valid(char *file_line);
-int				find(char *str, char *to_find);
 void			fmessage_error(t_vars *vars, int n);
 void			f_error(char *file);
 void			final_cleaner(t_vars *vars, int assets);
@@ -127,5 +126,6 @@ void			check_walls(t_vars *v);
 int				check_line(char *line);
 void			check_is_rectangular(t_vars *vars);
 int				checker_way_out(char **map, int x, int y);
-
+void			check_empty_line(char *file_path);
+int				check_nl(char *str);
 #endif

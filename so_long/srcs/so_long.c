@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/14 13:58:17 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:25:46 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int	main(int argc, char *argv[])
 		write(1, "ERROR\n", 6);
 		exit(1);
 	}
-	
 	if (!check_file_is_valid(argv[1]))
 		exit(1);
 	vars.map = get_map(argv[1], &vars);

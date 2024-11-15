@@ -6,46 +6,15 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:10:30 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/14 15:28:50 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:38:11 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	find(char *str, char *to_find)
-{
-	int	i;
-
-	i = 0;
-	while (to_find[i])
-	{
-		if (to_find[i] != str[i])
-			return (0);
-		i++;
-	}
-	if (str[i] == '\0')
-		return (1);
-	return (0);
-}
-
-
-
 int	check_file_is_valid(char *file_line)
 {
-	// while (*file_line)
-	// {
-	// 	if (*file_line == '.')
-	// 	{
-	// 		if (find(file_line, ".ber"))
-	// 		{
-	// 			return (1);
-	// 		}
-	// 	}
-	// 	file_line++;
-	// }
-	// write(1, "ERROR: map file is not valid\n", 29);
-	// exit(1);
-	char *temp;
+	char	*temp;
 
 	temp = ft_strchr(file_line, '.');
 	if (temp)
@@ -56,17 +25,16 @@ int	check_file_is_valid(char *file_line)
 		}
 		else
 		{
-			ft_printf("erro encontrado no nome da funcao\n");
+			ft_printf("erro encontrado no nome do mapa\n");
 			return (0);
 		}
-			
 	}
-	else 
+	else
 	{
-		ft_printf("erro encontrado no nome da funcao");
+		ft_printf("erro encontrado no nome do mapa\n");
 		return (0);
 	}
-	return 1;
+	return (1);
 }
 
 int	check_c(t_vars *vars)
@@ -127,6 +95,17 @@ void	check_map_valid(t_vars *vars)
 	if (!checker_way_out(vars->map, 0, 0))
 	{
 		printf("no way out\n");
+		final_cleaner(vars , 3);
 		exit(1);
 	}
+}
+
+int	map_height(char **map)
+{
+	int	height;
+
+	height = 0;
+	while (map[height])
+		height++;
+	return (height);
 }

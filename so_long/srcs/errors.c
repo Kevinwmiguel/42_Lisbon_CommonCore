@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:12:52 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/14 17:03:45 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:38:18 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	fmessage_error(t_vars *vars, int n)
 {
-	n = 9;
 	ft_printf("Error in map\n");
 	final_cleaner(vars, n);
 	exit(0);
@@ -55,7 +54,7 @@ void	check_elements(t_vars *vars)
 	map = map_check_initiatializer(vars, map);
 	if (map.b == 1)
 		vars->compass++;
-	if (map.e == 00 || map.p == 0 \
+	if (map.e == 0 || map.p == 0 \
 		|| map.c == 0 || map.p > 1 || map.b > 1 || map.e > 1)
 		ft_error(vars, error_possibility(&map));
 }

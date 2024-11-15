@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/14 15:10:22 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:24:43 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	invisible_door(t_vars *v, int x1, int y1)
 	v->e_y = y1;
 }
 
-void	check_is_rectangular(t_vars *vars)
+void	check_is_rectangular(t_vars *v)
 {
 	int	map_x;
 	int	map_y;
@@ -56,17 +56,17 @@ void	check_is_rectangular(t_vars *vars)
 	map_y = 0;
 	map_x = 0;
 	backup = 0;
-	height = get_height(vars->map);
+	height = get_height(v->map);
 	while (map_y != height)
 	{
 		map_x = 0;
-		while (vars->map[map_y][map_x] != '\0')
+		while (v->map[map_y][map_x] != '\0')
 			map_x++;
 		map_y++;
 		if (backup != 0)
 		{
 			if (backup != map_x)
-				ft_error(vars, "Error not retangular");
+				ft_error(v, "Error not retangular");
 		}
 		else
 			backup = map_x;
@@ -93,7 +93,7 @@ void	check_walls(t_vars *v)
 	char	*message;
 
 	message = "[ERROR] Not surrounded by walls";
-	if (v->map[0] && check_line(v->map[0]))
+	if (check_line(v->map[0]))
 		ft_error(v, message);
 	i = get_height(v->map) - 1;
 	if (i < 0)

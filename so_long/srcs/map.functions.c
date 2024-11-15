@@ -6,11 +6,29 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:58:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/14 14:57:51 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:39:41 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	check_nl(char *str)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("%s  xx ", str);
+	while (str[i])
+	{
+		if (str[i] == '\n' && str[i + 1])
+		{
+			if (str[i +1 ] == '\n')
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 char	**get_map(char *fmap, t_vars *vars)
 {
@@ -25,12 +43,14 @@ char	**get_map(char *fmap, t_vars *vars)
 	if (fd < 0)
 	{
 		free(all_lines);
-		fmessage_error(vars, 4);
+		fmessage_error(vars, 9);
 	}
 	all_lines = linear(fd, line, all_lines);
 	close(fd);
 	if (!all_lines)
 		fmessage_error(vars, 0);
+	if (check_nl(all_lines) == 1)
+		exit(1);
 	result = ft_split(all_lines, '\n');
 	free(all_lines);
 	return (result);
@@ -41,27 +61,26 @@ int	checker_way_out(char **map, int x, int y)
 	int	accessible;
 
 	accessible = 0;
-	while (map[y])
+	while (map[++y])
 	{
 		x = 0;
-		while (map[y][x])
+		while (map[y][++x])
 		{
 			if (map[y][x] == 'C')
 			{
-				
-				if ((y > 0 && (map[y - 1][x] == '0' || map[y - 1][x] == 'C')) ||
-					(map[y + 1] && (map[y + 1][x] == '0' || map[y + 1][x] == 'C')) ||
-					(x > 0 && (map[y][x - 1] == '0' || map[y][x - 1] == 'C')) ||
-					(map[y][x + 1] && (map[y][x + 1] == '0' || map[y][x + 1] == 'C')))
-				{
+				if ((y > 0 && (map[y - 1][x] == '0' \
+						|| map[y - 1][x] == 'C')) ||
+					(map[y + 1] && (map[y + 1][x] == '0'\
+						|| map[y + 1][x] == 'C')) ||
+					(x > 0 && (map[y][x - 1] == '0'\
+						|| map[y][x - 1] == 'C')) ||
+					(map[y][x + 1] && (map[y][x + 1] == '0'\
+						|| map[y][x + 1] == 'C')))
 					accessible = 1;
-				}
 				else
 					return (0);
 			}
-			x++;
 		}
-		y++;
 	}
 	return (accessible);
 }
@@ -126,14 +145,4 @@ void	flood_checker(t_vars *vars, char **argv)
 	vars->map = get_map(argv[1], vars);
 	vars->assets = malloc(sizeof(t_assets));
 	assets_initiator(vars);
-}
-
-int	map_height(char **map)
-{
-	int	height;
-
-	height = 0;
-	while (map[height])
-		height++;
-	return (height);
 }
