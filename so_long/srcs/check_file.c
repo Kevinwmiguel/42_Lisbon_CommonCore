@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:10:30 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/14 22:56:45 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:06:09 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	check_map_valid(t_vars *vars)
 	if (!checker_way_out(vars->map, 0, 0))
 	{
 		printf("no way out\n");
-		final_cleaner(vars , 3);
+		final_cleaner(vars, 3);
 		exit(1);
 	}
 }

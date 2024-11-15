@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 18:55:56 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 20:29:06 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:31:14 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 char	*get_next_line(int fd);
 size_t	ft_strlen1(const char *s);
 char	*ft_strjoin2(char *s1, char *s2);
+char	*ft_strjoin(const char *s1, const char *s2);
 
 #endif

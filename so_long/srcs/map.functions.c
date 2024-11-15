@@ -6,11 +6,37 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:58:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/14 17:44:05 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:07:40 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	check_nl(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] == '\n')
+		return (1);
+	while (str[i])
+	{
+		if (str[i] == '\n' && str[i + 1])
+		{
+			if (str[i + 1] == '\n')
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	lines_mistake(char *all_lines)
+{
+	printf("problemas aqui\n");
+	free(all_lines);
+	exit(1);
+}
 
 char	**get_map(char *fmap, t_vars *vars)
 {
@@ -31,6 +57,8 @@ char	**get_map(char *fmap, t_vars *vars)
 	close(fd);
 	if (!all_lines)
 		fmessage_error(vars, 0);
+	if (check_nl(all_lines) == 1)
+		lines_mistake(all_lines);
 	result = ft_split(all_lines, '\n');
 	free(all_lines);
 	return (result);

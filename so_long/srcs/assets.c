@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:22:50 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/14 14:36:46 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:20:26 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	map_xloop(t_vars *vars, int x1, int y1, int map_y)
 	map_x = 0;
 	if (vars->map[map_y] == NULL)
 	{
-		ft_error(vars, "ERROR\n");
+		ft_error(vars, "ERROR");
 		exit (1);
 	}
 	while (vars->win_w > 0)
