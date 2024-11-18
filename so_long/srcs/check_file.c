@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:10:30 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/15 17:06:09 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:16:50 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	check_file_is_valid(char *file_line)
 		}
 		else
 		{
-			ft_printf("erro encontrado no nome do mapa\n");
+			ft_printf("ERROR\nerro encontrado no nome do mapa\n");
 			return (0);
 		}
 	}
 	else
 	{
-		ft_printf("erro encontrado no nome do mapa");
+		ft_printf("ERROR\nerro encontrado no nome do mapa\n");
 		return (0);
 	}
 	return (1);
@@ -51,7 +51,7 @@ int	check_c(t_vars *vars)
 			n++;
 			if (vars->map[i][n - 1] == 'C')
 			{
-				ft_printf("NO way to collectable and exit\n");
+				ft_printf("ERROR\nNO way to collectable and exit\n");
 				final_cleaner(vars, 4);
 				exit(1);
 			}
@@ -76,7 +76,7 @@ int	check_e(t_vars *vars)
 			n++;
 			if (vars->map[i][n] == 'E')
 			{
-				ft_printf("No way to exit\n");
+				ft_printf("ERROR\nNo way to exit\n");
 				final_cleaner(vars, 0);
 				exit(1);
 			}
@@ -94,7 +94,7 @@ void	check_map_valid(t_vars *vars)
 	check_elements(vars);
 	if (!checker_way_out(vars->map, 0, 0))
 	{
-		printf("no way out\n");
+		ft_printf("ERROR\nno way out\n");
 		final_cleaner(vars, 3);
 		exit(1);
 	}

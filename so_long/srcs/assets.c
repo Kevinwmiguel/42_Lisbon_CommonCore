@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:22:50 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/18 00:28:57 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:21:15 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	map_xloop(t_vars *vars, int x1, int y1, int map_y)
 	map_x = 0;
 	if (vars->map[map_y] == NULL)
 	{
-		ft_error(vars, "ERROR");
+		ft_error(vars, "ERROR\n map");
 		exit (1);
 	}
 	while (vars->win_w > 0)
@@ -42,24 +42,11 @@ t_imgs	*new_file_img(char *path, void *mlx, void *window)
 	image->img = mlx_xpm_file_to_image(mlx, path, &image->width,
 			&image->height);
 	if (!image->img)
-		write(2, "File could not be read\n", 23);
+		ft_printf("ERROR\n map");
 	else
 		image->addr = mlx_get_data_addr(image->img, &(image->bites_per_pxl),
 				&(image->line_len), &(image->endian));
 	return (image);
-}
-
-void	put_pixel_img(t_imgs *img, int x, int y, int color)
-{
-	char	*dst;
-
-	if (color == (int)0x00FFFFFF || color == -16777216)
-		return ;
-	if (x >= 0 && y >= 0 && x < img->width && y < img->height)
-	{
-		dst = img->addr + (y * img->line_len + x * (img->bites_per_pxl / 8));
-		*(unsigned int *)dst = color;
-	}
 }
 
 unsigned int	get_pixel_img(t_imgs *img, int x, int y)
@@ -81,4 +68,17 @@ void	assets_initiator(t_vars *v)
 	v->assets->boat = new_file_img("assets/textures/barco.xpm", v->mlx, v->win);
 	v->assets->monster = new_file_img("assets/textures/mermaid.xpm", \
 		v->mlx, v->win);
+}
+
+void	put_pixel_img(t_imgs *img, int x, int y, int color)
+{
+	char	*dst;
+
+	if (color == (int)0x00FFFFFF || color == -16777216)
+		return ;
+	if (x >= 0 && y >= 0 && x < img->width && y < img->height)
+	{
+		dst = img->addr + (y * img->line_len + x * (img->bites_per_pxl / 8));
+		*(unsigned int *)dst = color;
+	}
 }

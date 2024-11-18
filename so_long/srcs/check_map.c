@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/15 01:47:51 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:17:57 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_map	map_check_initiatializer(t_vars *vars, t_map map)
 						&& vars->map[map.y][map.x] != '0' \
 						&& vars->map[map.y][map.x] != '\n' \
 						&& vars->map[map.y][map.x] != '\0')
-				ft_error(vars, "Wrong Element stupid");
+				ft_error(vars, "Error\nWrong Element stupid");
 			map.x++;
 		}
 	}
@@ -66,7 +66,7 @@ void	check_is_rectangular(t_vars *v)
 		if (backup != 0)
 		{
 			if (backup != map_x)
-				ft_error(v, "Error not retangular");
+				ft_error(v, "ERROR\n not retangular");
 		}
 		else
 			backup = map_x;
@@ -92,7 +92,7 @@ void	check_walls(t_vars *v)
 	int		i;
 	char	*message;
 
-	message = "[ERROR] Not surrounded by walls";
+	message = "ERROR\n Not surrounded by walls";
 	if (v->map[0] && check_line(v->map[0]))
 		ft_error(v, message);
 	i = get_height(v->map) - 1;

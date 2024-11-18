@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 21:45:18 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/14 16:40:35 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:18:59 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_vars(t_vars *vars)
 	vars->img_floor = NULL;
 	if (vars->map[0] == NULL)
 	{
-		write(1, "ERROR in map to init\n", 13);
+		write(1, "ERROR\n in map to init\n", 13);
 		final_cleaner(vars, 1);
 		exit(1);
 	}

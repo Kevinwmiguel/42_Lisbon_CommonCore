@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:12:52 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/18 00:06:28 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:18:32 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 
 void	fmessage_error(t_vars *vars, int n)
 {
-	ft_printf("Error in map\n");
+	ft_printf("ERROR\n in map\n");
 	final_cleaner(vars, n);
 	exit(0);
 }
 
 void	f_error(char *file)
 {
-	ft_printf("can't open the file %s", file);
+	ft_printf("ERROR\ncan't open the file %s", file);
 	exit(0);
 }
 
 static char	*error_possibility(t_map *map)
 {
 	if (map->c == 0)
-		return ("Miss 'C'");
+		return ("ERROR\nMiss 'C'");
 	else if (map->p == 0)
-		return ("Miss 'P'");
+		return ("ERROR\nMiss 'P'");
 	else if (map->e == 0)
-		return ("Miss 'E'");
+		return ("ERROR\nMiss 'E'");
 	else if (map->p > 1)
-		return ("> 1 p");
+		return ("ERROR\n> 1 p");
 	else if (map->e)
-		return ("> 1 e");
+		return ("ERROR\n> 1 e");
 	else if (map->b)
 		return ("> 1 b");
-	return ("Missing Map");
+	return ("ERROR\nMissing Map");
 }
 
 void	check_elements(t_vars *vars)
