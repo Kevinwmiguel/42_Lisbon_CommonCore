@@ -33,7 +33,7 @@ int	check_nl(char *str)
 
 void	lines_mistake(char *all_lines)
 {
-	printf("problemas aqui\n");
+	ft_printf("ERROR\nproblemas aqui\n");
 	free(all_lines);
 	exit(1);
 }
@@ -42,7 +42,7 @@ void	ft_empty_map(char *all_lines)
 {
 	if (all_lines[0] == '\0')
 	{
-		printf("Mapa vazio ai n po!\n");
+		ft_printf("ERROR\nMapa vazio ai n po!\n");
 		free(all_lines);
 		exit(1);
 	}

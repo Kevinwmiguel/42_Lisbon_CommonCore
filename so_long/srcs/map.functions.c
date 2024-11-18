@@ -42,9 +42,6 @@ char	**get_map(char *fmap, t_vars *vars)
 
 int	checker_way_out(char **map, int x, int y)
 {
-	int	accessible;
-
-	accessible = 0;
 	while (map[++y])
 	{
 		x = 0;
@@ -52,21 +49,15 @@ int	checker_way_out(char **map, int x, int y)
 		{
 			if (map[y][x] == 'C')
 			{
-				if ((y > 0 && (map[y - 1][x] == '0' \
-						|| map[y - 1][x] == 'C')) ||
-					(map[y + 1] && (map[y + 1][x] == '0'\
-						|| map[y + 1][x] == 'C')) ||
-					(x > 0 && (map[y][x - 1] == '0'\
-						|| map[y][x - 1] == 'C')) ||
-					(map[y][x + 1] && (map[y][x + 1] == '0'\
-						|| map[y][x + 1] == 'C')))
-					accessible = 1;
-				else
-					return (0);
+				if ((y > 0 && (map[y - 1][x] == '0' || map[y - 1][x] == 'C' || map[y - 1][x] == 'P')) ||
+					(map[y + 1] && (map[y + 1][x] == '0' || map[y + 1][x] == 'C' || map[y + 1][x] == 'P')) ||
+					(x > 0 && (map[y][x - 1] == '0' || map[y][x - 1] == 'C' || map[y][x - 1] == 'P')) ||
+					(map[y][x + 1] && (map[y][x + 1] == '0' || map[y][x + 1] == 'C' || map[y][x + 1] == 'P')))
+					return (1);
 			}
 		}
 	}
-	return (accessible);
+	return (0);
 }
 
 void	flood_fill(char **map, int x, int y)
