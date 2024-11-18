@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:27:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/15 16:47:12 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 00:17:55 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ int	main(int argc, char *argv[])
 		check_map_valid(&vars);
 		init_vars(&vars);
 		vars.mlx = mlx_init();
-		vars.win = mlx_new_window(vars.mlx, \
-				vars.win_w * 32, vars.win_h * 32, "So_long");
+		vars.win = mlx_new_window(vars.mlx, vars.win_w * 32, \
+			vars.win_h * 32, "So_long");
 		load_map(&vars, argv);
 		mlx_string_put(vars.mlx, vars.win, 5, 10, 0xffffff, "Move: 0");
 		mlx_hook(vars.win, 2, (1L << 0), key_hook, &vars);
