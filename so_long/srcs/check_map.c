@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:09:55 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/18 18:17:57 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:08:15 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_map	map_check_initiatializer(t_vars *vars, t_map map)
 
 void	invisible_door(t_vars *v, int x1, int y1)
 {
-	mlx_put_image_to_window(v->mlx, v->win, v->assets->water->img, x1, y1);
+	mlx_put_image_to_window(v->mlx, v->win, v->assets->wood->img, x1, y1);
 	v->e_x = x1;
 	v->e_y = y1;
 }

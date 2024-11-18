@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:58:41 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/18 18:19:33 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:07:03 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	move_left(t_vars *v)
 	mlx_put_image_to_window(
 		v->mlx, v->win, v->assets->wood->img, v->x_p, v->y_p);
 	if (v->map[(v->y_p / 32)][(v->x_p / 32) - 1] == 'E')
-		exit_verifier(v, 0, -1);
+		exit_verifier(v, 0, 0);
 	else if (v->map[(v->y_p / 32)][(v->x_p / 32) - 1] != '1')
 	{
 		v->x_p -= 32;
@@ -43,7 +43,7 @@ void	move_right(t_vars *v)
 	mlx_put_image_to_window(v->mlx, v->win, \
 		v->assets->wood->img, v->x_p, v->y_p);
 	if (v->map[(v->y_p / 32)][(v->x_p / 32) + 1] == 'E')
-		exit_verifier(v, 0, -1);
+		exit_verifier(v, 0, 1);
 	else if (v->map[(v->y_p / 32)][(v->x_p / 32) + 1] != '1')
 	{
 		v->x_p += 32;
@@ -63,7 +63,7 @@ void	move_up(t_vars *v)
 	mlx_put_image_to_window(v->mlx, v->win,
 		v->assets->wood->img, v->x_p, v->y_p);
 	if ((v)->map[((v)->y_p / 32) - 1][((v)->x_p / 32)] == 'E')
-		exit_verifier(v, 1, -1);
+		exit_verifier(v, 1, 0);
 	else if ((v)->map[((v)->y_p / 32) - 1][((v)->x_p / 32)] != '1')
 	{
 		(v)->y_p -= 32;
@@ -77,7 +77,7 @@ void	move_down(t_vars *v)
 	mlx_put_image_to_window(v->mlx, v->win,
 		v->assets->wood->img, v->x_p, v->y_p);
 	if (v->map[(v->y_p / 32) + 1][(v->x_p / 32)] == 'E')
-		exit_verifier(v, 1, -1);
+		exit_verifier(v, 1, 1);
 	else if (v->map[(v->y_p / 32) + 1][(v->x_p / 32)] != '1')
 	{
 		v->y_p += 32;
