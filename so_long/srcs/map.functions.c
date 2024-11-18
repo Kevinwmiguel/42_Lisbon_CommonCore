@@ -6,47 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:58:15 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/18 00:16:09 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 00:37:20 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	check_nl(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[0] == '\n')
-		return (1);
-	while (str[i])
-	{
-		if (str[i] == '\n' && str[i + 1])
-		{
-			if (str[i + 1] == '\n')
-				return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-void	lines_mistake(char *all_lines)
-{
-	printf("problemas aqui\n");
-	free(all_lines);
-	exit(1);
-}
-
-void	ft_empty_map(char *all_lines)
-{
-	if (all_lines[0] == '\0')
-	{
-		printf("Mapa vazio ai n po!\n");
-		free(all_lines);
-		exit(1);
-	}
-}
 
 char	**get_map(char *fmap, t_vars *vars)
 {

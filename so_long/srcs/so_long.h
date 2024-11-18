@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:28:39 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/18 00:15:06 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 00:39:57 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,8 @@ void			check_walls(t_vars *v);
 int				check_line(char *line);
 void			check_is_rectangular(t_vars *vars);
 int				checker_way_out(char **map, int x, int y);
+void			ft_empty_map(char *all_lines);
+int				check_nl(char *str);
+void			lines_mistake(char *all_lines);
 void			ft_empty_map(char *all_lines);
 #endif

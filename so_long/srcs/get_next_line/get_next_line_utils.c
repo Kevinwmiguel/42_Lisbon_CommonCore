@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:01:00 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/15 16:53:01 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/18 00:38:36 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ size_t	ft_strlenn(char *s)
 	}
 	return (i);
 }
+
 char	*ft_strjoin2(char *s1, char *s2)
 {
 	char	*str;
