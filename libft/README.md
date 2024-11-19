@@ -21,7 +21,6 @@
 	<span> · </span>
 	<a href="#-testing">Testing</a>
 </h3>
-
 ---
 
 ## 💡 About the project
