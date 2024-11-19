@@ -66,7 +66,7 @@ void	check_is_rectangular(t_vars *v)
 		if (backup != 0)
 		{
 			if (backup != map_x)
-				ft_error(v, "Error\n not retangular");
+				ft_error(v, "Error\nNot retangular");
 		}
 		else
 			backup = map_x;

@@ -69,7 +69,7 @@ int	check_e(t_vars *vars)
 			if (vars->map[i][n] == 'E')
 			{
 				ft_printf("Error\nNo way to exit\n");
-				final_cleaner(vars, 0);
+				final_cleaner(vars, 4);
 				exit(1);
 			}
 		}

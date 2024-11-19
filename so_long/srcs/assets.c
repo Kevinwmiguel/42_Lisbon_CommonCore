@@ -19,7 +19,7 @@ int	map_xloop(t_vars *vars, int x1, int y1, int map_y)
 	map_x = 0;
 	if (vars->map[map_y] == NULL)
 	{
-		ft_error(vars, "Error\n map");
+		ft_error(vars, "Error\n in map");
 		exit (1);
 	}
 	while (vars->win_w > 0)
@@ -42,7 +42,7 @@ t_imgs	*new_file_img(char *path, void *mlx, void *window)
 	image->img = mlx_xpm_file_to_image(mlx, path, &image->width,
 			&image->height);
 	if (!image->img)
-		ft_printf("ERROR\n map");
+		ft_printf("ERROR\n in map");
 	else
 		image->addr = mlx_get_data_addr(image->img, &(image->bites_per_pxl),
 				&(image->line_len), &(image->endian));
