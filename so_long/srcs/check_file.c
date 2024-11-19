@@ -12,29 +12,21 @@
 
 #include "so_long.h"
 
-int	check_file_is_valid(char *file_line)
+void	check_file_is_valid(char *file_line)
 {
-	char	*temp;
-
-	temp = ft_strchr(file_line, '.');
-	if (temp)
+	while (*file_line)
 	{
-		if (ft_strncmp(temp, ".ber", 5) == 0)
+		if (*file_line == '.')
 		{
-			return (1);
+			if (find(file_line, ".ber"))
+			{
+				return ;
+			}
 		}
-		else
-		{
-			ft_printf("ERROR\nerro encontrado no nome do mapa\n");
-			return (0);
-		}
+		file_line++;
 	}
-	else
-	{
-		ft_printf("ERROR\nerro encontrado no nome do mapa\n");
-		return (0);
-	}
-	return (1);
+	ft_printf("Error\nfile is not valid\n");
+	exit(1);
 }
 
 int	check_c(t_vars *vars)
@@ -51,7 +43,7 @@ int	check_c(t_vars *vars)
 			n++;
 			if (vars->map[i][n - 1] == 'C')
 			{
-				ft_printf("ERROR\nNO way to collectable and exit\n");
+				ft_printf("Error\nNO way to collectable and exit\n");
 				final_cleaner(vars, 4);
 				exit(1);
 			}
@@ -76,7 +68,7 @@ int	check_e(t_vars *vars)
 			n++;
 			if (vars->map[i][n] == 'E')
 			{
-				ft_printf("ERROR\nNo way to exit\n");
+				ft_printf("Error\nNo way to exit\n");
 				final_cleaner(vars, 0);
 				exit(1);
 			}
@@ -92,12 +84,6 @@ void	check_map_valid(t_vars *vars)
 	check_is_rectangular(vars);
 	check_walls(vars);
 	check_elements(vars);
-	if (!checker_way_out(vars->map, 0, 0))
-	{
-		ft_printf("ERROR\nno way out\n");
-		final_cleaner(vars, 3);
-		exit(1);
-	}
 }
 
 int	map_height(char **map)

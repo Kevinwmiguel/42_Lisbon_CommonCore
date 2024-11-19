@@ -16,13 +16,22 @@ void	fmessage_error(t_vars *vars, int n)
 {
 	ft_printf("ERROR\n in map\n");
 	final_cleaner(vars, n);
-	exit(0);
+	exit(1);
 }
 
-void	f_error(char *file)
+void	ft_error(t_vars *vars, char *message)
 {
-	ft_printf("ERROR\ncan't open the file %s", file);
-	exit(0);
+	int	x;
+
+	x = 0;
+	while (vars->map[x])
+	{
+		free(vars->map[x]);
+		x++;
+	}
+	free (vars->map);
+	ft_printf("%s\n", message);
+	exit (1);
 }
 
 static char	*error_possibility(t_map *map)
@@ -57,19 +66,4 @@ void	check_elements(t_vars *vars)
 	if (map.e == 00 || map.p == 0 \
 		|| map.c == 0 || map.p > 1 || map.b > 1 || map.e > 1)
 		ft_error(vars, error_possibility(&map));
-}
-
-void	ft_error(t_vars *vars, char *message)
-{
-	int	x;
-
-	x = 0;
-	while (vars->map[x])
-	{
-		free(vars->map[x]);
-		x++;
-	}
-	free (vars->map);
-	ft_printf("%s\n", message);
-	exit (1);
 }

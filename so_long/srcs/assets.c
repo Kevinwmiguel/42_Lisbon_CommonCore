@@ -19,7 +19,7 @@ int	map_xloop(t_vars *vars, int x1, int y1, int map_y)
 	map_x = 0;
 	if (vars->map[map_y] == NULL)
 	{
-		ft_error(vars, "ERROR\n map");
+		ft_error(vars, "Error\n map");
 		exit (1);
 	}
 	while (vars->win_w > 0)

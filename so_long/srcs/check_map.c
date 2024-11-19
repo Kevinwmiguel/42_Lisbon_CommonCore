@@ -66,7 +66,7 @@ void	check_is_rectangular(t_vars *v)
 		if (backup != 0)
 		{
 			if (backup != map_x)
-				ft_error(v, "ERROR\n not retangular");
+				ft_error(v, "Error\n not retangular");
 		}
 		else
 			backup = map_x;
@@ -92,7 +92,7 @@ void	check_walls(t_vars *v)
 	int		i;
 	char	*message;
 
-	message = "ERROR\n Not surrounded by walls";
+	message = "Error\n Not surrounded by walls";
 	if (v->map[0] && check_line(v->map[0]))
 		ft_error(v, message);
 	i = get_height(v->map) - 1;

@@ -25,7 +25,7 @@ char	**get_map(char *fmap, t_vars *vars)
 	if (fd < 0)
 	{
 		free(all_lines);
-		ft_printf("no map\n");
+		ft_printf("Error\nNo map\n");
 		exit(1);
 	}
 	all_lines = linear(fd, line, all_lines);
@@ -38,29 +38,6 @@ char	**get_map(char *fmap, t_vars *vars)
 	result = ft_split(all_lines, '\n');
 	free(all_lines);
 	return (result);
-}
-
-int	checker_way_out(char **map, int x, int y)
-{
-	while (map[++y])
-	{
-		x = 0;
-		while (map[y][++x])
-		{
-			if (map[y][x] == 'C')
-			{
-				if (((y > 0 && (map[y - 1][x] == '0' || map[y - 1][x] == 'C' || \
-				map[y - 1][x] == 'P')) || (map[y + 1] && (map[y + 1][x] == '0' \
-				|| map[y + 1][x] == 'C' || map[y + 1][x] == 'P')) || (x > 0 \
-				&& (map[y][x - 1] == '0' || map[y][x - 1] == 'C' || \
-				map[y][x - 1] == 'P')) || (map[y][x + 1] && \
-				(map[y][x + 1] == '0' || map[y][x + 1] == 'C' \
-				|| map[y][x + 1] == 'P'))))
-					return (1);
-			}
-		}
-	}
-	return (0);
 }
 
 void	flood_fill(char **map, int x, int y)

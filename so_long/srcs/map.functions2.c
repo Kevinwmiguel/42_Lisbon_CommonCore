@@ -33,7 +33,7 @@ int	check_nl(char *str)
 
 void	lines_mistake(char *all_lines)
 {
-	ft_printf("ERROR\nproblemas aqui\n");
+	ft_printf("Error\nproblemas aqui\n");
 	free(all_lines);
 	exit(1);
 }
@@ -42,8 +42,24 @@ void	ft_empty_map(char *all_lines)
 {
 	if (all_lines[0] == '\0')
 	{
-		ft_printf("ERROR\nMapa vazio ai n po!\n");
+		ft_printf("Error\nMapa vazio ai n po!\n");
 		free(all_lines);
 		exit(1);
 	}
+}
+
+int	find(char *str, char *to_find)
+{
+	int	i;
+
+	i = 0;
+	while (to_find[i])
+	{
+		if (to_find[i] != str[i])
+			return (0);
+		i++;
+	}
+	if (str[i] == '\0')
+		return (1);
+	return (0);
 }

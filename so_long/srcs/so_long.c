@@ -113,8 +113,7 @@ int	main(int argc, char *argv[])
 		write(1, "ERROR\n", 6);
 		exit(1);
 	}
-	if (!check_file_is_valid(argv[1]))
-		exit(1);
+	check_file_is_valid(argv[1]);
 	vars.map = get_map(argv[1], &vars);
 	if (vars.map != NULL)
 	{

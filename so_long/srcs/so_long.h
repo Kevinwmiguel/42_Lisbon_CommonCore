@@ -19,7 +19,6 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "../All_libs/minilibx-linux/mlx.h"
-//# include "get_next_line_miguel/get_next_line.h"
 # include "./get_next_line/get_next_line.h"
 # include <X11/keysym.h>
 # include "../All_libs/libft/libft.h"
@@ -81,9 +80,8 @@ typedef struct s_map
 	int	b; // monster
 }	t_map;
 
-int				check_file_is_valid(char *file_line);
+void			check_file_is_valid(char *file_line);
 void			fmessage_error(t_vars *vars, int n);
-void			f_error(char *file);
 void			final_cleaner(t_vars *vars, int assets);
 int				get_height(char **map);
 t_map			map_check_initiatializer(t_vars *vars, t_map map);
@@ -130,4 +128,5 @@ void			ft_empty_map(char *all_lines);
 int				check_nl(char *str);
 void			lines_mistake(char *all_lines);
 void			ft_empty_map(char *all_lines);
+int				find(char *str, char *to_find);
 #endif
