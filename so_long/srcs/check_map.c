@@ -32,7 +32,7 @@ t_map	map_check_initiatializer(t_vars *vars, t_map map)
 						&& vars->map[map.y][map.x] != '0' \
 						&& vars->map[map.y][map.x] != '\n' \
 						&& vars->map[map.y][map.x] != '\0')
-				ft_error(vars, "Error\nWrong Element stupid");
+				ft_error(vars, "Error\nWrong Element in the map");
 			map.x++;
 		}
 	}

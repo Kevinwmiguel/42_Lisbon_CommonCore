@@ -33,7 +33,7 @@ int	check_nl(char *str)
 
 void	lines_mistake(char *all_lines)
 {
-	ft_printf("Error\nproblemas aqui\n");
+	ft_printf("Error\nproblemas aqui, linhas em branco\n");
 	free(all_lines);
 	exit(1);
 }
