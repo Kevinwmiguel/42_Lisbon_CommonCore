@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/29 23:36:27 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:12:44 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,18 @@
 // 				 6         |     end[1]    |  
 // 						   -----------------
 
+check args()
+{
+	
+}
+
 void	child_one(int fd_write, char *cmd, char **envp)
 {
 	dup2(fd_write, STDOUT_FILENO);
 	close(fd_write);
     char *args[] = {cmd, NULL};
-    execve(cmd, args, envp);
+	char *nova = ft_strjoin("/bin/", cmd);
+    execve(nova, args, envp);
     perror("Execve: ");
     exit(1);
 }
@@ -57,7 +63,8 @@ void	child_two(int fd_read, char *cmd, char **envp)
 	dup2(fd_read, STDIN_FILENO);
 	close(fd_read);
 	char *args[] = {cmd, NULL};
-	execve(cmd, args, envp);
+	char *nova = ft_strjoin("/bin/", cmd);
+	execve(nova, args, envp);
 	perror("Execve: ");
 	exit(1);
 }
@@ -66,9 +73,10 @@ int main(int argc, char **argv, char **envp)
 {
 	int end[2];
     pid_t child1, child2;
+
     if (argc != 3)
     {
-        fprintf(stderr, "Usage: ./pipex <cmd1> <cmd2>\n");
+        fprintf(stderr, "Usage: ./pipex infile <cmd1> <cmd2> outfile\n");
         return (1);
     }
     if (pipe(end) == -1)
