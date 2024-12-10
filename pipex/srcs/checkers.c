@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:43:27 by kwillian          #+#    #+#             */
-/*   Updated: 2024/12/09 20:49:48 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:58:30 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void    check_file(int file)
     if (file < 0)
     {
         perror("Error get the file: \n");
+        close(file);
         exit(1);
-    }
+    }    
 }

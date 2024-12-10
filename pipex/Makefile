@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/29 12:37:09 by kwillian          #+#    #+#              #
-#    Updated: 2024/12/09 21:27:28 by kwillian         ###   ########.fr        #
+#    Updated: 2024/12/10 21:47:20 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,6 @@ $(NAME) : $(OBJS) $(LIBFT)
 %.o:%.c
 	@$(CC) $(CFLAGS) -c $^ -o $@
 
-$(MLX): 
-	$(MAKE) -C $()
 
 $(LIBFT):
 	make -s -C $(LIBFT_PATH)
@@ -47,11 +45,25 @@ $(OBJ_DIR)/%.o: srcs/%.c
 clean:
 	make -C $(LIBFT_PATH) clean
 	@rm -f *.o
+	clear
 
 fclean: clean
 	make -C $(LIBFT_PATH) fclean
 	@rm -f $(NAME) $(OBJECTS)
 	clear
-	@echo All clean...
+	@echo Never is a good bye...
 
-re: fclean all
+loading:
+	@echo "Let's do Magic..."
+	@i=0; \
+	while [ $$i -lt 40 ]; do \
+		if [ $$((i % 4)) -eq 0 ]; then printf "\033[32m\r◜\033[0m"; fi; \
+		if [ $$((i % 4)) -eq 1 ]; then printf "\033[32m\r◝\033[0m"; fi; \
+		if [ $$((i % 4)) -eq 2 ]; then printf "\033[32m\r◞\033[0m"; fi; \
+		if [ $$((i % 4)) -eq 3 ]; then printf "\033[32m\r◟\033[0m"; fi; \
+		sleep 0.15; \
+		i=$$((i + 1)); \
+	done; \
+	echo "\r\033[32mAbrakadabra!!\033[0m"
+
+re: fclean all loading
