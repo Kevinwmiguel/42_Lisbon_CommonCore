@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:43:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/12/10 22:11:25 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/12/10 22:19:10 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,32 @@ void	child_one(files fd_read, int fd_write, char **cmd, char *argv)
         perror("ft_strjoin: ");
         exit(1);
     }
-    if (ft_strncmp(cmd[0],"ls", 3))
-        //Aqui o cmd devera receber o argumento como o nome do arquivo para que seja dado apenas um ls naquele arquivo.
-        
+    if (ft_strncmp(cmd[0], "ls", 3) == 0)
+    {
+        // Se não houver argumentos após o comando 'ls', adiciona o nome do arquivo
+        if (cmd[1] == NULL) // Caso sem argumentos
+        {
+            cmd[1] = argv;  // Adiciona o nome do arquivo (ou diretório)
+            cmd[2] = NULL;   // Finaliza a lista de argumentos com NULL
+        }
+        else if (cmd[1] != NULL && access(argv , F_OK) == 0) // Verifica se o arquivo existe
+        {
+            // Adiciona o nome do arquivo ao final dos argumentos (caso já haja outros argumentos como '-l' ou '-a')
+            size_t len = 0;
+            while (cmd[len] != NULL)
+                len++;  // Encontra o último índice da lista de argumentos
+            cmd[len] = argv;  // Adiciona o nome do arquivo no final
+            cmd[len + 1] = NULL; // Finaliza a lista de argumentos
+        }
+        else
+        {
+            // Caso o arquivo não exista, podemos fazer algum tratamento de erro se necessário
+            fprintf(stderr, "Arquivo %s não encontrado\n", cmd[1]);
+            free(nova);
+            exit(1);
+        }
+    }
+ 
     // Executa o comando com seus argumentos
     execve(nova, cmd, fd_read.envp);
 
