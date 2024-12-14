@@ -6,23 +6,20 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:19:11 by kwillian          #+#    #+#             */
-/*   Updated: 2024/12/09 20:19:25 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:17:25 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_free_split(char **split)
+void	ft_free_split(char *split, char *msg)
 {
 	int i;
 
+	ft_printf("%s\n", msg);
 	if (!split)
-		return;
+		exit(1);
 	i = 0;
-	while (split[i])
-	{
-		free(split[i]); // Libera cada string individual
-		i++;
-	}
-	free(split); // Libera o array principal
+	free(split);
+	exit(1);
 }
