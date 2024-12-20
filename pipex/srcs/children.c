@@ -6,21 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:43:47 by kwillian          #+#    #+#             */
-/*   Updated: 2024/12/20 17:20:53 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:30:03 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-size_t	length(char **cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i] != NULL)
-		i++;
-	return (i);
-}
 
 char	*get_command_path(char *cmd)
 {
@@ -34,7 +24,7 @@ char	*get_command_path(char *cmd)
 	paths[2] = NULL;
 	while (paths[i])
 	{
-		full_path = malloc(strlen(paths[i]) + strlen(cmd) + 1);
+		full_path = malloc(strlen(paths[i]) + length2(cmd) + 1);
 		if (!full_path)
 		{
 			perror("Erro de malloc");
@@ -55,7 +45,7 @@ char	*get_directory_path(char *path)
 	char	*last_slash;
 	char	*dir_path;
 
-	last_slash = strrchr(path, '/');
+	last_slash = ft_strrchr(path, '/');
 	if (!last_slash)
 		return (NULL);
 	dir_path = malloc(last_slash - path + 2);
@@ -79,11 +69,8 @@ void	child_one(t_files fd_read, int fd_write, char **cmd, char *file_path)
 	close(fd_read.infile);
 	close(fd_write);
 	dir_path = get_directory_path(file_path);
-	if (ft_strncmp(cmd[0], "ls", 2) == 0 && dir_path)
-	{
-		cmd[length(cmd) - 1] = dir_path;
-		cmd[length(cmd)] = NULL;
-	}
+	if (ft_strncmp(cmd[0], "ls", 2) == 0)
+		cmd = add_file_to_cmd(cmd, file_path);
 	command_path = get_command_path(cmd[0]);
 	if (!command_path)
 	{

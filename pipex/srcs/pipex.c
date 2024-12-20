@@ -40,7 +40,6 @@ void	check_start_child1(pid_t child1, int *end, char **argv, t_files file)
 			perror("ft_split: child 1");
 			exit(1);
 		}
-		printf("comando um %s\n", argv[1]);
 		child_one(file, end[1], file.cmd1, argv[1]);
 	}
 }

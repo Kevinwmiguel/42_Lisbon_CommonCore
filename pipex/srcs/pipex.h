@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:00 by kwillian          #+#    #+#             */
-/*   Updated: 2024/12/20 17:26:45 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:30:20 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,8 @@ char	*ft_strcpy(char *dest, const char *src);
 char	*get_directory_path(char *path);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strncpy(char *dst, const char *src, size_t n);
+char	**add_file_to_cmd(char **cmd, char *file_path);
+size_t	length2(char *cmd);
+size_t	length(char **cmd);
 
 #endif
