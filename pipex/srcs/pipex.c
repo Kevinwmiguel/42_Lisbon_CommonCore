@@ -6,13 +6,13 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2024/12/14 18:03:16 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:04:58 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	check_pipe(int *end, files file)
+void	check_pipe(int *end, t_files file)
 {
 	if (pipe(end) == -1)
 	{
@@ -22,7 +22,7 @@ void	check_pipe(int *end, files file)
 	}
 }
 
-void	check_and_start_child1(pid_t child1, int *end, char **argv, files file)
+void	check_start_child1(pid_t child1, int *end, char **argv, t_files file)
 {
 	if (child1 < 0)
 	{
@@ -40,11 +40,12 @@ void	check_and_start_child1(pid_t child1, int *end, char **argv, files file)
 			perror("ft_split: child 1");
 			exit(1);
 		}
+		printf("comando um %s\n", argv[1]);
 		child_one(file, end[1], file.cmd1, argv[1]);
 	}
 }
 
-void	check_and_start_child2(pid_t child2, int *end, char **argv, files file)
+void	check_start_child2(pid_t child2, int *end, char **argv, t_files file)
 {
 	if (child2 < 0)
 	{
@@ -71,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 	int		end[2];
 	pid_t	child1;
 	pid_t	child2;
-	files	file;
+	t_files	file;
 
 	file.envp = envp;
 	checker(argc, envp);
@@ -81,9 +82,9 @@ int	main(int argc, char **argv, char **envp)
 	check_file(file.outfile);
 	check_pipe(end, file);
 	child1 = fork();
-	check_and_start_child1(child1, end, argv, file);
+	check_start_child1(child1, end, argv, file);
 	child2 = fork();
-	check_and_start_child2(child2, end, argv, file);
+	check_start_child2(child2, end, argv, file);
 	close_files(end, file);
 	wait(&child1);
 	wait(&child2);

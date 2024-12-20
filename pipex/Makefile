@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/29 12:37:09 by kwillian          #+#    #+#              #
-#    Updated: 2024/12/14 18:16:47 by kwillian         ###   ########.fr        #
+#    Updated: 2024/12/20 16:47:25 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 
 SRCS 	=	$(SRC_DIR)pipex.c $(SRC_DIR)closes.c \
 			$(SRC_DIR)ft_free_split.c $(SRC_DIR)checkers.c \
-			$(SRC_DIR)children.c
+			$(SRC_DIR)children.c $(SRC_DIR)aux.c
 
 all: $(NAME)
 
