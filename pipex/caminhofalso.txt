@@ -1,0 +1,10 @@
+total 64
+-rw-rw-r-- 1 kevin kevin    46 dez 20 22:04 arquivo.txt
+-rw-r--r-- 1 kevin kevin     0 dez 20 23:13 caminhofalso.txt
+-rw-rw-r-- 1 kevin kevin    50 dez 20 22:29 caminhooriginal.txt
+drwxrwxr-x 3 kevin kevin  4096 dez 20 22:18 libft
+-rw-rw-r-- 1 kevin kevin  2080 dez 20 22:17 Makefile
+-rwxrwxr-x 1 kevin kevin 33544 dez 20 22:18 pipex
+-rw-rw-r-- 1 kevin kevin   778 dez 20 22:04 readme.txt
+drwxrwxr-x 2 kevin kevin  4096 dez 20 22:04 srcs
+drwxrwxr-x 2 kevin kevin  4096 dez 20 22:26 teste
