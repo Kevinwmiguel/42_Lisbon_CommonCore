@@ -55,26 +55,26 @@ The project involves creating a small 2d game where the player can collects item
 
 Focus: GRaphics manipulation, file reading, and event handling in a Linux environment.
 
-Understanding: <br>  OK
-CODE: <br>  OK 
-TEST: <br> OK 
-EVALUATION <br>  OK
+Understanding: OK <br>
+CODE: OK  <br>  
+TEST: OK  <br> 
+EVALUATION OK <br>
 
 [![42 Profile](https://badgen.net/badge/Born2Code/42%20Profile/blue)](https://profile.intra.42.fr/users/your-username)
 
 # PIPEX:
 
-Understanding: <br> OK
-Code: <br> OK 
-Testing: <br> OK
-Evaluation: <br> OK 
+Understanding: OK <br> 
+Code: OK  <br> 
+Testing: OK <br> 
+Evaluation: OK  <br> 
 
 ### Exame 3
 Ongoing
 
 #Minishell
 
-Understanding: <br> Crying
-Code: <br> Crying
-Testing: <br> Crying
-Evaluation: <br> Crying
+Understanding: Crying <br> 
+Code: Crying <br> 
+Testing: Crying <br> 
+Evaluation: Crying <br> 
