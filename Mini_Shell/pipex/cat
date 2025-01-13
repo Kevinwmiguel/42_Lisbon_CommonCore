@@ -1,0 +1,8 @@
+total 64
+-rw-r--r-- 1 kwillian kwillian     0 Dec 27 22:24 cat
+-rw-rw-r-- 1 kwillian kwillian    64 Dec 27 22:20 file1.txt
+-rw-rw-r-- 1 kwillian kwillian     0 Dec 27 22:24 file2.txt
+-rw-rw-r-- 1 kwillian kwillian  1119 Dec 27 20:39 Makefile
+drwxrwxr-x 2 kwillian kwillian  4096 Dec 27 22:15 objects
+-rwxrwxr-x 1 kwillian kwillian 48096 Dec 27 22:15 pipex
+drwxrwxr-x 2 kwillian kwillian  4096 Dec 27 20:39 sources
