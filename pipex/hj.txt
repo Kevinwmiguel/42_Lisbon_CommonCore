@@ -1,0 +1,1 @@
+-rw-rw-r-- 1 kwillian kwillian 46 Jan 13 22:11 arquivo.txt$

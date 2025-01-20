@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:57:29 by thguimar          #+#    #+#             */
-/*   Updated: 2025/01/16 21:37:37 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/01/16 22:57:46 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,5 @@ void	build_exit(char **argv, t_shell *utils, int flag, int i)
 		}
 	}
 	else
-		exit ((global_status()->status));
+		exit (global_status()->status);
 }

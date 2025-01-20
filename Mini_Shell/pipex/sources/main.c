@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joanda-s <joanda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 18:37:42 by thiago-camp       #+#    #+#             */
-/*   Updated: 2024/08/19 20:42:47 by joanda-s         ###   ########.fr       */
+/*   Updated: 2025/01/16 22:46:17 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	struct_initialize(t_pipe *p, int i, char **argv, int argc)
 	}
 	else
 		p[0].heredoc = false;
-	while (++i <= p[0].n)
+	while (++i < p[0].n)
 	{
 		p[i].id = 0;
 		p[i].command = NULL;

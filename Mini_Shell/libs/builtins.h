@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:03:40 by thguimar          #+#    #+#             */
-/*   Updated: 2025/01/13 21:49:34 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/01/20 21:07:04 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@
 
 typedef struct	s_nodes
 {
-	char		**content;
-	char		token;
-	struct s_nodes	*next;
-	struct s_nodes	*prev;
-}				t_nodes;
+	int				id;
+	char			*content;
+	char			token;
+	struct s_nodes	*left;
+	struct s_nodes	*right;
+	int				fd_in;
+	int				fd_out;
+}				t_nodes; 
 
 typedef enum e_signal_type
 {

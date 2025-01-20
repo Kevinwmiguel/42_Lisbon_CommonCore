@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 18:42:24 by thguimar          #+#    #+#             */
-/*   Updated: 2025/01/13 21:20:43 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/01/20 22:19:50 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,12 @@ void	init_pcomms(t_pipe_comms *pcomms)
 int	main2(t_shell *utils)
 {
 	t_pipe_comms	*pcomms;
+	t_nodes			*tree;
+	t_nodes			*tree_cpy;
 
 	pcomms = ft_calloc(1, sizeof(t_pipe_comms));
+	tree = ft_calloc(1, sizeof(t_nodes));
+	tree_cpy = tree;
 	init_pcomms(pcomms);
 	free_dptr(utils->command, 0);
 	signal_search(ROOT);
@@ -58,6 +62,24 @@ int	main2(t_shell *utils)
 		if (pipe_verify(utils->input, -1, 0) == 0)
 		{
 			utils->command = pipping_commands(utils->input, pcomms);
+			int h;
+			h = -1;
+			while (utils->command[++h])
+			{
+				printf("AAAAAAAAA utils->command[%d]: %s\n", h, utils->command[h]);
+				if (utils->command[h][0] == '|')
+					tree_cpy->content = utils->command[h];
+				
+				if (utils->command[h + 1])
+				{
+					tree_cpy->right = ft_calloc(1, sizeof(t_nodes));
+					tree_cpy = tree_cpy->right;
+				}
+				else
+					tree_cpy = NULL;
+			}
+			while (tree->right)
+				tree = tree->right;
 			ft_split_args_in_comms(pcomms, utils);
 			pcomms_arg_count(pcomms);
 			main2_helper(pcomms, utils);
@@ -65,7 +87,7 @@ int	main2(t_shell *utils)
 		}
 		utils->command = NULL;
 	}
-	return (1);
+	return (1); 
 }
 
 int	main(int argc, char **argv, char **env)

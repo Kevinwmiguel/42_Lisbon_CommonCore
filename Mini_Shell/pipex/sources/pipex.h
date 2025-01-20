@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joanda-s <joanda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 18:40:59 by thiago-camp       #+#    #+#             */
-/*   Updated: 2025/01/16 21:48:31 by kwillian         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:42:47 by joanda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	path_cleaner(char **paths);
 int		any_here_doc(char **argv);
 int		heredoc_init(t_pipe *p);
 void	fd_detector(t_pipe *p, char **argv, int argc, int i);
-
 
 # endif
 #endif
