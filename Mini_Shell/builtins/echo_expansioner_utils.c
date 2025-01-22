@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 18:18:22 by joana             #+#    #+#             */
-/*   Updated: 2025/01/13 21:16:35 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/01/20 21:46:58 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**pipping_commands2(char *str, int x, t_pipe_comms *pcomms)
 	}
 	copy = pcomms;
 	rtn = ft_calloc(sizeof(char *), x + 1);
-	rtn = ft_split(str, '|');
+	rtn = ft_split(str, ' ');
 	while (rtn[++i])
 	{
 		copy->strp = rtn[i];
@@ -83,7 +83,7 @@ char	**pipping_commands(char *input, t_pipe_comms *pcomms)
 	x = 1;
 	while (input[++i])
 	{
-		if (input[i] == '|')
+		if (input[i] == ' ')
 			x++;
 	}
 	rtn = pipping_commands2(input, x, pcomms);

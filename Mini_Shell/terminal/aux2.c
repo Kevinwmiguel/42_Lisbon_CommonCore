@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aux2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joana <joana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:23:32 by joana             #+#    #+#             */
-/*   Updated: 2024/10/19 18:39:47 by joana            ###   ########.fr       */
+/*   Updated: 2025/01/22 20:53:04 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,3 +72,4 @@ char	**ft_split_args(char *str)
 	strings_content2(split, s_copy);
 	return (split);
 }
+
