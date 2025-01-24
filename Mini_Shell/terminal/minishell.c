@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 18:42:24 by thguimar          #+#    #+#             */
-/*   Updated: 2025/01/22 22:23:33 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:33:20 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	tree_filler(t_nodes *tree_cpy, t_shell *utils, int h, int layer_count)
 				break ;
 		}
 	}
-	while (h < x)
+	if (h < x)
 	{
 		tree_cpy->left = ft_calloc(1, sizeof(t_nodes));
 		tree_cpy = tree_cpy->left;
@@ -64,17 +64,37 @@ int	tree_filler(t_nodes *tree_cpy, t_shell *utils, int h, int layer_count)
 		tree_cpy->token = 'C';
 		tree_cpy->layer = layer_count;
 		layer_count++;
-		printf("\ntree_cpy->content = %s, nivel %i da arvore", tree_cpy->content, tree_cpy->layer);
+		printf("\nAAAAAAAAAAAA tree_cpy->content = %s, nivel %i da arvore, token= %c\n", tree_cpy->content, tree_cpy->layer, tree_cpy->token);
 		h++;
 	}
+	while (h < x)
+	{
+		if (utils->command[h][0] == '-')
+		{
+			tree_cpy->left = ft_calloc(1, sizeof(t_nodes));
+			tree_cpy = tree_cpy->left;
+			tree_cpy->content = utils->command[h];
+			tree_cpy->token = 'F';
+			tree_cpy->layer = layer_count;
+			layer_count++;
+			printf("\nBBBBBBBBBBBBBtree_cpy->content = %s, nivel %i da arvore, token= %c\n", tree_cpy->content, tree_cpy->layer, tree_cpy->token);
+		}
+		h++;
+	}
+	
+	printf("============================%i\n", shelf);
 	if (utils->command[h + 1] == NULL)
 	{
 		tree_cpy->left = ft_calloc(1, sizeof(t_nodes));
 		tree_cpy = tree_cpy->left;
+		if (utils->command[h][0] == '-')
+			tree_cpy->token = 'F';
+		else
+			tree_cpy->token = 'C';
 	 	tree_cpy->content = utils->command[h];
 	 	tree_cpy->layer = layer_count;
 		layer_count++;
-		printf("\ntree_cpy->content = %s, nivel %i da arvore", tree_cpy->content, tree_cpy->layer);
+		printf("\nCCCCCCCCCCCCCCCCtree_cpy->content = %s, nivel %i da arvore, token= %c\n", tree_cpy->content, tree_cpy->layer, tree_cpy->token);
 	 }
 	shelf++;
 	return (shelf);
