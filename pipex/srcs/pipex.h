@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:00 by kwillian          #+#    #+#             */
-/*   Updated: 2024/12/20 20:30:20 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/01/27 22:57:46 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 
 typedef struct datafile
 {
-	int		infile;
-	int		outfile;
-	char	**envp;
-	char	**cmd1;
-	char	**cmd2;
+	int		infile;    // Arquivo de entrada
+	int		outfile;   // Arquivo de saída
+	char	**envp;    // Ambiente
+	char	***cmds;   // Array de comandos (ex: [["ls", "-l"], ["cat", "-e"]])
+	int		cmd_count; // Número de comandos
 }	t_files;
 
 void	ft_free_split(char *split, char *msg);

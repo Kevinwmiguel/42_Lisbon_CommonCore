@@ -1,0 +1,10 @@
+arquivo.txt$
+caminhofalso.txt$
+caminhooriginal.txt$
+libft$
+Makefile$
+output.txt$
+pipex$
+readme.txt$
+srcs$
+teste$
