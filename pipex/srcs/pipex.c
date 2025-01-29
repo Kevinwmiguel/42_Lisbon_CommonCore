@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/01/27 23:10:43 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/01/29 23:25:30 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,39 +151,56 @@ void search_path(t_files *file, char **paths)
 	path_cleaner(paths);
 }
 
-void execute_command(char **cmd_args, char **envp) {
-    char **args = NULL;
+void handle_redirection_input(char **cmd_args) {
     int fd = -1;
+    int i = 0;
 
-    // Verifica se há redirecionamento de entrada
-    if (cmd_args && ft_strchr(cmd_args[0], '<')) {
-        char **split = ft_split(cmd_args[0], '<'); // Separa comando e arquivo
-        if (!split || !split[0] || !split[1]) {
-            perror("Invalid redirection");
+    while (cmd_args[i]) {
+        if (ft_strncmp(cmd_args[i], "<", 1) == 0 && cmd_args[i + 1]) {
+            if (access(cmd_args[i + 1], F_OK) == -1) {  // Verifica se o arquivo existe
+                perror("Arquivo inexistente");
+                exit(1);
+            }
+            fd = open(cmd_args[i + 1], O_RDONLY);
+            if (fd < 0) {
+                perror("open");
+                exit(1);
+            }
+            dup2(fd, STDIN_FILENO);
+            close(fd);
+
+            // Remove "< file" dos argumentos
+            while (cmd_args[i]) {
+                cmd_args[i] = cmd_args[i + 2];
+                i++;
+            }
+            break;
+        }
+        i++;
+    }
+}
+
+void execute_command(char **cmd_args, char **envp) {
+    pid_t pid = fork();
+    
+    if (pid == 0) { // Processo filho
+        handle_redirection_input(cmd_args);  // Tratar '<' antes do execve()
+        
+        if (!cmd_args[0]) {
+            perror("Invalid command");
             exit(1);
         }
-        args = ft_split(split[0], ' '); // Separa os argumentos do comando
-        fd = open(ft_strtrim(split[1], " "), O_RDONLY); // Abre o arquivo redirecionado
-        if (fd < 0) {
-            perror("open");
-            exit(1);
-        }
-        dup2(fd, STDIN_FILENO); // Redireciona entrada padrão
-        close(fd);
-        free_split(split);
-    } else {
-        args = cmd_args; // Se não houver redirecionamento, usa os comandos passados
-    }
 
-    if (!args || !args[0]) {
-        perror("Invalid command");
-        exit(1);
+        execve(cmd_args[0], cmd_args, envp);
+        perror("execve");
+        exit(127);
     }
-
-    // Executa o comando
-    execve(args[0], args, envp);
-    perror("execve");
-    exit(127);
+    else if (pid > 0) { // Processo pai
+        waitpid(pid, NULL, 0);
+    }
+    else {
+        perror("fork");
+    }
 }
 
 
@@ -274,12 +291,8 @@ void pipex(int argc, char **argv, char **envp)
 	free(file.cmds);
 }
 
-int main(int argc, char **argv, char **envp) {
-    if (argc < 5) {
-        fprintf(stderr, "Usage: %s infile cmd1 cmd2 ... cmdN outfile\n", argv[0]);
-        return (1);
-    }
-
+int main(int argc, char **argv, char **envp)
+{
     pipex(argc, argv, envp);
     return (0);
 }

@@ -1,10 +1,9 @@
-arquivo.txt$
-caminhofalso.txt$
-caminhooriginal.txt$
-libft$
-Makefile$
-output.txt$
-pipex$
-readme.txt$
-srcs$
-teste$
+total 64
+-rw-rw-r-- 1 kevin kevin    46 jan 24 22:02 arquivo.txt
+drwxrwxr-x 3 kevin kevin  4096 jan 29 23:25 libft
+-rw-rw-r-- 1 kevin kevin  2080 jan 24 22:02 Makefile
+-rw-r--r-- 1 kevin kevin     0 jan 29 23:27 output.txt
+-rwxrwxr-x 1 kevin kevin 39368 jan 29 23:25 pipex
+-rw-rw-r-- 1 kevin kevin   778 jan 24 22:02 readme.txt
+drwxrwxr-x 2 kevin kevin  4096 jan 24 22:03 srcs
+drwxrwxr-x 2 kevin kevin  4096 jan 24 22:02 teste
