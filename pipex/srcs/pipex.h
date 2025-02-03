@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:00 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/02 19:00:54 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:49:02 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include <unistd.h>
+# include "../get_next_line/get_next_line.h"
 # include <stdio.h>
 # include <sys/wait.h>
 # include <stdlib.h>

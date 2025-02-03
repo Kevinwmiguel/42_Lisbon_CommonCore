@@ -8,6 +8,7 @@
         "stdarg.h": "c",
         "so_long.h": "c",
         "get_next_line.h": "c",
-        "mlx.h": "c"
+        "mlx.h": "c",
+        "stdlib.h": "c"
     }
 }

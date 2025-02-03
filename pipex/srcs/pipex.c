@@ -6,44 +6,40 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/02 19:21:19 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:05:25 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int here_doc(t_files *file)
+int	here_doc(char *limiter)
 {
-    char    *line;
-    int     fd[2];
+	char	*line;
+	int     fd[2];
 
-    if (pipe(file->pipe_fd) == -1) // Use a estrutura file para gerenciar o pipe
-    {
-        perror("Erro ao criar o pipe");
-        exit(1); // Finalização segura
-    }
-
-    while (1)
-    {
-        line = get_next_line(STDIN_FILENO); // Lê a entrada do usuário
-        if (!line)
-        {
-            perror("Erro ao ler a linha");
-            exit(1); // Finalização segura
-        }
-
-        // Verifica se a linha corresponde ao limitador
-        if (ft_strncmp(line, file->limiter, ft_strlen(line)) == 0 &&
-            ft_strlen(line) == ft_strlen(file->limiter))
-            break;
-
-        write(file->pipe_fd[1], line, ft_strlen(line)); // Escreve no pipe
-        free(line);
-    }
-
-    free(line);
-    close(file->pipe_fd[1]); // Fecha o lado de escrita do pipe
-    return (file->pipe_fd[0]); // Retorna o lado de leitura
+	line = NULL;
+	if (pipe(fd) == -1)
+	{
+		perror("Erro ao criar o pipe");
+		exit(1);
+	}
+	while (1)
+	{
+		line = get_next_line(STDIN_FILENO);
+		if (!line)
+		{
+			perror("Erro ao ler a linha");
+			exit(1);
+		}
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0 && \
+			ft_strlen(line) == ft_strlen(limiter))
+			break ;
+		write(fd[1], line, ft_strlen(line));
+		free(line);
+	}
+	free(line);
+	close(fd[1]);
+	return (fd[0]);
 }
 
 void	handle_redirection_input(char **cmd_args)
@@ -55,12 +51,19 @@ void	handle_redirection_input(char **cmd_args)
 	fd = -1;
 	while (cmd_args[i])
 	{
-		// EOF
-		if (ft_strncmp(cmd_args[i], "<<", 2) == 0)
-			here_doc();
-
-		
-		if (ft_strncmp(cmd_args[i], "<", 1) == 0 && cmd_args[i + 1])
+		if (ft_strncmp(cmd_args[i], "<<", 2) == 0 && cmd_args[i + 1])
+		{
+			fd = here_doc(cmd_args[i + 1]);
+			dup2(fd, STDIN_FILENO);
+			close(fd);
+			while (cmd_args[i])
+			{
+				cmd_args[i] = cmd_args[i + 2];
+				i++;
+			}
+			break ;
+		}
+		else if (ft_strncmp(cmd_args[i], "<", 1) == 0 && cmd_args[i + 1])
 		{
 			if (access(cmd_args[i + 1], F_OK) == -1)
 			{
@@ -75,7 +78,6 @@ void	handle_redirection_input(char **cmd_args)
 			}
 			dup2(fd, STDIN_FILENO);
 			close(fd);
-			// Remove "< file" dos argumentos
 			while (cmd_args[i])
 			{
 				cmd_args[i] = cmd_args[i + 2];
@@ -87,31 +89,30 @@ void	handle_redirection_input(char **cmd_args)
 	}
 }
 
-void execute_command(char **cmd_args, char **envp) {
-	pid_t pid = fork();
-	
-	if (pid == 0) { // Processo filho
-		handle_redirection_input(cmd_args);  // Tratar '<' antes do execve()
-		
-		if (!cmd_args[0]) {
+void	execute_command(char **cmd_args, char **envp)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		handle_redirection_input(cmd_args);
+		if (!cmd_args[0])
+		{
 			perror("Invalid command");
 			exit(1);
 		}
-
 		execve(cmd_args[0], cmd_args, envp);
 		perror("execve");
 		exit(127);
 	}
-	else if (pid > 0) { // Processo pai
+	else if (pid > 0)
 		waitpid(pid, NULL, 0);
-	}
-	else {
+	else
 		perror("fork");
-	}
 }
 
-
-void pipex(int argc, char **argv, char **envp)
+void	pipex(int argc, char **argv, char **envp)
 {
 	t_files file;
 	int pipe_fd[2];
@@ -137,8 +138,11 @@ void pipex(int argc, char **argv, char **envp)
 		perror("open infile");
 		exit(1);
 	}
-
-	// Processa cada comando
+	// i = 0;
+	// while (i < file.cmd_count - 1)
+	// {
+	// 	i++;
+	// }
 	for (i = 0; i < file.cmd_count - 1; i++)
 	{
 		if (pipe(pipe_fd) == -1)
