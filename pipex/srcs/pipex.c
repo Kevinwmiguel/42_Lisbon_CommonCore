@@ -6,88 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/03 23:05:25 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/09 18:07:03 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int	here_doc(char *limiter)
-{
-	char	*line;
-	int     fd[2];
-
-	line = NULL;
-	if (pipe(fd) == -1)
-	{
-		perror("Erro ao criar o pipe");
-		exit(1);
-	}
-	while (1)
-	{
-		line = get_next_line(STDIN_FILENO);
-		if (!line)
-		{
-			perror("Erro ao ler a linha");
-			exit(1);
-		}
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0 && \
-			ft_strlen(line) == ft_strlen(limiter))
-			break ;
-		write(fd[1], line, ft_strlen(line));
-		free(line);
-	}
-	free(line);
-	close(fd[1]);
-	return (fd[0]);
-}
-
-void	handle_redirection_input(char **cmd_args)
-{
-	int	fd;
-	int	i;
-
-	i = 0;
-	fd = -1;
-	while (cmd_args[i])
-	{
-		if (ft_strncmp(cmd_args[i], "<<", 2) == 0 && cmd_args[i + 1])
-		{
-			fd = here_doc(cmd_args[i + 1]);
-			dup2(fd, STDIN_FILENO);
-			close(fd);
-			while (cmd_args[i])
-			{
-				cmd_args[i] = cmd_args[i + 2];
-				i++;
-			}
-			break ;
-		}
-		else if (ft_strncmp(cmd_args[i], "<", 1) == 0 && cmd_args[i + 1])
-		{
-			if (access(cmd_args[i + 1], F_OK) == -1)
-			{
-				perror("Arquivo inexistente");
-				exit(1);
-			}
-			fd = open(cmd_args[i + 1], O_RDONLY);
-			if (fd < 0)
-			{
-				perror("open");
-				exit(1);
-			}
-			dup2(fd, STDIN_FILENO);
-			close(fd);
-			while (cmd_args[i])
-			{
-				cmd_args[i] = cmd_args[i + 2];
-				i++;
-			}
-			break ;
-		}
-		i++;
-	}
-}
 
 void	execute_command(char **cmd_args, char **envp)
 {
@@ -104,7 +27,7 @@ void	execute_command(char **cmd_args, char **envp)
 		}
 		execve(cmd_args[0], cmd_args, envp);
 		perror("execve");
-		exit(127);
+		exit(1);
 	}
 	else if (pid > 0)
 		waitpid(pid, NULL, 0);
@@ -112,96 +35,101 @@ void	execute_command(char **cmd_args, char **envp)
 		perror("fork");
 }
 
-void	pipex(int argc, char **argv, char **envp)
+void	init_func(t_files *file, char **envp, char **argv, int argc)
 {
-	t_files file;
-	int pipe_fd[2];
-	int fd_in;
-	pid_t pid;
-	int i;
+	int	i;
 
-	// Inicializa estrutura
-	file.envp = envp;
-	file.cmd_count = argc - 3; // Exclui infile e outfile
-	file.cmds = malloc(sizeof(char **) * file.cmd_count);
-	for (i = 0; i < file.cmd_count; i++)
-		file.cmds[i] = ft_split(argv[2 + i], ' ');
+	i = -1;
+	file->envp = malloc(sizeof(char *) * (length(envp) + 1));
+	file->envp = envp;
+	file->cmd_count = argc - 3;
+	file->cmds = malloc(sizeof(char **) * file->cmd_count);
+	while (++i < file->cmd_count)
+		file->cmds[i] = ft_split(argv[2 + i], ' ');
+}
 
-	// Busca caminhos para os comandos
-	char **paths = pick_path(envp);
-	search_path(&file, paths);
+void pipex(int argc, char **argv, char **envp)
+{
+	t_files	*file;
+	int		fd_in;
+	pid_t	pid;
+	int		i;
+	char	**paths;
+	int		fd_out;
 
-	// Abre arquivo de entrada
-	fd_in = open(argv[1], O_RDONLY);
-	if (fd_in < 0)
+	file = malloc(sizeof(t_files));
+	init_func(file, envp, argv, argc);
+	paths = pick_path(envp);
+	search_path(file, paths);
+	fd_in = check_infile(argv[1]);
+	i = 0;
+	while (i < file->cmd_count - 1)
 	{
-		perror("open infile");
-		exit(1);
-	}
-	// i = 0;
-	// while (i < file.cmd_count - 1)
-	// {
-	// 	i++;
-	// }
-	for (i = 0; i < file.cmd_count - 1; i++)
-	{
-		if (pipe(pipe_fd) == -1)
-		{
-			perror("pipe");
-			exit(1);
-		}
-
+		if (pipe(file->pipe_fd) == -1)
+			exit(printf("Erro ao criar o pipe"));
 		pid = fork();
 		if (pid == -1)
-		{
-			perror("fork");
-			exit(1);
-		}
+			exit(printf("Erro ao criar o processo"));
 		if (pid == 0)
 		{
-			dup2(fd_in, STDIN_FILENO);  // Entrada padrão
-			dup2(pipe_fd[1], STDOUT_FILENO); // Saída padrão
-			close(pipe_fd[0]);
-			close(pipe_fd[1]);
-			execute_command(file.cmds[i], envp);
+			dup2(fd_in, STDIN_FILENO);
+			dup2(file->pipe_fd[1], STDOUT_FILENO);
+			close(file->pipe_fd[0]);
+			close(file->pipe_fd[1]);
+			close(fd_in);
+			execute_command(file->cmds[i], envp);
+			exit(1);
 		}
 		else
 		{
 			waitpid(pid, NULL, 0);
-			close(pipe_fd[1]);
-			fd_in = pipe_fd[0];
+			close(file->pipe_fd[1]);
+			close(fd_in);
+			fd_in = file->pipe_fd[0];
 		}
+		i++;
 	}
-	int fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd_out < 0) // Último comando
+	if (argc > 2 && !is_command(argv[argc - 1]))
 	{
-		perror("open outfile");
-		exit(1);
-	}
-	pid = fork();
-	if (pid == 0)
-	{
-		dup2(fd_in, STDIN_FILENO);
-		dup2(fd_out, STDOUT_FILENO);
-		execute_command(file.cmds[i], envp);
+		fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd_out < 0)
+		{
+			perror("Erro ao abrir o arquivo de saída");
+			fd_out = STDOUT_FILENO;
+		}
 	}
 	else
 	{
-		waitpid(pid, NULL, 0);
-		close(fd_in);
-		close(fd_out);
+		fd_out = STDOUT_FILENO;
 	}
-	i = 0;
-	while (i < file.cmd_count) // Libera memória
+	if (is_command(argv[argc - 1]))
 	{
-		free(file.cmds[i]);
-		i++;
+		fd_out = STDOUT_FILENO;
+		dup2(fd_in, STDIN_FILENO);
+		dup2(fd_out, STDOUT_FILENO);
+		close(fd_in);
+		//close(fd_out);  // Fechar a saída do arquivo/terminal
+		execute_command(file->cmds[i], envp);
 	}
-	free(file.cmds);
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	pipex(argc, argv, envp);
-	return (0);
+	else
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			dup2(fd_in, STDIN_FILENO);
+			dup2(fd_out, STDOUT_FILENO);
+			close(fd_in);
+			close(fd_out);
+			execute_command(file->cmds[i], envp);
+			exit(1);
+		}
+		else
+		{
+			waitpid(pid, NULL, 0);
+			close(fd_in);
+			if (fd_out != STDOUT_FILENO)
+				close(fd_out);
+		}
+	}
+	free_split((*file->cmds));
 }

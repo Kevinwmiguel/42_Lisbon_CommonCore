@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:00 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/03 20:49:02 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:03:53 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct datafile
 {
@@ -29,11 +31,12 @@ typedef struct datafile
 	char	**envp;
 	char	***cmds;
 	int		cmd_count;
+	int		pipe_fd[2];
 }	t_files;
 
 void	ft_free_split(char *split, char *msg);
 void	close_files(int *end, t_files file);
-void	check_file(int file);
+int		check_infile(char *file);
 void	child_two(int fd_read, t_files fd_write, char **cmd);
 void	child_one(t_files fd_read, int fd_write, char **cmd, char *file_path);
 void	checker(int argc, char **envp);
@@ -57,5 +60,8 @@ void	path_cleaner(char **paths);
 void	pick_path2(t_files *file, char **path, int cmd_index, int path_index);
 char	**pick_path(char **envp);
 void    search_path(t_files *file, char **paths);
-
+void	pipex(int argc, char **argv, char **envp);
+int		is_command(const char *arg);
+int	here_doc(char *limiter);
+void	handle_redirection_input(char **cmd_args);
 #endif

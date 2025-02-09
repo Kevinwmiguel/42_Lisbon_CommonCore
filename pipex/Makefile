@@ -6,7 +6,7 @@
 #    By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/29 12:37:09 by kwillian          #+#    #+#              #
-#    Updated: 2025/02/03 20:57:39 by kwillian         ###   ########.fr        #
+#    Updated: 2025/02/09 15:36:29 by kwillian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,13 @@ SRCS 	=	$(SRC_DIR)pipex.c $(SRC_DIR)closes.c \
 			$(SRC_DIR)ft_free_split.c $(SRC_DIR)checkers.c \
 			$(SRC_DIR)children.c $(SRC_DIR)aux.c $(SRC_DIR)aux2.c \
 			$(SRC_DIR)path.c $(GET_DIR)get_next_line.c \
-			$(GET_DIR)get_next_line_utils.c
+			$(GET_DIR)get_next_line_utils.c $(SRC_DIR)main.c \
+			$(SRC_DIR)here_red.c
 
 all: $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(SRCS) -o $@ $(LIBFT)
+	@$(CC) $(CFLAGS) $(SRCS) -o $@ $(LIBFT) $^ -lreadline
 	clear
 %.o:%.c
 	@$(CC) $(CFLAGS) -c $^ -o $@

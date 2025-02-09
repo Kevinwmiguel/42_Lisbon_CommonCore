@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:43:27 by kwillian          #+#    #+#             */
-/*   Updated: 2024/12/16 16:33:28 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/09 16:05:54 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,25 @@ void	checker(int argc, char **envp)
 	}
 }
 
-void	check_file(int file)
+int	check_infile(char *argv)
 {
-	if (file < 0)
+	int	fd_in;
+
+	fd_in = open(argv, O_RDONLY);
+	if (fd_in < 0)
 	{
-		perror("Error get the file: \n");
-		close(file);
-		exit(1);
+		fd_in = open("/dev/null", O_RDONLY);
 	}
+	return (fd_in);
+}
+
+int	is_command(const char *arg)
+{
+	while (*arg)
+	{
+		if (*arg == ' ' || *arg == '<' || *arg == '>' || *arg == '|')
+			return (1);
+		arg++;
+	}
+	return (0);
 }

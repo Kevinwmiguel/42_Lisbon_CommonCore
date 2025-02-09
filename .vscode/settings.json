@@ -9,6 +9,7 @@
         "so_long.h": "c",
         "get_next_line.h": "c",
         "mlx.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "pipex.h": "c"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 00:06:35 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/02 19:00:24 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:05:26 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,12 @@ char	**pick_path(char **envp)
 
 void    search_path(t_files *file, char **paths)
 {
-	int i, n, check;
+	int i;
+	int n;
+	int check;
 
-	for (n = 0; n < file->cmd_count; n++) // Itera pelos comandos
+	n = 0;
+	while (n < file->cmd_count)
 	{
 		i = 0;
 		check = 0;
@@ -86,21 +89,19 @@ void    search_path(t_files *file, char **paths)
 			char *tmp = ft_strjoin(paths[i], "/");
 			char *full_path = ft_strjoin(tmp, file->cmds[n][0]);
 			free(tmp);
-
 			if (access(full_path, X_OK) == 0)
 			{
 				free(file->cmds[n][0]);
-				file->cmds[n][0] = full_path; // Substitui pelo caminho completo
+				file->cmds[n][0] = full_path;
 				check = 1;
-				break;
+				break ;
 			}
 			free(full_path);
 			i++;
 		}
-		if (!check) // Se não encontrou o comando, define como NULL
-		{
+		if (!check)
 			file->cmds[n][0] = NULL;
-		}
+		n++;
 	}
 	path_cleaner(paths);
 }
