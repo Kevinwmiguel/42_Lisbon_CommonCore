@@ -1,10 +1,10 @@
-total 80$$$$
--rw-rw-r-- 1 kwillian kwillian    46 Feb  2 19:44 arquivo.txt$$$$
-drwxrwxr-x 2 kwillian kwillian  4096 Feb  2 19:44 get_next_line$$$$
-drwxrwxr-x 3 kwillian kwillian  4096 Feb  9 18:03 libft$$$$
--rw-rw-r-- 1 kwillian kwillian  2249 Feb  9 15:36 Makefile$$$$
--rw-r--r-- 1 kwillian kwillian   579 Feb  9 18:00 output.txt$$$$
--rwxrwxr-x 1 kwillian kwillian 45264 Feb  9 18:03 pipex$$$$
--rw-rw-r-- 1 kwillian kwillian   778 Feb  2 19:44 readme.txt$$$$
-drwxrwxr-x 2 kwillian kwillian  4096 Feb  9 13:01 srcs$$$$
-drwxrwxr-x 2 kwillian kwillian  4096 Feb  2 19:44 teste$$$$
+total 76$$$
+-rw-rw-r-- 1 kevin kevin    46 fev  9 21:56 arquivo.txt$$$
+drwxrwxr-x 2 kevin kevin  4096 fev  9 21:56 get_next_line$$$
+drwxrwxr-x 3 kevin kevin  4096 fev  9 23:10 libft$$$
+-rw-rw-r-- 1 kevin kevin  2249 fev  9 21:56 Makefile$$$
+-rw-rw-r-- 1 kevin kevin     0 fev  9 23:09 output.txt$$$
+-rwxrwxr-x 1 kevin kevin 45264 fev  9 23:10 pipex$$$
+-rw-rw-r-- 1 kevin kevin   778 fev  9 21:56 readme.txt$$$
+drwxrwxr-x 2 kevin kevin  4096 fev  9 21:56 srcs$$$
+drwxrwxr-x 2 kevin kevin  4096 fev  9 21:56 teste$$$

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/09 18:07:03 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/09 23:09:56 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	init_func(t_files *file, char **envp, char **argv, int argc)
 	i = -1;
 	file->envp = malloc(sizeof(char *) * (length(envp) + 1));
 	file->envp = envp;
-	file->cmd_count = argc - 3;
+	file->cmd_count = argc - 3; // 3 para o output do pipex
 	file->cmds = malloc(sizeof(char **) * file->cmd_count);
 	while (++i < file->cmd_count)
 		file->cmds[i] = ft_split(argv[2 + i], ' ');
@@ -108,7 +108,6 @@ void pipex(int argc, char **argv, char **envp)
 		dup2(fd_in, STDIN_FILENO);
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_in);
-		//close(fd_out);  // Fechar a saída do arquivo/terminal
 		execute_command(file->cmds[i], envp);
 	}
 	else
