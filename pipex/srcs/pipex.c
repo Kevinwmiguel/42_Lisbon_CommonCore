@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/10 23:12:10 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/10 23:48:25 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,27 @@ void	execute_command(char **cmd_args, char **envp)
 		perror("fork");
 }
 
+void	dup_process(int arch, t_files *file, int i)
+{
+	dup2(arch, STDIN_FILENO);
+	dup2(file->pipe_fd[1], STDOUT_FILENO);
+	close(file->pipe_fd[0]);
+	close(file->pipe_fd[1]);
+	close(arch);
+	execute_command(file->cmds[i], file->envp);
+	exit(1);
+}
+
+void	dup_process2(t_files *file, int i)
+{
+	dup2(file->infile, STDIN_FILENO);
+	dup2(file->outfile, STDOUT_FILENO);
+	close(file->infile);
+	close(file->outfile);
+	execute_command(file->cmds[i], file->envp);
+	exit(1);
+}
+
 void	init_func(t_files *file, char **envp, char **argv, int argc)
 {
 	int	i;
@@ -43,11 +64,42 @@ void	init_func(t_files *file, char **envp, char **argv, int argc)
 	file->paths = malloc(sizeof(char *) * 1);
 	file->envp = malloc(sizeof(char *) * (length(envp) + 1));
 	file->envp = envp;
-	file->cmd_count = argc - 3; // 3 para o output do pipex
+	file->cmd_count = argc - 2; // 3 para o output do pipex
 	file->cmds = malloc(sizeof(char **) * file->cmd_count);
 	while (++i < file->cmd_count)
 		file->cmds[i] = ft_split(argv[2 + i], ' ');
 }
+
+void	main3(t_files *file, int i, char **argv, int argc)
+{
+	pid_t		pid;
+
+	if (is_command(argv[argc - 1]))
+	{
+		file->outfile = STDOUT_FILENO;
+		dup2(file->infile, STDIN_FILENO);
+		dup2(file->outfile, STDOUT_FILENO);
+		close(file->infile);
+		execute_command(file->cmds[i], file->envp);
+	}
+	else
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			dup_process2(file, i);
+		}
+		else
+		{
+			waitpid(pid, NULL, 0);
+			close(file->infile);
+			if (file->outfile != STDOUT_FILENO)
+				close(file->outfile);
+		}
+	}
+	free_split((*file->cmds));
+}
+
 
 void	pipex(int argc, char **argv, char **envp)
 {
@@ -71,13 +123,7 @@ void	pipex(int argc, char **argv, char **envp)
 			exit(printf("Erro ao criar o processo"));
 		if (pid == 0)
 		{
-			dup2(file->infile, STDIN_FILENO);
-			dup2(file->pipe_fd[1], STDOUT_FILENO);
-			close(file->pipe_fd[0]);
-			close(file->pipe_fd[1]);
-			close(file->infile);
-			execute_command(file->cmds[i], envp);
-			exit(1);
+			dup_process(file->infile, file, i);
 		}
 		else
 		{
@@ -88,7 +134,6 @@ void	pipex(int argc, char **argv, char **envp)
 		}
 		i++;
 	}
-
 	if (argc > 2 && !is_command(argv[argc - 1]))
 	{
 		file->outfile = open(argv[argc - 1], O_WRONLY \
@@ -103,34 +148,5 @@ void	pipex(int argc, char **argv, char **envp)
 	{
 		file->outfile = STDOUT_FILENO;
 	}
-
-	if (is_command(argv[argc - 1]))
-	{
-		file->outfile = STDOUT_FILENO;
-		dup2(file->infile, STDIN_FILENO);
-		dup2(file->outfile, STDOUT_FILENO);
-		close(file->infile);
-		execute_command(file->cmds[i], envp);
-	}
-	else
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			dup2(file->infile, STDIN_FILENO);
-			dup2(file->outfile, STDOUT_FILENO);
-			close(file->infile);
-			close(file->outfile);
-			execute_command(file->cmds[i], envp);
-			exit(1);
-		}
-		else
-		{
-			waitpid(pid, NULL, 0);
-			close(file->infile);
-			if (file->outfile != STDOUT_FILENO)
-				close(file->outfile);
-		}
-	}
-	free_split((*file->cmds));
+	main3(file, i, argv, argc);
 }
