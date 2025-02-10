@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:00 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/09 17:03:53 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:58:41 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct datafile
 	char	***cmds;
 	int		cmd_count;
 	int		pipe_fd[2];
+	char	**paths;
 }	t_files;
 
 void	ft_free_split(char *split, char *msg);
