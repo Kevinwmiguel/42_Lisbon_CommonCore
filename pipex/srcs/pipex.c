@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/10 23:48:25 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/20 20:33:48 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	main3(t_files *file, int i, char **argv, int argc)
 	}
 	free_split((*file->cmds));
 }
-
 
 void	pipex(int argc, char **argv, char **envp)
 {
