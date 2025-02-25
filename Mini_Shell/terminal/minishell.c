@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 18:42:24 by thguimar          #+#    #+#             */
-/*   Updated: 2025/02/20 23:26:40 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/25 22:39:10 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,20 @@ int	fusion(t_nodes *tree, t_shell *utils, int h)
 	char	*shelf;
 
 	connection = ft_strjoinsp(tree->content, utils->command[h]);
-	h++;
-	while (utils->command[h] && utils->command[h][0] == '-')
+	if (utils->command[h + 1])
 	{
-		if (shelf)
-			free(shelf);
-		shelf = ft_strjoinsp(connection, utils->command[h]);
-		connection = shelf;
 		h++;
+		while (utils->command[h] && utils->command[h][0] == '-')
+		{
+			if (shelf)
+				free(shelf);
+			shelf = ft_strjoinsp(connection, utils->command[h]);
+			connection = shelf;
+			h++;
+		}
 	}
-	tree->content = shelf;
-	free (connection);
+	tree->content = connection;
+	printf("/n/nCONTENT AQUI->>>>>> %s/n/n", tree->content);
 	return (h);
 }
 
@@ -63,8 +66,8 @@ int	tree_filler(t_nodes *tree_cpy, t_shell *utils, int h, int layer_count)
 	int	x;
 	int shelf;
 	int	flag;
+	t_nodes	*tree_cpy_prev;
 
-	printf("\nCAGANEIRA!!!!!!!!!!\n");
 	flag = 0;
 	shelf = layer_count;
 	layer_count++;
@@ -114,15 +117,18 @@ int	tree_filler(t_nodes *tree_cpy, t_shell *utils, int h, int layer_count)
 		}
 		h++;
 	}
-	/*if (utils->command[h][0] == '-')
-		fusion(tree_cpy, utils, h);*/
 	printf("============================%i\n", shelf);
-	if (utils->command[h + 1] == NULL)
+	if (utils->command[h + 1] == NULL) // pegar o ultimo comando
 	{
+		tree_cpy_prev = tree_cpy;
 		tree_cpy->left = ft_calloc(1, sizeof(t_nodes));
 		tree_cpy = tree_cpy->left;
 		if (utils->command[h][0] == '-')
+		{
 			tree_cpy->token = 'F';
+			if (flag == 1)
+				fusion(tree_cpy_prev, utils, h);
+		}
 		else if ((ft_isalnum(utils->command[h][0]) == 1|| utils->command[h][0] == '_'))
 			tree_cpy->token = 'A';
 		else
@@ -138,15 +144,19 @@ int	tree_filler(t_nodes *tree_cpy, t_shell *utils, int h, int layer_count)
 
 int	main3(t_nodes *tree, t_pipe_comms *pcomms, t_shell *utils)
 {
-	// t_nodes	*tree_cpy;
+	t_nodes	*tree_cpy;
 
-	// tree_cpy = tree;
-	// while (tree_cpy && tree_cpy->right)
-	// {
-	// 	//mesclaçao
-	// 	pipex(tree_cpy->fd_in, pcomms, utils, tree_cpy->fd_out);
-	// 	tree = tree->right;
-	// }
+	while (tree)
+	{
+		tree_cpy = tree->left;
+		if (tree_cpy->left)
+		{
+			tree_cpy->content = ft_strjoinsp(tree_cpy->content, tree_cpy->left->content);
+			free(tree_cpy->left->content);
+		}
+			//pipex(tree_cpy->fd_in, pcomms, utils, tree_cpy->fd_out);
+		tree = tree->right;
+	}
 	while (tree->right)
 				tree = tree->right;
 			ft_split_args_in_comms(pcomms, utils);
@@ -167,6 +177,8 @@ int	main2(t_shell *utils)
 	pcomms = ft_calloc(1, sizeof(t_pipe_comms));
 	tree = ft_calloc(1, sizeof(t_nodes));
 	tree_cpy = tree;
+	printf("SLASLASLASLSALSALSLASLASLLASL: %p\n", tree);      //LAYER 0, CERTO (IGUAL)
+	printf("22222222222222222222222222222: %p\n", tree_cpy);  //LAYER 0, CERTO (IGUAL)
 	init_pcomms(pcomms);
 	free_dptr(utils->command, 0);
 	signal_search(ROOT);
@@ -190,8 +202,10 @@ int	main2(t_shell *utils)
 				if (utils->command[h][0] == '|')
 				{
 					tree_cpy->content = utils->command[h];
+					printf("tree_copy content: %s\n", tree_cpy->content);
 					tree_cpy->token = 'P';
 					tree_cpy->layer = layer_count;
+					printf("AAAAAAAAAAAAA TREE %p, TREE->content %s, tree layer %d \n", tree_cpy, tree_cpy->content, tree_cpy->layer);  //LAYER 0, ERRADO (NAO ESTA IGUAL)
 					layer_count = tree_filler(tree_cpy, utils, h, layer_count);
 				}
 				else if (utils->command[h + 1] == NULL)
@@ -201,16 +215,11 @@ int	main2(t_shell *utils)
 					tree_cpy->right = ft_calloc(1, sizeof(t_nodes));
 					tree_cpy = tree_cpy->right;
 				}
-				else
-					tree_cpy = NULL;
 			}
-			main3(tree, pcomms, utils);
-			// while (tree->right)
-			// 	tree = tree->right;
-			// ft_split_args_in_comms(pcomms, utils);
-			// pcomms_arg_count(pcomms);
-			// main2_helper(pcomms, utils);
-			// free_dptr(utils->command, 0);
+			printf("BBBBBBBBBBBB TREE %p, TREE->content %s, TREE->LAYER %d\n", tree, tree->content, tree->layer); //LAYER 0, CERTO (IGUAL)
+			printf("BBBBBB222222 TREE %p\n", tree->right);
+			tree_cpy = tree;
+			main3(tree_cpy, pcomms, utils);
 		}
 		utils->command = NULL;
 	}
