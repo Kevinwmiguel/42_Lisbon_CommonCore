@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 18:42:24 by thguimar          #+#    #+#             */
-/*   Updated: 2025/02/25 22:39:10 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/02/25 22:58:59 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,4 +246,3 @@ int	main(int argc, char **argv, char **env)
 		;
 	return (0);
 }
- 
