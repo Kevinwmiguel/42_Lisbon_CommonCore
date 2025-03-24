@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:01:00 by kwillian          #+#    #+#             */
-/*   Updated: 2024/11/02 20:28:57 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/03/19 21:05:51 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_strjoin2(char *s1, char const *s2)
 	nova = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!nova)
 		return (NULL);
-	while (s1 && s1[i] != '\0')
+	while (s1)
 	{
 		nova[i] = s1[i];
 		i++;

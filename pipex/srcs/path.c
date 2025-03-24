@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 00:06:35 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/09 17:05:26 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/03/24 21:22:19 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ void	path_cleaner(char **paths)
 		free(paths);
 }
 
-void	pick_path2(t_files *file, char **path, int cmd_index, int path_index)
+void	pick_path2(t_files *file, char **path, int cmd_idx, int path_idx)
 {
 	char	*tmp;
 
-	tmp = ft_strjoin(path[path_index], "/");
+	tmp = ft_strjoin(path[path_idx], "/");
 	if (!tmp)
 	{
 		path_cleaner(path);
 		final_cleaner(file);
 		exit(EXIT_FAILURE);
 	}
-	file->cmds[cmd_index][0] = ft_strjoin(tmp, file->cmds[cmd_index][0]);
+	file->cmds[cmd_idx][0] = ft_strjoin(tmp, file->cmds[cmd_idx][0]);
 	free(tmp);
-	if (!file->cmds[cmd_index][0])
+	if (!file->cmds[cmd_idx][0])
 	{
 		path_cleaner(path);
 		final_cleaner(file);

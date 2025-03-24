@@ -6,22 +6,17 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:43:27 by kwillian          #+#    #+#             */
-/*   Updated: 2025/02/09 16:05:54 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/03/19 21:17:08 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	checker(int argc, char **envp)
+void	checker_envp(char **envp)
 {
 	if (!envp)
 	{
 		ft_printf("Error\n No Path\n");
-		exit(1);
-	}
-	if (argc != 5)
-	{
-		fprintf(stderr, "Usage: ./pipex infile <cmd1> <cmd2> outfile\n");
 		exit(1);
 	}
 }
