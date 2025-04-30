@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/04/29 14:00:22 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:55:57 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	execute_command(char **cmd_args, char **envp, t_pipesort *piped)
 		perror("Invalid command");
 		exit(1);
 	}
+	printf("%s %s TEM AQUI \n", cmd_args[0], cmd_args[1]);
 	fullpath = ft_strjoin(fullpath, piped->content[0]);
 	execve(fullpath , cmd_args, envp);
 	perror("execve");
@@ -44,68 +45,77 @@ void	main3pipex(t_files *file, t_pipesort *piped)
 	pid_t	pid;
 	int		i;
 	int		flag;
-	int fd[2];
-	int fd_anterior[2];
+	int		fd[2];
+	int		fd_in = 0; // começa com stdin
 
 	i = 0;
 	flag = ft_lstsize_pipesort(piped);
+	printf("VALOR DE FLAG %d \n", flag);
 	while (i < flag)
 	{
-		//SE N FOR O ULTIMO crio um pipe
 		if (i != flag - 1)
 			pipe(fd);
 
 		pid = fork();
-		if (pid == 0) // child
+		if (pid == 0)
 		{
-			if (i == 0) // primeiro comando
+			if (i != 0)
+			{
+				dup2(fd_in, STDIN_FILENO);
+				close(fd_in);
+			}
+			if (i != flag - 1)
 			{
 				dup2(fd[1], STDOUT_FILENO);
-				close(fd[0]);
-				close(fd[1]);
-			}
-			else if (i == flag - 1) // último comando
-			{
-				dup2(fd_anterior[0], STDIN_FILENO);
-				close(fd_anterior[0]);
-			}
-			else // comandos do meio
-			{
-				dup2(fd_anterior[0], STDIN_FILENO);
-				dup2(fd[1], STDOUT_FILENO);
-				close(fd_anterior[0]);
 				close(fd[0]);
 				close(fd[1]);
 			}
 			execute_command(file->cmds[i], file->envp, piped);
+			exit(1); // garantir que o filho saia
 		}
-		else // parent
+		else
 		{
-			waitpid(pid, NULL, 0);
 			if (i != 0)
-				close(fd_anterior[0]);
+				close(fd_in); // fechar entrada anterior
+
 			if (i != flag - 1)
-				fd_anterior[0] = fd[0];
+			{
+				close(fd[1]);       // fechar escrita do pipe
+				fd_in = fd[0];      // salvar leitura para próximo
+			}
+			waitpid(pid, NULL, 0);
+			piped = piped->next;
+			i++;
 		}
-		i++;
 	}
-	free_split((*file->cmds));
 }
 
 
-void	init_func(t_files *file, char **envp, char **argv, int argc)
+
+void	init_func(t_files *file, char **envp, t_pipesort *piped, int argc)
 {
-	int	i;
+	int			i;
+	t_pipesort	*tmp;
 
 	i = 0;
+	tmp = piped;
+
 	file->paths = malloc(sizeof(char *) * 1);
 	file->envp = malloc(sizeof(char *) * (length(envp) + 1));
+	if (!file->envp)
+		return ;
 	file->envp = envp;
+
 	file->cmd_count = argc;
 	file->cmds = malloc(sizeof(char **) * file->cmd_count);
+	if (!file->cmds)
+		return ;
+
+	i = 0;
 	while (i < file->cmd_count)
 	{
-		file->cmds[i] = argv;
+		file->cmds[i] = tmp->content;
+		tmp = tmp->next;
 		i++;
 	}
 }
@@ -115,7 +125,7 @@ void	pipex(int argc, t_pipesort *piped, t_shell *utils, char *path)
 	t_files		*file;
 
 	file = malloc(sizeof(t_files));
-	init_func(file, utils->envr, piped->content, argc);
+	init_func(file, utils->envr, piped, argc);
 	file->paths = path;
 	//search_path(file, file->paths);
 	//checar se tem redirection aqui ou a file
