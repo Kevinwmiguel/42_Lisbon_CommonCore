@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 14:12:32 by thguimar          #+#    #+#             */
-/*   Updated: 2025/04/24 16:56:17 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/03 00:00:21 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ void	path_comms(char **argv, t_shell *utils, t_pipesort *piped)
 			{
 				test = ft_strjoin(right_path[j], "/");
 				test2 = ft_strjoin(test, argv[0]);
-				pipex(ft_lstsize_pipesort(piped), piped, utils, test); // aqui temos que chamar o pipex -- O TESTE 2 PODERÁ SER O PATH
 				flag = 1;
 			}
+			pipex(ft_lstsize_pipesort(piped), piped, utils, test);
 		}
 		if (flag == 0)
 			pipex(ft_lstsize_pipesort(piped), piped, utils, test);

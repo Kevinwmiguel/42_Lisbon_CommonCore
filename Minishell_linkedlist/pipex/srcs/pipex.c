@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/04/30 17:55:57 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/03 00:20:20 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	execute_command(char **cmd_args, char **envp, t_pipesort *piped)
 		perror("Invalid command");
 		exit(1);
 	}
-	printf("%s %s TEM AQUI \n", cmd_args[0], cmd_args[1]);
 	fullpath = ft_strjoin(fullpath, piped->content[0]);
 	execve(fullpath , cmd_args, envp);
 	perror("execve");
@@ -46,11 +45,10 @@ void	main3pipex(t_files *file, t_pipesort *piped)
 	int		i;
 	int		flag;
 	int		fd[2];
-	int		fd_in = 0; // começa com stdin
+	int		fd_in = 0;
 
 	i = 0;
 	flag = ft_lstsize_pipesort(piped);
-	printf("VALOR DE FLAG %d \n", flag);
 	while (i < flag)
 	{
 		if (i != flag - 1)
@@ -71,22 +69,22 @@ void	main3pipex(t_files *file, t_pipesort *piped)
 				close(fd[1]);
 			}
 			execute_command(file->cmds[i], file->envp, piped);
-			exit(1); // garantir que o filho saia
+			exit(1);
 		}
 		else
 		{
 			if (i != 0)
-				close(fd_in); // fechar entrada anterior
+				close(fd_in);
 
 			if (i != flag - 1)
 			{
-				close(fd[1]);       // fechar escrita do pipe
-				fd_in = fd[0];      // salvar leitura para próximo
+				close(fd[1]);
+				fd_in = fd[0];
 			}
 			waitpid(pid, NULL, 0);
 			piped = piped->next;
-			i++;
 		}
+		i++;
 	}
 }
 
