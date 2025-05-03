@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 20:40:04 by kwillian          #+#    #+#             */
-/*   Updated: 2025/04/27 18:13:50 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/03 12:45:50 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef enum e_signal_type
 typedef struct s_pipesort
 {
 	int		id;
+	int		heredoc_fd;
 	int		infd;
 	int		outfd;
 	int		pid;

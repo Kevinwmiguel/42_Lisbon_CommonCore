@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:00 by kwillian          #+#    #+#             */
-/*   Updated: 2025/04/05 17:56:59 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/03 11:36:13 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ int		pipex_start(int argc, t_pipesort *piped, t_shell *utils);
 void	pipex(int argc, t_pipesort *piped, t_shell *utils);
 int		is_command(const char *arg);
 int		here_doc(char *limiter);
-void	handle_redirection_input(char **cmd_args);
 
 #endif

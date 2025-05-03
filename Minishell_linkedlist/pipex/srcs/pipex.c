@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/03 00:20:20 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/03 23:23:47 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	main3pipex(t_files *file, t_pipesort *piped)
 	int		i;
 	int		flag;
 	int		fd[2];
-	int		fd_in = 0;
+	int		fd_in;
 
+	fd_in = 0;
 	i = 0;
 	flag = ft_lstsize_pipesort(piped);
 	while (i < flag)
@@ -57,14 +58,23 @@ void	main3pipex(t_files *file, t_pipesort *piped)
 		pid = fork();
 		if (pid == 0)
 		{
-			if (i != 0)
-			{
+			// entrada
+			if (piped->heredoc_fd)
+				dup2(piped->heredoc_fd, STDIN_FILENO);
+			else if (i != 0)
 				dup2(fd_in, STDIN_FILENO);
+
+			// saída
+			if (i != flag - 1)
+				dup2(fd[1], STDOUT_FILENO);
+
+			// fechar tudo que não for mais usado
+			if (piped->heredoc_fd)
+				close(piped->heredoc_fd);
+			if (i != 0)
 				close(fd_in);
-			}
 			if (i != flag - 1)
 			{
-				dup2(fd[1], STDOUT_FILENO);
 				close(fd[0]);
 				close(fd[1]);
 			}
@@ -121,13 +131,17 @@ void	init_func(t_files *file, char **envp, t_pipesort *piped, int argc)
 void	pipex(int argc, t_pipesort *piped, t_shell *utils, char *path)
 {
 	t_files		*file;
+	t_pipesort	*head;
 
 	file = malloc(sizeof(t_files));
 	init_func(file, utils->envr, piped, argc);
 	file->paths = path;
-	//search_path(file, file->paths);
-	//checar se tem redirection aqui ou a file
-	//handle_redirection_input(piped);
-	//file->infile = check_infile(argv[1]);
+	head = piped;
+	while (piped)
+	{
+		handle_redirection_input(piped);
+		piped = piped->next;
+	}
+	piped = head;
 	main3pipex(file, piped);
 }
