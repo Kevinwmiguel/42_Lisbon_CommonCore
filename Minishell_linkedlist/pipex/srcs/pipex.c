@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/03 23:23:47 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:41:20 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	execute_command(char **cmd_args, char **envp, t_pipesort *piped)
 	char	*fullpath;
 
 	fullpath = "/bin/";
-	//handle_redirection_input(cmd_args);
 	if (!cmd_args[0])
 	{
 		perror("Invalid command");
@@ -63,10 +62,11 @@ void	main3pipex(t_files *file, t_pipesort *piped)
 				dup2(piped->heredoc_fd, STDIN_FILENO);
 			else if (i != 0)
 				dup2(fd_in, STDIN_FILENO);
-
 			// saída
 			if (i != flag - 1)
 				dup2(fd[1], STDOUT_FILENO);
+			else if (piped->outfd != 0)
+				dup2(piped->outfd, STDOUT_FILENO);
 
 			// fechar tudo que não for mais usado
 			if (piped->heredoc_fd)
@@ -133,13 +133,15 @@ void	pipex(int argc, t_pipesort *piped, t_shell *utils, char *path)
 	t_files		*file;
 	t_pipesort	*head;
 
+	piped->outfd = 0;
 	file = malloc(sizeof(t_files));
 	init_func(file, utils->envr, piped, argc);
 	file->paths = path;
 	head = piped;
 	while (piped)
 	{
-		handle_redirection_input(piped);
+		//handle_redirection_input(piped);
+		handle_redirection_right_input(piped);
 		piped = piped->next;
 	}
 	piped = head;

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 14:12:32 by thguimar          #+#    #+#             */
-/*   Updated: 2025/05/03 00:00:21 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/04 23:25:04 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	path_comms(char **argv, t_shell *utils, t_pipesort *piped)
 	int		flag;
 	char	*test;
 	char	*test2;
-	char *extra;
+	char	*extra;
 
 	j = -1;
 	right_path = NULL;

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 20:40:04 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/03 12:45:50 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:03:25 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,17 @@ int		pipex_start(t_pipesort *piped, t_shell *utils);
 void	pipex(int argc, t_pipesort *piped, t_shell *utils, char *path);
 int		is_command(const char *arg);
 int		here_doc(char *limiter);
-void	handle_redirection_input(t_pipesort *piped);
+void	handle_redirection_right_input(t_pipesort *piped);
 int		ft_lstsize_pipesort(t_pipesort *lst);
+
+void	remove_double_right_tokens(t_pipesort *piped, int limiter_idx);
+int		find_double_right_index(t_pipesort *piped);
+int		find_input_file_index(char **content, int i);
+void	remove_double_left_tokens(t_pipesort *piped, int limiter_idx);
+int     find_double_left_index(t_pipesort *piped);
+void	remove_one_left_tokens(t_pipesort *piped, int file_idx);
+void	handle_redirection_input(t_pipesort *piped);
+void	remove_one_right_tokens(t_pipesort *piped, int file_idx);
 
 /////////////
 

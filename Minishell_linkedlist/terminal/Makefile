@@ -34,7 +34,8 @@ SRCS 	=	minishell.c\
 			../pipex/srcs/checkers.c ../pipex/srcs/children.c \
 			../pipex/srcs/closes.c ../pipex/srcs/ft_free_split.c \
 			../pipex/srcs/main.c ../pipex/srcs/path.c \
-			../pipex/srcs/pipex.c ../pipex/srcs/here_red.c
+			../pipex/srcs/pipex.c ../pipex/srcs/here_red.c \
+			../pipex/srcs/left_tokens.c
 
 Color_Off='\033[0m'       # Text Reset
 
@@ -53,6 +54,7 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(SRCS) -o $@ $(LINKS) ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
 	$(MSG1);
+	clear
 
 %.o:%.c
 	@$(CC) $(CFLAGS) -c $^ -o $@

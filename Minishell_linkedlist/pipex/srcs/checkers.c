@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:43:27 by kwillian          #+#    #+#             */
-/*   Updated: 2025/04/21 14:56:41 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/04 21:03:47 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	is_command(const char *arg)
 {
 	while (*arg)
 	{
-		if (*arg == ' ' || *arg == '<' || *arg == '>' || *arg == '|' || *arg == 'l')
+		if (*arg == ' ' || *arg == '<' || *arg == '>' || \
+			*arg == '|' || *arg == 'l')
 			return (1);
 		arg++;
 	}
