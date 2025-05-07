@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:03 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/06 21:41:20 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:33:07 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	main3pipex(t_files *file, t_pipesort *piped)
 				dup2(fd[1], STDOUT_FILENO);
 			else if (piped->outfd != 0)
 				dup2(piped->outfd, STDOUT_FILENO);
-
 			// fechar tudo que não for mais usado
 			if (piped->heredoc_fd)
 				close(piped->heredoc_fd);
@@ -140,7 +139,7 @@ void	pipex(int argc, t_pipesort *piped, t_shell *utils, char *path)
 	head = piped;
 	while (piped)
 	{
-		//handle_redirection_input(piped);
+		handle_redirection_input(piped);
 		handle_redirection_right_input(piped);
 		piped = piped->next;
 	}

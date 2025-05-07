@@ -6,30 +6,25 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:01:54 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/06 22:23:42 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/07 21:41:53 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libs/builtins.h"
 
-int here_doc(char *limiter)
+int	here_doc(char *limiter)
 {
 	char	*line;
 	int		fd[2];
 
 	if (pipe(fd) == -1)
-	{
-		perror("Erro ao criar o pipe");
-		exit(EXIT_FAILURE);
-	}
-
+		exit(1);
 	while (1)
 	{
 		write(1, "heredoc> ", 9);
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 			break ;
-
 		if (ft_strlen(line) == ft_strlen(limiter) + 1 && \
 			ft_strncmp(line, limiter, ft_strlen(limiter)) == 0 && \
 			line[ft_strlen(limiter)] == '\n')
@@ -37,11 +32,9 @@ int here_doc(char *limiter)
 			free(line);
 			break ;
 		}
-
 		write(fd[1], line, ft_strlen(line));
 		free(line);
 	}
-
 	close(fd[1]);
 	return (fd[0]);
 }
@@ -50,7 +43,6 @@ void	remove_double_right_tokens(t_pipesort *piped, int limiter_idx)
 {
 	int	i;
 
-	// Começamos no índice do '>>', que está uma posição antes do limiter
 	i = limiter_idx - 1;
 	while (piped->content[i + 1])
 	{
@@ -65,8 +57,7 @@ void	remove_one_right_tokens(t_pipesort *piped, int file_idx)
 {
 	int	i;
 
-	i = file_idx - 1; // aponta para o '>'
-	printf("index %d\n", file_idx);
+	i = file_idx - 1;
 	while (piped->content[i + 1])
 	{
 		piped->content[i] = piped->content[i + 1];
@@ -99,16 +90,16 @@ int	find_output_file_index(char **content, int i)
 {
 	while (content[i])
 	{
-		if (ft_strncmp(content[i], ">", 2) == 0) // compara string exata
+		if (ft_strncmp(content[i], ">", 2) == 0)
 		{
 			if (content[i + 1] && content[i + 1][0] != '\0')
 				return (i + 1);
 			else
-				return (-1); // erro: sem arquivo depois de '>'
+				return (-1);
 		}
 		i++;
 	}
-	return (-1); // nenhum '>' encontrado
+	return (-1);
 }
 
 void	handle_redirection_right_input(t_pipesort *piped)
