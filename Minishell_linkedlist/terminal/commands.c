@@ -6,41 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 14:12:32 by thguimar          #+#    #+#             */
-/*   Updated: 2025/05/04 23:25:04 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/24 20:31:35 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libs/builtins.h"
-
-// void	execute_comm(char **argv, char *test2, t_shell *utils, char *test)
-// {
-// 	//int		i;
-// 	//int		n;
-// 	//char	*num;
-
-// 	//i = 0;
-// 	/*if (ft_strncmp(test2, "minishell", 9) == 0)
-// 	{
-// 		while (ft_strncmp("SHLVL", utils->exp[i],
-// 				ft_strlen3(utils->exp[i])) != 0)
-// 			i++;
-// 		if (utils->exp[i] != NULL)
-// 		{
-// 			n = ft_atoi(utils->exp[i] + ft_strlen3(utils->exp[i]) + 1);
-// 			n++;
-// 			free (utils->exp[i]);
-// 			num = ft_itoa(n);
-// 			utils->exp[i] = ft_strjoin("SHLVL=", num);
-// 			free (num);
-// 		}
-// 		else
-// 			utils->exp[i] = ft_strdup("SHLVL=1");
-// 	}*/
-// 	// if (access(test2, F_OK) == 0)
-// 	// 	pipex(test2, argv, utils->exp);
-// 	free(test);
-// 	free(test2);
-// }
 
 int	builtin_not_command(char **argv)
 {
@@ -61,6 +31,7 @@ int	builtin_not_command(char **argv)
 	return (0);
 }
 
+
 void	path_comms(char **argv, t_shell *utils, t_pipesort *piped)
 {
 	char	**right_path;
@@ -68,11 +39,14 @@ void	path_comms(char **argv, t_shell *utils, t_pipesort *piped)
 	int		flag;
 	char	*test;
 	char	*test2;
-	char	*extra;
 
 	j = -1;
 	right_path = NULL;
 	test = NULL;
+
+	if (builtins(argv[0], utils, -1) != 0)
+		exec_builtin(builtins(argv[0], utils, -1), piped->content,
+		 utils->envr, utils); // PROBLEMAS AQUI - THIAGO -- precisa ser dentro para ver caso seja no segundo comando - se for dentro tem problemas com o EXIT, UNSET, EXPORT, ENV
 	utils->process_id = fork();
 	signal_search(CHILD);
 	if (utils->process_id == 0)
@@ -93,13 +67,11 @@ void	path_comms(char **argv, t_shell *utils, t_pipesort *piped)
 			pipex(ft_lstsize_pipesort(piped), piped, utils, test);
 		}
 		if (flag == 0)
-			pipex(ft_lstsize_pipesort(piped), piped, utils, test);
+			pipex(ft_lstsize_pipesort(piped), piped, utils, test2);
 		free_dptr(right_path, 0);
 		build_exit(argv, utils);
 	}
 	else
 		waitpid(utils->process_id, NULL, 0);
-	extra = test2;
-	test2 = extra;
 	return ;
 }

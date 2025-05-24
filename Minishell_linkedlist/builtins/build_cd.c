@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joanda-s <joanda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:33:47 by thguimar          #+#    #+#             */
-/*   Updated: 2024/08/23 02:43:16 by joanda-s         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:34:54 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	build_cd(int argc, char **argv, char **env, t_shell *utils)
 		argc_2(&cd, argv);
 	if (cd.flag == 1)
 	{
-		free(cd.str);
+		if (cd.str)
+			cd.str = NULL; //PROBLEMAS DE SEG FAULT AQUI
 		free(cd.joined);
 	}
 	if (home && ft_strncmp("/home", home, 6) != 0)

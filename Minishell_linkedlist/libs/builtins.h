@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 20:40:04 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/07 21:18:57 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:33:50 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_pipesort
 	bool	redirection;
 	char	*redirection_type;
 	char 	**content;
+	int		pwd_storage;
 	struct s_pipesort	*next;
 	struct s_pipesort	*prev;
 }		t_pipesort;
@@ -87,6 +88,7 @@ typedef struct s_shell
 	int				process_id;
 	t_builtvars		*export;
 	t_builtvars2	*cd;
+	t_pipesort		*pipe_bridge;
 }		t_shell;
 
 typedef struct s_cd
@@ -148,10 +150,13 @@ void	remove_double_right_tokens(t_pipesort *piped, int limiter_idx);
 int		find_double_right_index(t_pipesort *piped);
 int		find_input_file_index(char **content, int i);
 void	remove_double_left_tokens(t_pipesort *piped, int limiter_idx);
-int     find_double_left_index(t_pipesort *piped);
 void	remove_one_left_tokens(t_pipesort *piped, int file_idx);
-void	handle_redirection_input(t_pipesort *piped);
+void	handle_redirection_left_input(t_pipesort *piped);
 void	remove_one_right_tokens(t_pipesort *piped, int file_idx);
+
+char	*find_command_path(char *cmd, char **envp);
+char	**get_paths_from_env(char **envp);
+void	execute_command(char **cmd_args, char **envp, t_pipesort *piped, t_shell *utils);
 
 /////////////
 
@@ -222,7 +227,7 @@ void	build_cd(int argc, char **argv, char **env, t_shell *utils);
 void	build_echo(char *arr, t_shell *utils, int i, int j);
 void	build_env(int argc, char **argv, t_shell *utils);
 void	build_exit(char **argv, t_shell *utils);
-void	build_pwd(int argc, char **argv);
+void	build_pwd(int argc, char **argv, t_shell *utils);
 void	exec_builtin(int flag, char **command, char **env, t_shell *utils);
 
 //PID FUNCTIONS

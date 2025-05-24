@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_export_utils2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thguimar <thguimar@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:00:33 by thguimar          #+#    #+#             */
-/*   Updated: 2024/08/30 16:33:47 by thguimar         ###   ########.fr       */
+/*   Updated: 2025/05/23 22:05:47 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ void	write_exp(t_shell *utils)
 		i = 0;
 		j++;
 	}
-	printf("AAAAAAAAAAAAAAAAA= %s\n", utils->exp[j - 1]);
 	//utils->exp[j] = NULL;
 }

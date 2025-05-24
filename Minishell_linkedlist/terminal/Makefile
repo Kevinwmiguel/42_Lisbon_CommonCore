@@ -35,8 +35,9 @@ SRCS 	=	minishell.c\
 			../pipex/srcs/closes.c ../pipex/srcs/ft_free_split.c \
 			../pipex/srcs/main.c ../pipex/srcs/path.c \
 			../pipex/srcs/pipex.c ../pipex/srcs/here_red.c \
-			../pipex/srcs/left_tokens.c
+			../pipex/srcs/left_tokens.c 
 
+#../pipex/srcs/paths.c
 Color_Off='\033[0m'       # Text Reset
 
 IGreen='\033[0;92m'       # Green

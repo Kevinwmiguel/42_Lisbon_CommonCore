@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 20:39:41 by kwillian          #+#    #+#             */
-/*   Updated: 2025/04/27 19:00:45 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:35:06 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,33 +85,46 @@ char	*double_to_one(char **dptr)
 	return (rtn);
 }
 
+size_t len_dp(char **s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
 void	exec_builtin(int flag, char **command, char **env, t_shell *utils)
 {
-	int		x;
-	char	*bizarre_breed;
 
+	int            x;
+    int            y;
+    char        *bizarre_breed;
+
+	y = len_dp(command);
 	x = where_is_echox(command);
-	if (x != -1)
-		bizarre_breed = double_to_one(utils->command);
-	if (utils->input)
+    if (x != -1)
+        bizarre_breed = double_to_one(utils->command);
+    if (utils->input)
 		input_fixer(utils->input);
-	if (flag == 1 && x != -1)
-	{
-		build_echo(bizarre_breed + 5, utils, 0, -1);
-		free (bizarre_breed);
-	}
-	else if (flag == 2)
-		build_cd(utils->j, command, env, utils);
-	else if (flag == 3)
-		build_pwd(utils->j, command);
-	else if (flag == 4)
-		utils->exp = build_export(utils->j, command, utils);
-	else if (flag == 5)
-		utils->exp = build_unset(utils->j, command, utils->exp, -1);
-	else if (flag == 6)
-		build_env(utils->j, command, utils);
-	else if (flag == 7)
-		build_exit(command, utils);
+    if (flag == 1 && x != -1)
+    {
+        build_echo(bizarre_breed + 5, utils, 0, -1);
+        free (bizarre_breed);
+    }
+    else if (flag == 2)
+		build_cd(y, command, env, utils);
+    else if (flag == 3)
+		build_pwd(y, command, utils);
+    else if (flag == 4)
+        utils->exp = build_export(y, command, utils);
+    else if (flag == 5)
+        utils->exp = build_unset(y, command, utils->exp, -1);
+    else if (flag == 6)
+        build_env(y, command, utils);
+    else if (flag == 7)
+        build_exit(command, utils);
 }
 
 void	index_reset(t_shell *utils)
@@ -129,6 +142,7 @@ void	index_reset(t_shell *utils)
 
 bool	redirection_verifier_utils(t_pipesort *piped, int i, int j)
 {
+	piped->redirection_type = NULL;
 	if (ft_strncmp(piped->content[j] + i, "<", 1) == 0 &&
 		piped->content[j][i + 1] != '<')
 	{
@@ -166,7 +180,9 @@ bool	redirection_verifier(t_pipesort *piped)
 		while (piped->content[j][++i])
 		{
 			if (redirection_verifier_utils(piped, i, j) == true)
+			{
 				return (true);
+			}
 		}
 		i = -1;
 	}
@@ -214,6 +230,8 @@ int	scary_thing(t_pipesort	*piped, t_shell *utils)
 		piped_clone->content = ft_split(utils->command[i], ' ');
 		piped_clone->id = i;
 		piped_clone->redirection = redirection_verifier(piped_clone);
+		// printf("type %s\n", piped->redirection_type);
+		//printf("type %s\n", utils->pipe_bridge->redirection_type);
 		if (piped_clone->redirection == true)
 		{
 			if (correct_redirection(piped_clone->content) == 0)
@@ -228,14 +246,15 @@ int	scary_thing(t_pipesort	*piped, t_shell *utils)
 
 void	main2(t_shell *utils)
 {
-
-	//int flag;
 	t_pipesort	*piped;
-	//flag = 0;
+
 	piped = ft_calloc(2, sizeof(t_pipesort));
+	utils->pipe_bridge = piped;
 	signal_search(ROOT);
 	index_reset(utils);
 	utils->input = readline("\x1b[5;95mpanic_shell> \x1b[0m");
+	if (utils->input[0] == '\0' || utils->input[0] == '\n')
+		return ;
 	if (utils->input)
 		add_history(utils->input);
 	if (quotes_verify(utils->input) == 0)

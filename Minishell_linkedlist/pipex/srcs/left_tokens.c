@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:20:43 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/07 21:41:24 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/13 21:15:44 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	remove_all_double_left_tokens(t_pipesort *piped)
 {
 	int	i;
 	int	j;
+	int	k;
 
+	k = 0;
 	i = 0;
 	while (piped->content[i])
 	{
@@ -48,6 +50,7 @@ void	remove_all_double_left_tokens(t_pipesort *piped)
 			continue ;
 		}
 		i++;
+		k++;
 	}
 }
 
@@ -119,7 +122,7 @@ int	find_next_double_left_index(t_pipesort *piped, int start)
 
 	while (piped->content[i])
 	{
-		if (ft_strncmp(piped->content[i], "<<", 2) == 0 &&
+		if (ft_strncmp(piped->content[i], "<<", 3) == 0 &&
 			ft_strlen(piped->content[i]) == 2)
 			return (i);
 		i++;
@@ -127,43 +130,50 @@ int	find_next_double_left_index(t_pipesort *piped, int start)
 	return (-1);
 }
 
-void	handle_redirection_input(t_pipesort *piped)
+void	handle_redirection_left_input(t_pipesort *piped)
 {
 	int idx_limiter;
 	int idx = 0;
+	int	i;
 
+	i = 0;
 	if (!piped || !piped->content || !piped->redirection_type)
 		return ;
-
-	if (ft_strncmp(piped->redirection_type, "double left", 11) == 0)
+	while (piped->content[i])
 	{
-		while ((idx = find_next_double_left_index(piped, idx)) != -1)
+		if (ft_strncmp(piped->content[i], "<<", 3) == 0)
 		{
-			idx_limiter = idx + 1;
-			if (!piped->content[idx_limiter])
+			while ((idx = find_next_double_left_index(piped, idx)) != -1)
 			{
-				write(2, "Limite ausente para heredoc\n", 29);
+				idx_limiter = idx + 1;
+				if (!piped->content[idx_limiter])
+				{
+					write(2, "Limite ausente para heredoc\n", 29);
+					exit(1);
+				}
+				piped->heredoc_fd = here_doc(piped->content[idx_limiter]);
+				idx = idx_limiter;
+			}
+			remove_all_double_left_tokens(piped);
+			i = 0;
+		}
+		else if (ft_strncmp(piped->content[i], "<", 2) == 0)
+		{
+			int file_index = find_input_file_index(piped->content, 0);
+			if (file_index == -1)
+			{
+				write(2, "Arquivo não fornecido para redirecionamento\n", 45);
 				exit(1);
 			}
-			piped->heredoc_fd = here_doc(piped->content[idx_limiter]);
-			idx = idx_limiter;
+			piped->infd = open(piped->content[file_index], O_RDONLY);
+			if (piped->infd < 0)
+			{
+				perror("open");
+				exit(1);
+			}
+			remove_one_left_tokens(piped, file_index);
+			i = 0;
 		}
-		remove_all_double_left_tokens(piped);
-	}
-	else if (ft_strncmp(piped->redirection_type, "one left", 8) == 0)
-	{
-		int file_index = find_input_file_index(piped->content, 0);
-		if (file_index == -1)
-		{
-			write(2, "Arquivo não fornecido para redirecionamento\n", 45);
-			exit(1);
-		}
-		piped->infd = open(piped->content[file_index], O_RDONLY);
-		if (piped->infd < 0)
-		{
-			perror("open");
-			exit(1);
-		}
-		remove_one_left_tokens(piped, file_index);
+		i++;
 	}
 }

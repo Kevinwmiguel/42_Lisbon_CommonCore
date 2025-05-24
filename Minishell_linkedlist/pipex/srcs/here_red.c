@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:01:54 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/07 21:41:53 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:35:39 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,17 @@ void	remove_double_right_tokens(t_pipesort *piped, int limiter_idx)
 
 void	remove_one_right_tokens(t_pipesort *piped, int file_idx)
 {
-	int	i;
+	int	i = file_idx - 1;
 
-	i = file_idx - 1;
-	while (piped->content[i + 1])
+	free(piped->content[i]);
+	free(piped->content[i + 1]);
+
+	while (piped->content[i + 2])
 	{
-		piped->content[i] = piped->content[i + 1];
+		piped->content[i] = piped->content[i + 2];
 		i++;
 	}
 	piped->content[i] = NULL;
-	piped->content[i - 1] = NULL;
 }
 
 int	find_double_right_index(t_pipesort *piped)
@@ -104,35 +105,76 @@ int	find_output_file_index(char **content, int i)
 
 void	handle_redirection_right_input(t_pipesort *piped)
 {
-	int		i;
-	int		idx_file;
+	int		i = 0;
+	int		last_index = -1;
+	char	*redir_type = NULL;
+	int		j;
 
-	if (!piped || !piped->content || !piped->redirection_type)
+	if (!piped || !piped->content)
 		return ;
-	i = 0;
+
 	while (piped->content[i])
 	{
-		if (ft_strncmp(piped->redirection_type, "double right", 12) == 0)
+		if ((ft_strncmp(piped->content[i], ">", 2) == 0 ||
+			ft_strncmp(piped->content[i], ">>", 3) == 0) &&
+			piped->content[i + 1])
 		{
-            idx_file = find_double_right_index(piped) + 1;
-            piped->outfd = open(piped->content[idx_file], \
-                O_WRONLY | O_CREAT | O_APPEND, 0644);
-			remove_double_right_tokens(piped, idx_file);
-			break ;
-		}
-		else if (ft_strncmp(piped->redirection_type, "one right", 9) == 0)
-		{
-			idx_file = find_output_file_index(piped->content, 0);
-			piped->outfd = open(piped->content[idx_file], \
-                O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			if (piped->infd < 0)
-			{
-				perror("open");
-				exit(1);
-			}
-			remove_one_right_tokens(piped, idx_file);
-			break ;
+			last_index = i;
+			redir_type = piped->content[i];
 		}
 		i++;
 	}
+	if (last_index == -1)
+		return ;
+
+	// Abrir o arquivo da última ocorrência
+	if (ft_strncmp(redir_type, ">>", 2) == 0)
+		piped->outfd = open(piped->content[last_index + 1],
+			O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		piped->outfd = open(piped->content[last_index + 1],
+			O_WRONLY | O_CREAT | O_TRUNC, 0644);
+
+	// Agora remover todos os redirecionamentos, exceto o último
+	i = 0;
+	while (piped->content[i])
+	{
+		if ((i != last_index) &&
+			(ft_strncmp(piped->content[i], ">", 2) == 0 ||
+			ft_strncmp(piped->content[i], ">>", 3) == 0) &&
+			piped->content[i + 1])
+		{
+			// Remover redirecionador e seu argumento
+			j = i;
+			while (piped->content[j + 2])
+			{
+				piped->content[j] = piped->content[j + 2];
+				j++;
+			}
+			piped->content[j] = NULL;
+			piped->content[j + 1] = NULL;
+			continue;
+		}
+		i++;
+	}
+
+	// Remover o último redirecionamento também
+	j = last_index;
+	while (piped->content[j + 2])
+	{
+		piped->content[j] = piped->content[j + 2];
+		j++;
+	}
+	piped->content[j] = NULL;
+	piped->content[j + 1] = NULL;
 }
+
+
+
+// flag para varios
+//FUNCIONAR
+//BUILTINS
+//FULLPATH
+//CAT -E << EOF > OUTPUT.TXT
+//CAT -E << EOF > OUTPUT.TXT << EOF > OUTPUT2.TXT
+//CAT -E << EOF < EOF > OUTPUT.TXT << EOF > INPUT.TXT

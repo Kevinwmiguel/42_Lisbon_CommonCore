@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 18:03:58 by thguimar          #+#    #+#             */
-/*   Updated: 2025/03/11 22:48:33 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:29:21 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ int	get_line_value(char **exp, int line)
 	return (j);
 }
 
-void	get_cd(t_cd *cd, char **argv)
+void	get_cd(t_cd *cd, char **argv) 
 {
 	cd->x = var_equal_line2(cd->utils->exp, "PWD=");
+
 	cd->x = get_line_value(cd->utils->exp, cd->x);
 	chdir(getcwd(argv[1], cd->x + ft_strlen(argv[1])));
 	cd->flag = 1;
@@ -64,6 +65,7 @@ void	argc_2(t_cd *cd, char **argv)
 
 void	argc_1(t_cd *cd, char *home, int argc, char **argv)
 {
+	//(void)home;
 	cd->i = 0;
 	while (argc == 1 || (argv[1][cd->i] == 47 && argv[1][cd->i]))
 	{
