@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thguimar <thguimar@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:21:43 by thguimar          #+#    #+#             */
-/*   Updated: 2024/08/20 16:36:11 by thguimar         ###   ########.fr       */
+/*   Updated: 2025/06/03 01:51:51 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ void	signal_search2(t_signal_type t)
 			return ;
 		sigaction(SIGINT, &sa, NULL);
 	}
-	else if (t == IGNORE)
-	{
-		//ainda fazer
-	}
 }
+
+// else if (t == IGNORE)
+	// {
+	// 	//ainda fazer
+	// }
 
 void	signal_search(t_signal_type t)
 {
@@ -65,7 +66,6 @@ void	signal_search(t_signal_type t)
 		if (sigemptyset(&sa.sa_mask) != 0)
 			return ;
 		sigaction(SIGINT, &sa, NULL);
-		//ignore_signal(&sa, SIGQUIT);
 	}
 	else if (t == CHILD)
 	{
@@ -79,6 +79,8 @@ void	signal_search(t_signal_type t)
 	else
 		signal_search2(t);
 }
+
+//ignore_signal(&sa, SIGQUIT);
 
 void	ignore_signal(struct sigaction *sa, int signal)
 {

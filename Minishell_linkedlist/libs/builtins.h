@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 20:40:04 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/24 17:33:50 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:37:24 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,44 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <signal.h>
-# define PATH "/home/thguimar/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+# define PATH "/home/thguimar/bin:/usr/local/sbin:/usr/local/bin:/usr/ \
+sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
+typedef struct s_expansion
+{
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+	int		x;
+	int		dollar;
+	char	**split;
+	char	*oq1;
+	char	*oq2;
+	char	*oq3;
+	char	*oq4;
+	char	*oq5;
+	char	*output;
+	char	*pid_str;
+}	t_exp;
+
+typedef struct s_pipexinfo
+{
+	int		fd[2];
+	int		fd_in;
+	int		i;
+	int		pipe_counts;
+	pid_t	pid;
+}	t_pipexinfo;
+
+typedef struct s_fdinfo
+{
+	int	fd_in;
+	int	fd_read;
+	int	fd_write;
+	int	i;
+	int	pipe_count;
+}	t_fdinfo;
 
 typedef enum e_signal_type
 {
@@ -38,19 +75,20 @@ typedef enum e_signal_type
 
 typedef struct s_pipesort
 {
-	int		id;
-	int		heredoc_fd;
-	int		infd;
-	int		outfd;
-	int		pid;
-	bool	redirection;
-	char	*redirection_type;
-	char 	**content;
-	int		pwd_storage;
+	int					id;
+	int					heredoc_fd;
+	int					infd;
+	int					outfd;
+	int					pid;
+	bool				redirection;
+	char				*redirection_type;
+	char				*file;
+	char				**content;
+	int					pwd_storage;
+	int					export_red;
 	struct s_pipesort	*next;
 	struct s_pipesort	*prev;
 }		t_pipesort;
-
 
 typedef struct s_builtvars
 {
@@ -82,13 +120,27 @@ typedef struct s_shell
 	char			**envr;
 	char			**builtins;
 	char			**command;
+	char			*echo_breed;
 	char			***bizarre;
 	char			*input;
+	char			*echo_buffer;
+	char			**right_path;
+	char			*resolved_path;
+	char			*processed_output;
 	int				j;
+	int				index;
 	int				process_id;
+	int				export_j;
 	t_builtvars		*export;
 	t_builtvars2	*cd;
 	t_pipesort		*pipe_bridge;
+	char			*arr;
+	int				i;
+	int				y;
+	int				x;
+	int				echo_pa;
+	char			*str;
+	char			**final_reader;
 }		t_shell;
 
 typedef struct s_cd
@@ -118,7 +170,8 @@ typedef struct datafile
 }	t_files;
 
 int		check_infile(char *file);
-int		check_accessible(const char *path); // nao
+int		check_accessible(const char *path);
+char	*double_to_one(char **dptr);
 char	*ft_strcat(char *dest, const char *src);
 char	*ft_strcpy(char *dest, const char *src);
 char	*get_directory_path(char *path);
@@ -128,17 +181,16 @@ char	**add_file_to_cmd(char **cmd, char *file_path);
 size_t	length2(char *cmd);
 size_t	length(char **cmd);
 void	final_cleaner9(t_files *file);
-
+char	*ft_strrstr(const char *haystack, const char *needle);
 // new
 void	free_split(char **split);
 void	close_inout(t_files *file);
-//void	final_cleaner(t_files *file);
+char	*trim_start(char *str);
 
 //path
 void	path_cleaner(char **paths);
 void	pick_path2(t_files *file, char **path, int cmd_idx, int path_idx);
 char	**pick_path(char **envp);
-void    search_path(t_files *file, char **paths);
 int		pipex_start(t_pipesort *piped, t_shell *utils);
 void	pipex(int argc, t_pipesort *piped, t_shell *utils, char *path);
 int		is_command(const char *arg);
@@ -146,6 +198,7 @@ int		here_doc(char *limiter);
 void	handle_redirection_right_input(t_pipesort *piped);
 int		ft_lstsize_pipesort(t_pipesort *lst);
 
+void	main3pipex(t_files *file, t_pipesort *piped, t_shell *utils);
 void	remove_double_right_tokens(t_pipesort *piped, int limiter_idx);
 int		find_double_right_index(t_pipesort *piped);
 int		find_input_file_index(char **content, int i);
@@ -156,7 +209,27 @@ void	remove_one_right_tokens(t_pipesort *piped, int file_idx);
 
 char	*find_command_path(char *cmd, char **envp);
 char	**get_paths_from_env(char **envp);
-void	execute_command(char **cmd_args, char **envp, t_pipesort *piped, t_shell *utils);
+void	exec_comm(char **cmd_args, char **envp, \
+		t_pipesort *piped, t_shell *utils);
+void	handle_redirection_right_input_comms(t_pipesort *piped);
+int		quotes_verify(char *argv);
+void	init_func(t_files *file, char **envp, t_pipesort *piped, int argc);
+void	inform_path_error(void);
+void	init_pipexinfo(t_pipexinfo *px, t_pipesort *piped);
+int		find_next_double_left_index(t_pipesort *piped, int start);
+int		find_input_file_index(char **content, int i);
+int		count_heredocs(t_pipesort *piped);
+void	remove_all_output_redirs(t_pipesort *piped, int last_index);
+void	remove_one_right_tokens(t_pipesort *piped, int file_idx);
+void	remove_double_right_tokens(t_pipesort *piped, int limiter_idx);
+int		scary_thing(t_pipesort	*piped, t_shell *utils);
+int		dptr_len(char **dptr);
+void	helper_lines2(t_pipesort *piped, t_shell *utils);
+void	main2(t_shell *utils);
+int		echo_flag(char *argv);
+int		flag_count(char *argv);
+int		final_reader_size(char *str);
+char	*remove_before_last_echo(char *str);
 
 /////////////
 
@@ -178,6 +251,7 @@ void	export_helper(t_builtvars *export, char **argv, int j);
 void	export_helper2(char **mlc, char **argv, int i);
 void	export_helper_helper(t_builtvars *export, char **argv, int j);
 void	export_hha(char **argv, t_builtvars *export, int j, int flag);
+char	**remove_redirection(char **cmd, int index);
 void	index_reset(t_shell *utils);
 void	write_exp(t_shell *utils);
 
@@ -196,7 +270,7 @@ void	write_env(int j, char **mlc);
 char	*ft_strjoinn(char *s1, char *s2);
 int		quotes_verify(char *argv);
 char	**ft_split2(char *str, char c);
-//int		is_there_a_dollar_sign(char *argv);
+int		is_there_a_dollar(char *str);
 int		echo_flag(char *argv);
 int		echo_func(char *argv, int flag);
 int		flag_count(char *argv);
@@ -228,7 +302,6 @@ void	build_echo(char *arr, t_shell *utils, int i, int j);
 void	build_env(int argc, char **argv, t_shell *utils);
 void	build_exit(char **argv, t_shell *utils);
 void	build_pwd(int argc, char **argv, t_shell *utils);
-void	exec_builtin(int flag, char **command, char **env, t_shell *utils);
 
 //PID FUNCTIONS
 
@@ -272,4 +345,19 @@ void	input_fixer(char *input);
 void	main2(t_shell *utils); //, int flag
 
 //tokenizar a string, e depois usar o split para ...
+//outros
+
+void	input_fixer(char *input);
+size_t	len_dp(char **s);
+char	*double_to_one(char **dptr);
+int		where_is_echox(char **bizarre);
+int		where_is_echoj(char ***bizarre);
+void	exec_builtin(int flag, char **command, char **env, t_shell *utils);
+void	index_reset(t_shell *utils);
+bool	redirection_verifier_utils(t_pipesort *piped, int i, int j);
+bool	redirection_verifier(t_pipesort *piped);
+int		correct_redirection(char **dptr);
+void	utils_init(t_shell *utils, char **env);
+void	helper_lines(int argc, char **argv, t_shell *utils);
+int		main(int argc, char **argv, char **env);
 #endif

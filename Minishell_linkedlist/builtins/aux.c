@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aux.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joanda-s <joanda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 17:56:34 by thguimar          #+#    #+#             */
-/*   Updated: 2024/08/19 19:25:14 by joanda-s         ###   ########.fr       */
+/*   Updated: 2025/06/04 00:49:19 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,44 @@ char	*ft_getpid(void)
 		return (NULL);
 	return (pid);
 }
-/*int main (void)
-{
-	char	*temp;
 
-	temp = ft_getpid();
-	printf("pid: %s\n", temp);
-	free(temp);
-}*/
+char	*ft_strrstr(const char *haystack, const char *needle)
+{
+	char	*last_occurrence;
+	size_t	needle_len;
+
+	last_occurrence = NULL;
+	if (!haystack || !needle)
+		return (NULL);
+	needle_len = ft_strlen(needle);
+	while (*haystack)
+	{
+		if (ft_strncmp(haystack, needle, needle_len) == 0)
+			last_occurrence = (char *)haystack;
+		haystack++;
+	}
+	return (last_occurrence);
+}
+
+char	*trim_start(char *str)
+{
+	int		i;
+	int		j;
+	char	*trimmed;
+
+	i = 0;
+	j = 0;
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+		i++;
+	trimmed = malloc(sizeof(char) * (ft_strlen(str) - i + 1));
+	if (!trimmed)
+		return (NULL);
+	while (str[i])
+	{
+		trimmed[j] = str[i];
+		i++;
+		j++;
+	}
+	trimmed[j] = '\0';
+	return (trimmed);
+}

@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:37:00 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/03 11:36:13 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:32:33 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	close_inout(t_files *file);
 void	path_cleaner(char **paths);
 void	pick_path2(t_files *file, char **path, int cmd_idx, int path_idx);
 char	**pick_path(char **envp);
-void    search_path(t_files *file, char **paths);
 int		pipex_start(int argc, t_pipesort *piped, t_shell *utils);
 void	pipex(int argc, t_pipesort *piped, t_shell *utils);
 int		is_command(const char *arg);

@@ -6,26 +6,11 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:20:43 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/13 21:15:44 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:30:33 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libs/builtins.h"
-
-int count_heredocs(t_pipesort *piped)
-{
-	int count = 0;
-	int i = 0;
-
-	while (piped->content[i])
-	{
-		if (ft_strncmp(piped->content[i], "<<", 3) == 0 && \
-			ft_strlen(piped->content[i]) == 2)
-			count++;
-		i++;
-	}
-	return (count);
-}
 
 void	remove_all_double_left_tokens(t_pipesort *piped)
 {
@@ -54,36 +39,6 @@ void	remove_all_double_left_tokens(t_pipesort *piped)
 	}
 }
 
-int	find_input_file_index(char **content, int i)
-{
-	while (content[i])
-	{
-		if (ft_strncmp(content[i], "<", 1) == 0)
-		{
-			if (content[i + 1])
-				return (i + 1);
-			else
-				return (-1);
-		}
-		i++;
-	}
-	return (-1);
-}
-
-void	remove_double_left_tokens(t_pipesort *piped, int limiter_idx)
-{
-	int	i;
-
-	i = limiter_idx - 1;
-	while (piped->content[i + 2])
-	{
-		piped->content[i] = piped->content[i + 2];
-		i++;
-	}
-	piped->content[i] = NULL;
-	piped->content[i + 1] = NULL;
-}
-
 void	remove_one_left_tokens(t_pipesort *piped, int file_idx)
 {
 	int	i;
@@ -97,43 +52,48 @@ void	remove_one_left_tokens(t_pipesort *piped, int file_idx)
 	piped->content[i] = NULL;
 }
 
-int	find_last_double_left_index(t_pipesort *piped)
+void	handle_double_left(t_pipesort *piped)
 {
-	int	i;
-	int	last_idx;
+	int	idx;
+	int	idx_limiter;
 
-	if (!piped || !piped->content)
-		return (-1);
-	last_idx = -1;
-	i = 0;
-	while (piped->content[i])
+	idx = 0;
+	while ((find_next_double_left_index(piped, idx)) != -1)
 	{
-		if (ft_strncmp(piped->content[i], "<<", 3) == 0 && \
-			ft_strlen(piped->content[i]) == 2)
-			last_idx = i;
-		i++;
+		idx = find_next_double_left_index(piped, idx);
+		idx_limiter = idx + 1;
+		if (!piped->content[idx_limiter])
+		{
+			write(2, "Limite ausente para heredoc\n", 29);
+			exit(1);
+		}
+		piped->heredoc_fd = here_doc(piped->content[idx_limiter]);
+		idx = idx_limiter;
 	}
-	return (last_idx);
+	remove_all_double_left_tokens(piped);
 }
 
-int	find_next_double_left_index(t_pipesort *piped, int start)
+void	handle_single_left(t_pipesort *piped)
 {
-	int i = start;
+	int	file_index;
 
-	while (piped->content[i])
+	file_index = find_input_file_index(piped->content, 0);
+	if (file_index == -1)
 	{
-		if (ft_strncmp(piped->content[i], "<<", 3) == 0 &&
-			ft_strlen(piped->content[i]) == 2)
-			return (i);
-		i++;
+		write(2, "Arquivo não fornecido para redirecionamento\n", 45);
+		exit(1);
 	}
-	return (-1);
+	piped->infd = open(piped->content[file_index], O_RDONLY);
+	if (piped->infd < 0)
+	{
+		perror("open");
+		exit(1);
+	}
+	remove_one_left_tokens(piped, file_index);
 }
 
 void	handle_redirection_left_input(t_pipesort *piped)
 {
-	int idx_limiter;
-	int idx = 0;
 	int	i;
 
 	i = 0;
@@ -143,36 +103,15 @@ void	handle_redirection_left_input(t_pipesort *piped)
 	{
 		if (ft_strncmp(piped->content[i], "<<", 3) == 0)
 		{
-			while ((idx = find_next_double_left_index(piped, idx)) != -1)
-			{
-				idx_limiter = idx + 1;
-				if (!piped->content[idx_limiter])
-				{
-					write(2, "Limite ausente para heredoc\n", 29);
-					exit(1);
-				}
-				piped->heredoc_fd = here_doc(piped->content[idx_limiter]);
-				idx = idx_limiter;
-			}
-			remove_all_double_left_tokens(piped);
+			handle_double_left(piped);
 			i = 0;
+			continue ;
 		}
 		else if (ft_strncmp(piped->content[i], "<", 2) == 0)
 		{
-			int file_index = find_input_file_index(piped->content, 0);
-			if (file_index == -1)
-			{
-				write(2, "Arquivo não fornecido para redirecionamento\n", 45);
-				exit(1);
-			}
-			piped->infd = open(piped->content[file_index], O_RDONLY);
-			if (piped->infd < 0)
-			{
-				perror("open");
-				exit(1);
-			}
-			remove_one_left_tokens(piped, file_index);
+			handle_single_left(piped);
 			i = 0;
+			continue ;
 		}
 		i++;
 	}

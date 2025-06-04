@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:44:56 by kwillian          #+#    #+#             */
-/*   Updated: 2025/04/05 20:24:34 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:14:32 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,6 @@ char	*ft_strcpy(char *dest, const char *src)
 	dest[i] = '\0';
 	return (dest);
 }
-
-// int	ft_strncmp(const char *s1, const char *s2, size_t n)
-// {
-// 	size_t	i;
-
-// 	if (n == 0)
-// 		return (0);
-// 	i = 0;
-// 	while (i < n - 1 && s1[i] && s1[i] == s2[i])
-// 		i++;
-// 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-// }
 
 char	*ft_strncpy(char *dst, const char *src, size_t n)
 {
@@ -98,4 +86,19 @@ char	**add_file_to_cmd(char **cmd, char *file_path)
 	new_cmd[i] = file_path;
 	new_cmd[i + 1] = NULL;
 	return (new_cmd);
+}
+
+int	find_next_double_left_index(t_pipesort *piped, int start)
+{
+	int	i;
+
+	i = start;
+	while (piped->content[i])
+	{
+		if (ft_strncmp(piped->content[i], "<<", 3) == 0 && \
+			ft_strlen(piped->content[i]) == 2)
+			return (i);
+		i++;
+	}
+	return (-1);
 }

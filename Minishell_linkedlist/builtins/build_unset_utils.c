@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 18:44:02 by joanda-s          #+#    #+#             */
-/*   Updated: 2025/05/24 15:36:46 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:54:49 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ int	var_equal_line2(char **env, char *argv)
 	while (env[m])
 	{
 		if (ft_strncmp(argv, env[m], ft_strlen3(env[m])) == 0)
-		{
-			//printf("m = %d\nenv[%d] -> %s\n", m, m, env[m]);
 			return (m);
-		}
 		m++;
 	}
 	return (-1);

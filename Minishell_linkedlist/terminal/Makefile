@@ -35,8 +35,12 @@ SRCS 	=	minishell.c\
 			../pipex/srcs/closes.c ../pipex/srcs/ft_free_split.c \
 			../pipex/srcs/main.c ../pipex/srcs/path.c \
 			../pipex/srcs/pipex.c ../pipex/srcs/here_red.c \
-			../pipex/srcs/left_tokens.c 
-
+			../pipex/srcs/left_tokens.c \
+			../builtins/build_export_helper.c\
+			../builtins/pipe_verify.c ../pipex/srcs/inits.c \
+			../pipex/srcs/here_doc.c ../pipex/srcs/creator_helper.c\
+			minishell2.c minishell3.c minishell4.c\
+			../builtins/build_echo2.c\
 #../pipex/srcs/paths.c
 Color_Off='\033[0m'       # Text Reset
 

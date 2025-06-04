@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_export_utils3.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thguimar <thguimar@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:12:42 by thguimar          #+#    #+#             */
-/*   Updated: 2024/06/19 19:19:16 by thguimar         ###   ########.fr       */
+/*   Updated: 2025/06/03 01:34:54 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,18 @@ void	export_helper_helper(t_builtvars *export, char **argv, int j)
 		export->n++;
 		export->l++;
 	}
+}
+
+int	is_there_a_dollar(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
 }

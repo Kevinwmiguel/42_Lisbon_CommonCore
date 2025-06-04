@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:00:33 by thguimar          #+#    #+#             */
-/*   Updated: 2025/05/23 22:05:47 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:24:33 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,4 @@ void	write_exp(t_shell *utils)
 		i = 0;
 		j++;
 	}
-	//utils->exp[j] = NULL;
 }

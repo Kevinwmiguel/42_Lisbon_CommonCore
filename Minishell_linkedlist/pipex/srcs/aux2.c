@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:44:56 by kwillian          #+#    #+#             */
-/*   Updated: 2025/05/03 21:37:31 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:15:08 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ size_t	length(char **cmd)
 
 int	ft_lstsize_pipesort(t_pipesort *lst)
 {
-	int		i;
+	int			i;
 	t_pipesort	*list;
 
 	i = 0;
@@ -45,4 +45,20 @@ int	ft_lstsize_pipesort(t_pipesort *lst)
 		list = list->next;
 	}
 	return (i);
+}
+
+int	find_input_file_index(char **content, int i)
+{
+	while (content[i])
+	{
+		if (ft_strncmp(content[i], "<", 1) == 0)
+		{
+			if (content[i + 1])
+				return (i + 1);
+			else
+				return (-1);
+		}
+		i++;
+	}
+	return (-1);
 }

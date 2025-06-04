@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:56:04 by thguimar          #+#    #+#             */
-/*   Updated: 2025/05/24 13:51:51 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:24:13 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,15 @@ char	**exp_copy(char **exp)
 
 	i = 0;
 	j = 0;
-	//copy = ft_calloc(mlc_size(0, exp) + 1, sizeof(char *));
 	while (exp[i])
 		i++;
-	copy = malloc(sizeof(char *) *  (i + 1));
+	copy = malloc(sizeof(char *) * (i + 1));
 	while (exp[j + 1])
 	{
-		//copy[j] = ft_calloc(ft_strlen(exp[j]) + 1, sizeof(char));
 		copy[j] = ft_strdup(exp[j]);
-//		printf("%s\n", exp[j + 1]);
-//		write_env(0, copy[j]);
 		j++;
-		/* while (exp[j][++i])
-			copy[j][i] = exp[j][i]; */
-		//i = -1;
 	}
-	exp[j] = NULL;
+	copy[j] = NULL;
 	return (copy);
 }
 
@@ -88,7 +81,6 @@ char	**bubble_sort(int j, char **mlc, int flag, int argc)
 		copy = exp_copy(mlc);
 	else
 		copy = exp_copy2(mlc, argc);
-	j = 0;
 	if (mlc && x == 1)
 		free_dptr(mlc, 0);
 	x = 1;

@@ -1,1 +1,4 @@
-NOIS$
+as$
+outras$
+EOF$
+OI$

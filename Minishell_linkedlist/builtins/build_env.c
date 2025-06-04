@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joanda-s <joanda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:22:26 by thguimar          #+#    #+#             */
-/*   Updated: 2024/08/23 16:55:24 by joanda-s         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:23:27 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,21 @@ void	write_exp_to_env(t_shell *utils, int j, int i)
 void	build_env(int argc, char **argv, t_shell *utils)
 {
 	int	j;
+	int	outfd;
 
-	j = 0;
 	(void)argv;
+	j = 0;
 	if (argc == 1)
 	{
+		outfd = STDOUT_FILENO;
+		if (utils->pipe_bridge && utils->pipe_bridge->outfd > STDERR_FILENO)
+			outfd = utils->pipe_bridge->outfd;
 		while (utils->envr && utils->envr[j])
 		{
-			ft_putstr_fd(utils->envr[j], 1);
-			ft_putstr_fd("\n", 1);
+			ft_putstr_fd(utils->envr[j], outfd);
+			ft_putstr_fd("\n", outfd);
 			j++;
 		}
-		write_exp_to_env(utils, 0, mlc_size(0, utils->exp) - 1);
+		write_exp_to_env(utils, outfd, mlc_size(0, utils->exp) - 1);
 	}
 }

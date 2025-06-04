@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:33:47 by thguimar          #+#    #+#             */
-/*   Updated: 2025/05/24 15:34:54 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:22:50 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	build_cd(int argc, char **argv, char **env, t_shell *utils)
 	if (cd.flag == 1)
 	{
 		if (cd.str)
-			cd.str = NULL; //PROBLEMAS DE SEG FAULT AQUI
+			cd.str = NULL;
 		free(cd.joined);
 	}
 	if (home && ft_strncmp("/home", home, 6) != 0)

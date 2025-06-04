@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 14:12:32 by thguimar          #+#    #+#             */
-/*   Updated: 2025/05/24 20:31:35 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:24:07 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,47 +31,82 @@ int	builtin_not_command(char **argv)
 	return (0);
 }
 
-
-void	path_comms(char **argv, t_shell *utils, t_pipesort *piped)
+void	line_h_child(t_shell *utils, t_pipesort *piped, int flag, char **argv)
 {
-	char	**right_path;
+	if (flag == 0)
+		pipex(ft_lstsize_pipesort(piped), piped, utils, argv[0]);
+	else
+		pipex(ft_lstsize_pipesort(piped), piped, utils, utils->resolved_path);
+}
+
+void	run_child_process(char **argv, t_shell *utils, t_pipesort *piped)
+{
 	int		j;
 	int		flag;
-	char	*test;
-	char	*test2;
+	char	*temp;
 
 	j = -1;
-	right_path = NULL;
-	test = NULL;
+	flag = 0;
+	utils->resolved_path = NULL;
+	if (ft_strncmp(argv[0], "./", 2) == 0)
+		utils->resolved_path = ft_substr(argv[0], 2, ft_strlen(argv[0]) - 2);
+	else
+	{
+		utils->right_path = ft_split(PATH, ':');
+		while (utils->right_path[++j])
+		{
+			temp = ft_strjoin(utils->right_path[j], "/");
+			free(utils->resolved_path);
+			utils->resolved_path = ft_strjoin(temp, argv[0]);
+			free(temp);
+			flag = 1;
+		}
+	}
+	line_h_child(utils, piped, flag, argv);
+	free_dptr(utils->right_path, 0);
+	build_exit(argv, utils);
+}
 
-	if (builtins(argv[0], utils, -1) != 0)
-		exec_builtin(builtins(argv[0], utils, -1), piped->content,
-		 utils->envr, utils); // PROBLEMAS AQUI - THIAGO -- precisa ser dentro para ver caso seja no segundo comando - se for dentro tem problemas com o EXIT, UNSET, EXPORT, ENV
+void	exec_external_command(char **argv, t_shell *utils, \
+	t_pipesort *piped)
+{
 	utils->process_id = fork();
-	signal_search(CHILD);
 	if (utils->process_id == 0)
 	{
 		signal_search(CHILD);
-		flag = 0;
-		if (ft_strncmp(argv[0], "./", 2) == 0)
-			test2 = ft_substr(argv[0], 2, ft_strlen(argv[0]) - 2);
-		else
-		{
-			right_path = ft_split(PATH, ':');
-			while (right_path[++j])
-			{
-				test = ft_strjoin(right_path[j], "/");
-				test2 = ft_strjoin(test, argv[0]);
-				flag = 1;
-			}
-			pipex(ft_lstsize_pipesort(piped), piped, utils, test);
-		}
-		if (flag == 0)
-			pipex(ft_lstsize_pipesort(piped), piped, utils, test2);
-		free_dptr(right_path, 0);
-		build_exit(argv, utils);
+		run_child_process(argv, utils, piped);
 	}
 	else
 		waitpid(utils->process_id, NULL, 0);
-	return ;
+}
+
+void	handle_special_builtins(char **argv, t_shell *utils, t_pipesort *piped)
+{
+	int	ret;
+
+	ret = builtins(argv[0], utils, -1);
+	if (ret != 0)
+	{
+		if (ret == 2 || ret == 5)
+			exec_builtin(ret, piped->content, utils->envr, utils);
+		if (ret == 7)
+		{
+			exec_builtin(ret, utils->command, utils->envr, utils);
+			exit(1);
+		}
+	}
+}
+
+void	path_comms(char **argv, t_shell *utils, t_pipesort *piped)
+{
+	if (ft_strncmp(argv[0], "export", 6) == 0 && \
+	utils->pipe_bridge->redirection == false)
+		exec_builtin(builtins(argv[0], utils, -1), \
+		piped->content, utils->envr, utils);
+	else if ((ft_strncmp(argv[0], "cd", 2) == 0)
+		|| (ft_strncmp(argv[0], "unset", 5) == 0)
+		|| ft_strncmp(argv[0], "exit", 4) == 0)
+		handle_special_builtins(argv, utils, piped);
+	else
+		exec_external_command(argv, utils, piped);
 }

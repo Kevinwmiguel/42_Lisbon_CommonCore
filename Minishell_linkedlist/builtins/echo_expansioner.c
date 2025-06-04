@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_expansioner.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thguimar <thguimar@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:38:35 by thiago-camp       #+#    #+#             */
-/*   Updated: 2024/09/02 15:21:29 by thguimar         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:44:42 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,63 +64,6 @@ char	**pipping_commands2(char *str, int x)
 	return (rtn);
 }
 
-/*char	**pipping_commands2(t_shell *utils, int x)
-{
-	int		j;
-	int		i;
-	int		ns;
-	int		k;
-	char	*tmp;
-	char	*tmp2;
-	char	**rtn;
-
-
-	j = -1;
-	i = 0;
-	k = 0;
-	rtn = ft_calloc(sizeof(char *), x + 1);
-	while (utils->command[++j])
-	{
-		//printf(" this one here: %s\n", utils->command[j]);
-		i = 0;
-		//if (is_there_pipe(utils->command[j]) == false || utils->command[j][i] == '|')
-		//{
-		if (utils->command[j][i] != '\0' && utils->command[j][i] == '|')
-		{
-			while (utils->command[j][i] == '|')
-				i++;
-		}
-		ns = size_before_pipe(utils->command[j + 1]);
-		tmp = ft_substr(utils->command[j + 1], 0, ns);
-		tmp2 = ft_strjoinn(utils->command[j] + i, tmp);
-		if (utils->command[j][i] && is_there_pipe(utils->command[j + 1]) == false && is_there_pipe(utils->command[j]) == false)
-			j++;
-		//printf("AAAAAAAAAA: %s\n", tmp);
-		free (tmp);
-	//	printf("BBBBBBBBBB: %s\n========================\n", tmp2);
-		if (rtn[k] && rtn[k][0])
-			free(rtn[k]);
-		rtn[k] = ft_strdup(tmp2);
-		if (utils->command[j] && utils->command[j + 1] && utils->command[j + 1][0] != '|')
-		{
-			k++;
-			//if (utils->command[j + 1][1] == '\0')
-			if (is_there_pipe(utils->command[j + 1]) == true && utils->command[j + 1][ft_strlen(utils->command[j + 1])] != '|') 
-				j++;
-			free(tmp2);
-		}
-		if (is_there_pipe(utils->command[j + 1]) == true)
-			k++;
-		if (is_only_pipe(utils->command[j + 1]) == true)
-			j++;
-		//}
-	}
-	j = -1;
-	while (rtn[++j])
-		printf("CCCCCCCCCCC: %s\n", rtn[j]);
-	return (rtn);
-}*/
-
 char	**pipping_commands(char *input)
 {
 	int		i;
@@ -128,7 +71,7 @@ char	**pipping_commands(char *input)
 	char	**rtn;
 
 	i = -1;
-	x =  1;
+	x = 1;
 	while (input[++i])
 	{
 		if (input[i] == '|')
@@ -137,56 +80,4 @@ char	**pipping_commands(char *input)
 	i = -1;
 	rtn = pipping_commands2(input, x);
 	return (rtn);
-}
-
-int	quotes_verify(char *argv)
-{
-	int	sq;
-	int	dq;
-	int	j;
-
-	j = 0;
-	sq = 0;
-	dq = 0;
-	while (argv[j])
-	{
-		if (argv[j] == '\'')
-			sq++;
-		else if (argv[j] == '"')
-			dq++;
-		j++;
-	}
-	if (dq % 2 != 0 || sq % 2 != 0)
-	{
-		write(1, "Odd number of quotes\n", 21);
-		return (1);
-	}
-	return (0);
-}
-
-int	pipe_verify(char *argv)
-{
-	int	j;
-	int	x;
-
-	j = -1;
-	while (argv[++j])
-	{
-		x = 0;
-		if (j == 0 && argv[j] == '|')
-			return (ft_putendl_fd("wrong pipes", 1), -1);
-		if (argv[j] == '|')
-		{
-			j++;
-			while (argv[j] && argv[j] != '|')
-			{
-				if (argv[j] != ' ')
-					x++;
-				j++;
-			}
-			if (x == 0)
-				return (ft_putendl_fd("wrong pipes", 1), -1);
-		}
-	}
-	return (0);
 }

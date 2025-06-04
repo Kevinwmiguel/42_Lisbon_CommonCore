@@ -6,7 +6,7 @@
 /*   By: kwillian <kwillian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:57:29 by thguimar          #+#    #+#             */
-/*   Updated: 2025/05/03 01:05:31 by kwillian         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:41:53 by kwillian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,15 @@ void	final_cleaner(t_shell *utils)
 	free_dptr(utils->exp, 0);
 	free_dptr(utils->command, 0);
 	free(utils->export);
+	free(utils->input);
 	free(utils);
+}
+
+void	clear_little_things(char **argv, t_shell *utils)
+{
+	free_dptr(argv, 0);
+	final_cleaner(utils);
+	exit (0);
 }
 
 void	build_exit(char **argv, t_shell *utils)
@@ -54,11 +62,7 @@ void	build_exit(char **argv, t_shell *utils)
 	i = 0;
 	status = 0;
 	if (!argv[1])
-	{
-		free_dptr(argv, 0);
-		final_cleaner(utils);
-		exit (0);
-	}
+		clear_little_things(argv, utils);
 	if (!argv[2])
 	{
 		while (ft_isdigit(argv[1][i]) == 1)
