@@ -70,11 +70,20 @@ Testing: OK <br>
 Evaluation: OK  <br> 
 
 ### Exame 3
-Ongoing
+DONE!
 
 #Minishell
 
-Understanding: Crying <br> 
-Code: Crying <br> 
-Testing: Crying <br> 
-Evaluation: Crying <br> 
+Understanding: DONE <br> 
+Code: DONE <br> 
+Testing: DONE <br> 
+Evaluation: DONE <br> 
+
+# Philosophers
+
+Understanding: DONE <br> 
+Code: processing... <br> 
+Testing: Waitpid <br> 
+Evaluation: Waitpid <br> 
+
+
