@@ -42,7 +42,7 @@ I have successfully completed the **Exam Rank 2**, demonstrating my proficiency 
 
 ## About 42
 
-42 is an innovative and non-profit programming school that offers a unique educational model based on projects and peer learning, without teachers or formal classes. Through practical and collaborative challenges, students develop technical skills and problem-solving abilities, preparing for careers in software development.
+42 is an innovative and non-profit programming school that oC Piscine|C Piscine Brussels|C Piscine Antwerp / C Piscine C 07ffers a unique educational model based on projects and peer learning, without teachers or formal classes. Through practical and collaborative challenges, students develop technical skills and problem-solving abilities, preparing for careers in software development.
 
 Feel free to explore the repositories and reach out if you have any questions or feedback!
 
@@ -72,7 +72,7 @@ Evaluation: OK  <br>
 ### Exame 3
 DONE!
 
-#Minishell
+# Minishell
 
 Understanding: DONE <br> 
 Code: DONE <br> 
