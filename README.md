@@ -82,8 +82,8 @@ Evaluation: DONE <br>
 # Philosophers
 
 Understanding: DONE <br> 
-Code: processing... <br> 
-Testing: Waitpid <br> 
-Evaluation: Waitpid <br> 
+Code: DONE <br> 
+Testing: DONE <br> 
+Evaluation: DONE <br> 
 
 
