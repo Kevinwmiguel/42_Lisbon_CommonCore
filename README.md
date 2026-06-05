@@ -2,10 +2,6 @@
 
 ![image](https://github.com/Kevinwmiguel/42_Lisbon_CommonCore/assets/59360014/546d47c3-0f82-4340-b61c-efb3756594a4)
 
-# My 42 Projects
-
-Welcome to my repository of projects completed during my time at [42 Lisboa](https://www.42lisboa.com/). Here you will find a collection of the projects I have completed, as well as details about my current progress.
-
 ## Completed Projects
 
 ### Libft
