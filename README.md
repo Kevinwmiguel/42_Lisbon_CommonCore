@@ -86,4 +86,8 @@ Code: DONE <br>
 Testing: DONE <br> 
 Evaluation: DONE <br> 
 
-
+# Cub3D
+Understanding: DONE <br> 
+Code: DONE <br> 
+Testing: DONE <br> 
+Evaluation: DONE <br> 
