@@ -17,8 +17,11 @@ In the **Printf** project, I developed my own version of the C `printf` function
 ### Get Next Line
 The **Get Next Line** project involves creating a function that reads a line from a file descriptor one at a time. It is an essential project for understanding file handling and buffer management in C.
 
+### BornToBeRoot
+A 42 School system administration project focused on virtualization and secure Debian server configuration.My implementation of the 42 Born2beRoot project: Setting up a hardened Debian server using VirtualBox and LVM.Virtualization and system administration basics at 42: LVM, SSH, UFW, and automated monitoring scripts.
+
 ### Push Swap
-I am currently working on the **Push Swap** project. This project involves creating a program that sorts numbers using a limited set of operations on two stacks. It is a significant challenge in algorithm optimization and efficiency.
+This project involves creating a program that sorts numbers using a limited set of operations on two stacks. It is a significant challenge in algorithm optimization and efficiency.
 
 Norminette: OK:<br>
 possible erros: OK<br>
@@ -59,8 +62,6 @@ Understanding: OK <br>
 CODE: OK  <br>  
 TEST: OK  <br> 
 EVALUATION OK <br>
-
-[![42 Profile](https://badgen.net/badge/Born2Code/42%20Profile/blue)](https://profile.intra.42.fr/users/your-username)
 
 # PIPEX:
 
